@@ -9,7 +9,7 @@ plugin strategy, and extensions.
 
 <Note>
   This comparison uses public READMEs, repository manifests, and latest releases as of
-  2026-08-28. “Not confirmed” means the public material makes no clear promise; it does not
+  2026-09-11. “Not confirmed” means the public material makes no clear promise; it does not
   prove that a feature is absent. Check the relevant repository before choosing.
 </Note>
 
@@ -84,6 +84,8 @@ packages, and maintains Linux x64 through an older separate release line.
 | Workspaces | ✅ core capability | ✅ core capability | ✅ core capability | ✅ core capability |
 | Per-session Git worktree | ✅ bundled `dsh-tauri-worktree` | Not confirmed | Not confirmed | Not confirmed |
 | Check worktree back to local branch | ✅ explicit approval required | Not confirmed | Not confirmed | Not confirmed |
+| Turn-level file undo | ✅ bundled `dsh-tauri-turnrewind` | Not confirmed | Not confirmed | ✅ bundled line diff/restore |
+| Scheduled tasks | ✅ bundled `dsh-tauri-panel-scheduler` | Not confirmed | Not confirmed | Not confirmed |
 | File changes and diff | ✅ Harness capability | ✅ Harness/plugin | ✅ Harness | ✅ bundled line diff/restore |
 | Session terminal | ✅ Harness capability | ✅ Harness/plugin | ✅ Harness | ✅ bundled persistent terminal |
 | Preserve official workspace/settings slots | ✅ `sidebar.workspaces` / `sidebar.settings` | Not confirmed | Not confirmed | Not confirmed |
@@ -117,7 +119,6 @@ does not guarantee a release date.**
 | Planned capability | Status | Priority / timing | Relationship to current capabilities |
 | --- | --- | --- | --- |
 | Remote connection plugin | Planned | P2 · 2026-Q4 | Explore optional access beyond loopback |
-| Scheduled task plugin | Planned | P2 · 2026-Q4 | Add scheduling to the plugin model |
 | Pull Request support | Planned | P2 | Connect worktrees, branch handback, and collaboration |
 | Plugin/UI UX improvements | Planned | P2 · 2026-Q4 | Improve `dsh-tauri-plugins` and `dsh-tauri-ui` |
 | v1.0 release | Planned | P1 · 2026-Q4 | Feature freeze, alpha, beta, then stable |

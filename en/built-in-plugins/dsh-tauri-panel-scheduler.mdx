@@ -1,0 +1,34 @@
+---
+title: DSH Tauri Panel Scheduler
+description: Create scheduled tasks, run them in independent Agent sessions, and review run history.
+---
+
+`dsh-tauri-panel-scheduler` adds a scheduled-tasks page to the desktop sidebar. When a task is due, it runs the instruction in a fresh Agent session and records the result.
+
+## Schedule types
+
+| Type | Configuration | Meaning |
+| --- | --- | --- |
+| Daily | `HH:mm` | Run at a time every day |
+| Interval | Minutes | Run every N minutes |
+| Workdays | `HH:mm` | Run Monday through Friday |
+| Weekly | Weekdays and `HH:mm` | Run on selected weekdays |
+
+Tasks use the computer's local time zone and are scheduled only while the computer is awake and the desktop service is running.
+
+## How to use it
+
+- Create, search, pause, resume, run immediately, or delete tasks in the sidebar.
+- Configure a name, instruction, workspace, mode, and model for each task.
+- Review succeeded, failed, and interrupted runs in the Run history tab.
+- You can also manage tasks from Chat with `scheduler_create`, `scheduler_list`, `scheduler_toggle`, `scheduler_delete`, and `scheduler_run_now`.
+
+## Data and boundaries
+
+Task definitions and run records are stored as JSON under `$DSH_HOME/dsh-tauri-panel-scheduler/` with atomic writes; the latest 200 runs are retained. Each execution creates an independent session and waits up to 30 minutes by default. A failed run does not block the next scheduled run.
+
+<Warning>
+  Scheduled tasks can execute Agent instructions and local tools. Check the workspace, model, permissions, and instruction before creating a task; sleeping computers and stopped desktop services do not run tasks.
+</Warning>
+
+[View source and the complete guide](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/tree/main/packages/dsh-tauri-panel-scheduler)
