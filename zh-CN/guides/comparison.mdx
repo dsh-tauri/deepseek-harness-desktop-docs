@@ -7,7 +7,7 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 但在桌面技术、平台覆盖、插件策略和扩展功能上采用了不同取舍。
 
 <Note>
-  对比基于各项目截至 2026-08-28 的公开 README、仓库清单和最新 Release。
+  对比基于各项目截至 2026-09-11 的公开 README、仓库清单和最新 Release。
   “未确认”表示公开材料没有明确承诺，不代表项目一定不具备该能力。功能会快速变化，选择前请核对对应仓库。
 </Note>
 
@@ -73,6 +73,8 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 | 工作区 | ✅ 内核支持 | ✅ 内核支持 | ✅ 内核支持 | ✅ 内核支持 |
 | 会话级 Git Worktree 隔离 | ✅ 内置 `dsh-tauri-worktree` | 未确认 | 未确认 | 未确认 |
 | Worktree 检出回本地分支 | ✅，需用户明确批准 | 未确认 | 未确认 | 未确认 |
+| Turn 级文件改动撤销 | ✅ 内置 `dsh-tauri-turnrewind` | 未确认 | 未确认 | ✅ 预装行级 Diff 与还原 |
+| 定时任务 | ✅ 内置 `dsh-tauri-panel-scheduler` | 未确认 | 未确认 | 未确认 |
 | 文件改动与 Diff | ✅ Harness 内置能力 | ✅ Harness/插件能力 | ✅ Harness 能力 | ✅ 预装行级 Diff 与还原 |
 | 会话终端 | ✅ Harness 内置能力 | ✅ Harness/插件能力 | ✅ Harness 能力 | ✅ 预装持久终端 |
 | 侧栏保留官方工作区与设置槽 | ✅ `sidebar.workspaces` / `sidebar.settings` | 未确认 | 未确认 | 未确认 |
@@ -105,7 +107,6 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 | 计划能力 | 当前状态 | 优先级 / 时间 | 与现有能力的关系 |
 | --- | --- | --- | --- |
 | 远程连接插件 | Planned | P2 · 2026-Q4 | 在默认仅回环访问之外，探索可选远程连接 |
-| 定时任务插件 | Planned | P2 · 2026-Q4 | 为插件体系增加调度能力 |
 | Pull Request 支持 | Planned | P2 | 衔接现有 Worktree、分支检出与代码协作流程 |
 | 插件与 UI 系统性 UX/UI 优化 | Planned | P2 · 2026-Q4 | 改进 `dsh-tauri-plugins` 与 `dsh-tauri-ui` 的完成度 |
 | v1.0 发布 | Planned | P1 · 2026-Q4 | 依次经过功能冻结、alpha、beta 与 stable |

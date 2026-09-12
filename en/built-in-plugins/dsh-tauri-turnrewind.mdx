@@ -1,0 +1,30 @@
+---
+title: DSH Tauri Turn Rewind
+description: Review and safely undo workspace file changes made during an Agent turn.
+---
+
+`dsh-tauri-turnrewind` creates a private Git snapshot for each Agent turn and shows a file-change card at the end of the conversation. It never changes the user's repository HEAD, branches, index, stash, or commit history.
+
+## User-visible features
+
+- Show changed-file counts and `+N -M` line totals after a turn finishes.
+- Undo additions, modifications, and deletions after conflict checks pass.
+- Show up to three file rows with an expansion control for the rest.
+- On kernels that expose the sidebar file capability, open files in the in-app preview; the Review action opens the workspace file tree.
+- Hide non-actionable cards for non-Git workspaces while retaining actionable diagnostics for missing Git, unsafe paths, or expired snapshots.
+
+## Data and boundaries
+
+Snapshots live under `$DSH_HOME/dsh-tauri-turnrewind/` in private repositories and session ledgers. The most recent 50 turns per workspace remain undoable, and each ledger retains up to 200 records. Per-file, per-turn, and snapshot size/count limits are enforced; excluded paths are reported on the card.
+
+Before undoing, the plugin checks for changes made after the turn. If conflicts exist, it changes no files. Non-Git workspaces, nested repositories, and excluded oversized files are outside the undo scope.
+
+<Warning>
+  Undo changes workspace files. Review conflict warnings first; this plugin is not a backup system and does not provide redo.
+</Warning>
+
+## Compatibility
+
+The plugin chooses file-preview and Review actions from runtime capabilities rather than version strings. Older kernels hide or downgrade unavailable in-app sidebar actions instead of handing paths to the operating system.
+
+[View source and the complete protocol](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/tree/main/packages/dsh-tauri-turnrewind)

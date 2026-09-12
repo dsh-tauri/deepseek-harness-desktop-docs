@@ -1,0 +1,34 @@
+---
+title: DSH Tauri Panel Scheduler
+description: 创建定时任务，在独立 Agent 会话中执行并查看运行记录。
+---
+
+`dsh-tauri-panel-scheduler` 在桌面侧栏提供定时任务页。任务到期后会在独立的新 Agent 会话中执行指令，并保留运行历史。
+
+## 支持的计划
+
+| 类型 | 配置 | 语义 |
+| --- | --- | --- |
+| 每天 | `HH:mm` | 每天指定时刻 |
+| 间隔 | 分钟数 | 每 N 分钟执行 |
+| 工作日 | `HH:mm` | 周一至周五指定时刻 |
+| 每周 | 星期与 `HH:mm` | 每周选定日期执行 |
+
+任务使用电脑本地时区，并仅在电脑保持唤醒且桌面服务运行时调度。
+
+## 使用方式
+
+- 在侧栏创建、搜索、暂停、恢复、立即运行或删除任务。
+- 为每个任务设置名称、指令、工作区、模式和模型。
+- 在“执行记录”页查看成功、失败和中断记录。
+- 也可以在 Chat 中使用 `scheduler_create`、`scheduler_list`、`scheduler_toggle`、`scheduler_delete` 和 `scheduler_run_now` 管理任务。
+
+## 数据与边界
+
+任务和运行记录保存在 `$DSH_HOME/dsh-tauri-panel-scheduler/` 下的 JSON 文件中，采用原子写入；最近保留 200 条运行记录。每次执行都会创建独立会话，默认最长等待 30 分钟；失败会按下一次计划继续，不会阻塞调度器。
+
+<Warning>
+  定时任务能够执行 Agent 指令和本地工具。创建前请检查工作区、模型、权限和指令内容；电脑休眠或桌面服务停止期间不会执行任务。
+</Warning>
+
+[查看源码与完整说明](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/tree/main/packages/dsh-tauri-panel-scheduler)

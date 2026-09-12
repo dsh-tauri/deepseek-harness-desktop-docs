@@ -68,6 +68,8 @@
               "zh-CN/built-in-plugins/dsh-tauri-worktree",
               "zh-CN/built-in-plugins/dsh-tauri-panel",
               "zh-CN/built-in-plugins/dsh-tauri-panel-extension",
+              "zh-CN/built-in-plugins/dsh-tauri-panel-scheduler",
+              "zh-CN/built-in-plugins/dsh-tauri-turnrewind",
               "zh-CN/built-in-plugins/dsh-tauri-session",
               "zh-CN/built-in-plugins/dsh-tauri-pet",
               "zh-CN/built-in-plugins/dsh-tauri-rightclick"
@@ -153,6 +155,8 @@
               "en/built-in-plugins/dsh-tauri-worktree",
               "en/built-in-plugins/dsh-tauri-panel",
               "en/built-in-plugins/dsh-tauri-panel-extension",
+              "en/built-in-plugins/dsh-tauri-panel-scheduler",
+              "en/built-in-plugins/dsh-tauri-turnrewind",
               "en/built-in-plugins/dsh-tauri-session",
               "en/built-in-plugins/dsh-tauri-pet",
               "en/built-in-plugins/dsh-tauri-rightclick"
