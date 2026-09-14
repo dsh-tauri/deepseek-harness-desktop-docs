@@ -5,6 +5,19 @@ description: 按 Agent 回合查看并安全撤销工作区文件改动。
 
 `dsh-tauri-turnrewind` 为每个 Agent 回合建立私有 Git 快照，并在会话尾部显示文件变更卡片。它不会修改用户仓库的 HEAD、分支、index、stash 或提交历史。
 
+<Tabs>
+  <Tab title="变更摘要">
+    <Frame>
+      <img src="/images/zh-CN/dsh-tauri-turnrewind.png" alt="会话尾部的回合文件变更摘要" />
+    </Frame>
+  </Tab>
+  <Tab title="变更详情">
+    <Frame>
+      <img src="/images/zh-CN/dsh-tauri-turnrewind-changes.png" alt="展开后的文件清单，含撤销与审核操作" />
+    </Frame>
+  </Tab>
+</Tabs>
+
 ## 用户可见功能
 
 - 回合结束后显示已编辑文件数量与 `+N -M` 行数。

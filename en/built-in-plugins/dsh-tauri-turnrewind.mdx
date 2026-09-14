@@ -5,6 +5,19 @@ description: Review and safely undo workspace file changes made during an Agent 
 
 `dsh-tauri-turnrewind` creates a private Git snapshot for each Agent turn and shows a file-change card at the end of the conversation. It never changes the user's repository HEAD, branches, index, stash, or commit history.
 
+<Tabs>
+  <Tab title="Summary">
+    <Frame>
+      <img src="/images/en/dsh-tauri-turnrewind.png" alt="Turn file-change summary at the end of the conversation" />
+    </Frame>
+  </Tab>
+  <Tab title="Details">
+    <Frame>
+      <img src="/images/en/dsh-tauri-turnrewind-changes.png" alt="Expanded file list with undo and review actions" />
+    </Frame>
+  </Tab>
+</Tabs>
+
 ## User-visible features
 
 - Show changed-file counts and `+N -M` line totals after a turn finishes.
