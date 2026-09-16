@@ -80,11 +80,11 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 | 侧栏保留官方工作区与设置槽 | ✅ `sidebar.workspaces` / `sidebar.settings` | 未确认 | 未确认 | 未确认 |
 | 桌面原生导航桥 | ✅ 侧栏、后退、前进 | ✅ 桌面插件集成 | ✅ 原生菜单/窗口集成 | ✅ 桌面桥增强 |
 
-### 内置 UI 插件与扩展协议
+### 内置 UI 插件与面板入口
 
 | 功能 | 本项目 | anywhere-labs | dataelement | EAC |
 | --- | --- | --- | --- | --- |
-| 可扩展侧栏面板协议 | ✅ `sidebar.panel.action` | — | — | — |
+| 可扩展侧栏面板入口 | ✅ `definePanel` / `sidebar.panellist` | — | — | — |
 | Skills 管理面板 | ✅ 列表、搜索、筛选、启停、编辑 | — | — | ◐ 预装相关插件 |
 | 技能仓库导入 | ✅ GitHub 仓库导入 | — | 未确认 | ◐ 配置迁移/插件能力 |
 | MCP 管理面板 | ✅ 增删改、启停、JSON/表单编辑 | — | — | ✅ 可视化 MCP |
@@ -124,17 +124,18 @@ Roadmap 还包含处于 **Idea** 阶段的候选项，例如插件签名校验�
 ### 保持接近上游，不等于没有产品能力
 
 本项目保留 Harness 的工作区、文件树、文件改动、Diff 和终端能力，同时用少量第一方插件补充桌面体验：
-`dsh-tauri-worktree` 提供会话级 Git 隔离；`dsh-tauri-panel` 提供稳定侧栏与面板协议；
-`dsh-tauri-panel-extension` 在该协议上提供 Skills、技能仓库和 MCP 管理。
+`dsh-tauri-worktree` 提供会话级 Git 隔离；`dsh-tauri` 提供稳定侧栏与面板入口 API（`definePanel`）；
+`dsh-tauri-panel-extension` 在该入口上提供 Skills、技能仓库和 MCP 管理。
 
 区别在于这些能力具有明确边界、协议和维护责任，而不是把大量互不相关的社区插件默认装给所有用户。
 EAC 更倾向于预装完整增强工具集；本项目更倾向于维护较小、可验证的默认集合。
 
-### 面板协议为什么重要
+### 面板入口为什么重要
 
-`sidebar.panel.action` 允许插件在统一侧栏区域注册入口，`panel.protocol` 则统一面板内容的打开、替换和关闭。
+`definePanel` 允许插件在统一侧栏区域注册入口（`sidebar.panellist`），并把内容注册进主区域槽（`main`），
+面板内容的打开、替换和关闭由宿主统一管理。
 扩展插件无需复制整个侧栏或依赖易变的 DOM/CSS 结构，宿主仍负责折叠态、选中态和恢复官方会话视图。
-当前 Skills/MCP 面板既是用户功能，也是该协议的第一个完整消费者。
+当前 Skills/MCP 面板既是用户功能，也是该入口的第一个完整消费者。
 
 ### Tauri，还是 Electron
 

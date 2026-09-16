@@ -23,9 +23,21 @@ into Harness layout and browser-history operations.
 The plugin reports sidebar collapse state and back/forward availability to the desktop host.
 It also reports its own failures so native controls do not remain visible while silently failing.
 
+## Panel entry
+
+The client half also provides the desktop sidebar panel entry: a plugin calls
+`definePanel(ctx, entry)` with a `PanelEntry` (`id`, `label`, `icon`, `render`, plus optional
+`order` and `locale`). The entry registers into the `sidebar.panellist` list slot and `render`
+into the `main` slot; the returned `PanelHandle` exposes `select()`, `close()`, and `dispose()`.
+`dsh-tauri-panel-extension` and `dsh-tauri-panel-scheduler` both register panels through this entry.
+
+This entry requires Harness core **0.1.5-rc.1** or later. The `panel.protocol` reflection service
+and the `sidebar.panel.action` slot from the retired `dsh-tauri-panel` package were removed with
+the package and have no compatibility path.
+
 ## Boundary
 
-`dsh-tauri` only handles navigation messages and state. It does not manage profiles, cores,
+`dsh-tauri` only handles navigation messages, the panel entry, and state. It does not manage profiles, cores,
 plugin installation, or the filesystem. Harness can still run without it, but the native top
 bar omits navigation buttons that depend on the bridge.
 

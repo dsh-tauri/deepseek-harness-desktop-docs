@@ -95,7 +95,7 @@ packages, and maintains Linux x64 through an older separate release line.
 
 | Feature | This project | anywhere-labs | dataelement | EAC |
 | --- | --- | --- | --- | --- |
-| Extensible sidebar panel protocol | ✅ `sidebar.panel.action` | — | — | — |
+| Extensible sidebar panel entry | ✅ `definePanel` / `sidebar.panellist` | — | — | — |
 | Skills management panel | ✅ list, search, filter, enable, edit | — | — | ◐ bundled plugin |
 | Skill repository import | ✅ GitHub repositories | — | Not confirmed | ◐ migration/plugin |
 | MCP management panel | ✅ CRUD, enable, JSON/form editor | — | — | ✅ visual MCP |
@@ -139,19 +139,19 @@ plugin management. Idea means research direction; this page does not call them �
 
 This project preserves Harness workspaces, file tree, file changes, diff, and terminal while
 adding a small first-party desktop set. `dsh-tauri-worktree` provides per-session Git
-isolation; `dsh-tauri-panel` provides a stable sidebar/panel protocol; and
+isolation; `dsh-tauri` provides a stable sidebar and panel entry API (`definePanel`); and
 `dsh-tauri-panel-extension` provides Skills, skill repositories, and MCP management.
 
 The difference is explicit boundaries, protocols, and maintenance ownership rather than
 installing many unrelated community plugins for every user. EAC favors a broad bundled
 enhancement suite; this project favors a smaller, verifiable default set.
 
-### Why the panel protocol matters
+### Why the panel entry matters
 
-`sidebar.panel.action` lets plugins register entries in one sidebar area, while
-`panel.protocol` standardizes opening, replacing, and closing panel content. Extensions do
-not need to copy the whole sidebar or depend on unstable DOM/CSS details. The Skills/MCP
-panel is both a user feature and the first complete consumer of this protocol.
+`definePanel` lets plugins register entries in one sidebar area (`sidebar.panellist`) and register
+their content into the `main` slot, while the host owns opening, replacing, and closing panel
+content. Extensions do not need to copy the whole sidebar or depend on unstable DOM/CSS details.
+The Skills/MCP panel is both a user feature and the first complete consumer of this entry.
 
 ### Tauri or Electron
 

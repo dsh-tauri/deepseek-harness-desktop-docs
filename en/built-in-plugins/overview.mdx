@@ -7,13 +7,19 @@ DeepSeek Harness Desktop uses a small set of first-party plugins to connect Harn
 Tauri shell. They ship with the installer. Before startup, the desktop checks their declarations
 and files and restores inconsistent or missing copies from bundled resources.
 
+<Note>
+  Built-in plugins require Harness core **0.1.5-rc.1** or later. Earlier cores do not provide the
+  client API these plugins rely on, so panel plugins will not load.
+</Note>
+
 {/* <!-- [The current built-in plugins and their relationships](/images/en/built-in-plugins-overview.webp) --> */}
 
 ## Plugin list
 
 <CardGroup cols={2}>
   <Card title="DSH Tauri" icon="arrows-left-right" href="./dsh-tauri">
-    The message bridge between the native navigation bar and embedded Harness client.
+    The message bridge between the native navigation bar and embedded Harness client, plus the
+    desktop sidebar panel entry.
   </Card>
   <Card title="DSH Tauri UI" icon="sidebar" href="./dsh-tauri-ui">
     A desktop settings sidebar with safe fallback when required renderer capabilities are unavailable.
@@ -21,11 +27,8 @@ and files and restores inconsistent or missing copies from bundled resources.
   <Card title="DSH Tauri Worktree" icon="code-branch" href="./dsh-tauri-worktree">
     Isolates sessions in Git worktrees and checks them back to local branches after user approval.
   </Card>
-  <Card title="DSH Tauri Panel" icon="columns-3" href="./dsh-tauri-panel">
-    Provides the desktop sidebar, new-session entry, and panel extension protocol.
-  </Card>
   <Card title="DSH Tauri Panel Extension" icon="puzzle-piece" href="./dsh-tauri-panel-extension">
-    Provides Skills, skill repository, and MCP management through the panel protocol.
+    Provides Skills, skill repository, and MCP management on the `dsh-tauri` panel entry.
   </Card>
   <Card title="DSH Tauri Panel Scheduler" icon="calendar" href="./dsh-tauri-panel-scheduler">
     Creates scheduled tasks, runs them in independent Agent sessions, and retains run history.
