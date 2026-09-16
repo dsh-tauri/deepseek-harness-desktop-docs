@@ -6,13 +6,18 @@ description: 了解 DeepSeek Harness Desktop 随安装包提供的第一方桌�
 DeepSeek Harness Desktop 通过少量第一方插件连接 Harness 与 Tauri 桌面壳。这些插件随安装包提供，
 启动前会检查其声明与文件；缺失或不一致时，桌面端会从内置资源恢复。
 
+<Note>
+  内置插件要求 Harness 内核 **0.1.5-rc.1** 或更高版本。更低版本的内核不提供插件所需的客户端 API，
+  面板类插件无法加载。
+</Note>
+
 {/* <!-- [当前内置插件及其依赖关系](/images/zh-CN/built-in-plugins-overview.webp) --> */}
 
 ## 插件列表
 
 <CardGroup cols={2}>
   <Card title="DSH Tauri" icon="arrows-left-right" href="./dsh-tauri">
-    连接原生导航栏和嵌入式 Harness 客户端的消息桥。
+    连接原生导航栏和嵌入式 Harness 客户端，并提供桌面侧栏的面板入口。
   </Card>
   <Card title="DSH Tauri UI" icon="sidebar" href="./dsh-tauri-ui">
     提供桌面化设置侧边栏，并在能力缺失时安全降级。
@@ -20,11 +25,8 @@ DeepSeek Harness Desktop 通过少量第一方插件连接 Harness 与 Tauri 桌
   <Card title="DSH Tauri Worktree" icon="code-branch" href="./dsh-tauri-worktree">
     为会话创建隔离 Git Worktree，并在用户批准后检出回本地分支。
   </Card>
-  <Card title="DSH Tauri Panel" icon="columns-3" href="./dsh-tauri-panel">
-    提供桌面侧栏、新会话入口和面板扩展协议。
-  </Card>
   <Card title="DSH Tauri Panel Extension" icon="puzzle-piece" href="./dsh-tauri-panel-extension">
-    在面板协议上提供 Skills、技能仓库和 MCP 管理。
+    在 `dsh-tauri` 的面板入口上提供 Skills、技能仓库和 MCP 管理。
   </Card>
   <Card title="DSH Tauri Panel Scheduler" icon="calendar" href="./dsh-tauri-panel-scheduler">
     创建定时任务，在独立 Agent 会话中执行并保留运行记录。

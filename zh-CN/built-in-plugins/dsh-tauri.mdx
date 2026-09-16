@@ -22,9 +22,19 @@ description: 了解原生桌面导航栏与嵌入式 Harness 客户端之间的�
 插件向桌面宿主回报侧边栏折叠状态、是否可以后退和是否可以前进。插件自身发生异常时也会报告宿主，
 避免原生按钮保留在界面中却静默失效。
 
+## 面板入口
+
+client half 还提供桌面侧栏的面板入口：插件调用 `definePanel(ctx, entry)` 注册一个 `PanelEntry`
+（`id`、`label`、`icon`、`render`，可选 `order` 与 `locale`）。条目注册进侧栏面板列表槽
+`sidebar.panellist`，`render` 注册进主区域槽 `main`；返回的 `PanelHandle` 提供 `select()`、
+`close()` 和 `dispose()`。`dsh-tauri-panel-extension` 与 `dsh-tauri-panel-scheduler` 都通过该入口注册面板。
+
+该入口要求 Harness 内核 **0.1.5-rc.1** 或更高版本。旧版 `dsh-tauri-panel` 的 `panel.protocol`
+反射服务与 `sidebar.panel.action` 槽已随包移除，不提供兼容路径。
+
 ## 边界
 
-`dsh-tauri` 只负责导航消息与状态，不管理 Profile、内核、插件安装或文件系统。
+`dsh-tauri` 只负责导航消息、面板入口与状态，不管理 Profile、内核、插件安装或文件系统。
 缺少该插件时，Harness 本身仍可运行，但桌面顶部栏不会显示依赖消息桥的导航按钮。
 
 [查看源码](https://github.com/dsh-tauri-desk/dsh-tauri-plugins/tree/main/packages/dsh-tauri)

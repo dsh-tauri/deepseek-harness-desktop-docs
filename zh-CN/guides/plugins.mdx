@@ -13,7 +13,11 @@ description: 在 DeepSeek Harness Desktop 中安装、更新、恢复和理解�
 | 预设 | 首次运行时推荐，从 npm 或 GitHub 安装 | 可选，可稍后更新或移除 |
 | 社区 | 手动安装或通过市场插件安装 | 先审查源码与权限 |
 
-内部插件提供 Tauri 桥、设置 UI、Worktree、面板壳、Skills/MCP 管理、定时任务、Turn 级撤销、桌宠和右键菜单。定时任务在独立 Agent 会话中运行；Turn Rewind 使用私有 Git 快照，不修改用户仓库历史。Windows Minimal 修复插件在选择后从 GitHub 下载，其源码**不内置**于应用。
+内部插件提供 Tauri 桥、设置 UI、Worktree、面板入口、Skills/MCP 管理、定时任务、Turn 级撤销、桌宠和右键菜单。定时任务在独立 Agent 会话中运行；Turn Rewind 使用私有 Git 快照，不修改用户仓库历史。Windows Minimal 修复插件在选择后从 GitHub 下载，其源码**不内置**于应用。
+
+<Note>
+  内部插件要求 Harness 内核 **0.1.5-rc.1** 或更高版本；使用更低版本的内核时这些插件不会加载。
+</Note>
 
 <Frame>
   <img src="/images/zh-CN/plugins.png" alt="带状态和恢复操作的插件管理器" />

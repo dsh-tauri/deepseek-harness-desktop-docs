@@ -78,7 +78,7 @@ Do not maintain the built-in plugin list from memory.
    - repair all links and comparison claims.
 6. For renamed or merged plugins, migrate both locale paths and verify language page keys remain identical.
 
-Current documentation may cover `dsh-tauri`, `dsh-tauri-ui`, `dsh-tauri-worktree`, `dsh-tauri-panel`, and `dsh-tauri-panel-extension`, but this list is not permanent. Re-discover it every time.
+Current documentation may cover `dsh-tauri`, `dsh-tauri-ui`, `dsh-tauri-worktree`, `dsh-tauri-panel-extension`, and `dsh-tauri-panel-scheduler`, but this list is not permanent. Re-discover it every time.
 
 ### Desktop releases and platform support
 
@@ -245,7 +245,7 @@ Before reviewed assets exist, preserve the exact placeholder inside valid MDX JS
 
 ## Links and routes
 
-- Use relative same-locale page links without `.mdx`, such as `../help/troubleshooting` or `./dsh-tauri-panel`.
+- Use relative same-locale page links without `.mdx`, such as `../help/troubleshooting` or `./dsh-tauri`.
 - Do not prefix body links with `/en/` or `/zh-CN/`.
 - Use absolute URLs for official external sources.
 - `groups[].pages` accepts documentation page paths or nested groups, not arbitrary external-link objects. Create a local page that links to an external project.
@@ -255,7 +255,7 @@ Before reviewed assets exist, preserve the exact placeholder inside valid MDX JS
 
 - Add a language identifier to every code block.
 - Base examples on current public types and at least one real consumer.
-- Keep exact identifiers such as `sidebar.panel.action`, `panel.protocol`, `ActionItem`, `renderPanelContent(spec)`, and `closePanelContent()`.
+- Keep exact identifiers such as `definePanel`, `PanelEntry`, `PanelHandle`, `sidebar.panellist`, and `main`.
 - Show safe fallback when optional services may be absent.
 - Put authorization warnings next to destructive operations such as `checkout_worktree`.
 - Avoid non-compiling placeholder code unless clearly labeled pseudocode.
