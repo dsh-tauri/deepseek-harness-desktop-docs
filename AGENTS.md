@@ -19,8 +19,7 @@ When asked to “update,” “sync,” “refresh,” or add documentation, dis
 1. Determine the docs repository root from the current working directory and `docs.json`.
 2. Inspect the parent directory and sibling Git repositories by repository identity, not folder name alone.
 3. Use `git remote -v`, `git config --get remote.origin.url`, package manifests, and repository metadata to identify:
-   - `dsh-tauri-desk/deepseek-harness-desktop` — desktop implementation.
-   - `dsh-tauri-desk/dsh-tauri-plugins` — first-party desktop plugins.
+   - `dsh-tauri-desk/deepseek-harness-desktop` — desktop implementation and the first-party plugins under `packages/`.
    - `dsh-tauri-desk/deepseek-harness-pkg` — packaged Harness distribution.
 4. A sibling checkout is an optimization, not a requirement. If a source is absent or stale, read the public GitHub repository with `gh` or GitHub API.
 5. Never write an absolute workstation path into documentation or agent instructions.
@@ -28,7 +27,7 @@ When asked to “update,” “sync,” “refresh,” or add documentation, dis
 ### Canonical remote sources
 
 - Desktop source: <https://github.com/dsh-tauri-desk/deepseek-harness-desktop>
-- First-party plugins: <https://github.com/dsh-tauri-desk/dsh-tauri-plugins>
+- First-party plugins: <https://github.com/dsh-tauri-desk/deepseek-harness-desktop/tree/main/packages>
 - Packaged core: <https://github.com/dsh-tauri-desk/deepseek-harness-pkg>
 - Upstream Harness: <https://github.com/deepseek-ai/deepseek-harness>
 - Releases: <https://github.com/dsh-tauri-desk/deepseek-harness-desktop/releases>
@@ -59,7 +58,7 @@ Never assume the documented inventory is still current.
 Do not maintain the built-in plugin list from memory.
 
 1. Read the desktop repository's current internal-plugin manifest, normally `src-tauri/resources/internal-plugins.json`.
-2. Read the current package inventory and READMEs in `dsh-tauri-plugins`.
+2. Read the current package inventory and READMEs under `packages/` in the desktop repository.
 3. Compare manifest IDs, package names, descriptions, versions, and repository URLs with:
    - both locale navigation groups;
    - `built-in-plugins/overview.mdx`;

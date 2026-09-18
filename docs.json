@@ -23,7 +23,7 @@
           "links": [
             {
               "label": "下载版本",
-              "href": "https://github.com/dsh-tauri-desk/deepseek-harness-desktop/releases"
+              "href": "/zh-CN/downloads"
             }
           ],
           "primary": {
@@ -39,6 +39,7 @@
             "pages": [
               "zh-CN/why",
               "zh-CN/quickstart",
+              "zh-CN/downloads",
               "zh-CN/getting-started/installation",
               "zh-CN/getting-started/first-run",
               "zh-CN/getting-started/configure-model"
@@ -108,8 +109,8 @@
         "navbar": {
           "links": [
             {
-              "label": "Releases",
-              "href": "https://github.com/dsh-tauri-desk/deepseek-harness-desktop/releases"
+              "label": "Downloads",
+              "href": "/en/downloads"
             }
           ],
           "primary": {
@@ -125,6 +126,7 @@
             "pages": [
               "en/why",
               "en/quickstart",
+              "en/downloads",
               "en/getting-started/installation",
               "en/getting-started/first-run",
               "en/getting-started/configure-model"
