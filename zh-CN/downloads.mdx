@@ -1,11 +1,11 @@
 ---
 title: 下载
-description: 读取官方 GitHub Releases 的版本信息，下载 Windows、macOS 与 Linux 安装包。
+description: 从官方 GitHub Releases 同步的版本列表，下载 Windows、macOS 与 Linux 安装包。
 ---
 
 import { ReleaseDownloads } from "/snippets/downloads.jsx"
 
-本页在打开时从官方 GitHub Releases 读取版本列表，按平台列出每个版本的安装包。安装步骤见[安装](./getting-started/installation)。
+本页列出官方 GitHub Releases 中的版本，按平台给出每个版本的安装包。安装步骤见[安装](./getting-started/installation)。
 
 ## 选择版本并下载
 
@@ -33,7 +33,7 @@ import { ReleaseDownloads } from "/snippets/downloads.jsx"
 首次启动需要网络：应用会下载兼容的 Node.js 运行时和预构建 Harness 内核。内置插件要求 Harness 内核 **0.1.5-rc.1** 或更高版本。
 
 <Note>
-  安装包直接来自 GitHub Releases，本页不镜像也不缓存文件。接口受限时，可以从[发布页面](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/releases)手动选择。
+  安装包直接来自 GitHub Releases，本页不镜像也不缓存文件。版本列表由本仓库的定时工作流从发布页面同步，可能有一小时以内的延迟，以[发布页面](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/releases)为准。
 </Note>
 
 安装完成后继续阅读[首次运行](./getting-started/first-run)，或查看[内核与 Profile](./guides/profiles-and-cores)。

@@ -1,0 +1,35 @@
+name: Sync releases
+
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: docs-sync-releases
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Refresh the release snapshot from the GitHub releases page
+        run: node scripts/sync-releases.mjs
+      - name: Commit the refreshed snapshot
+        run: |
+          git add snippets/downloads.jsx
+          if git diff --cached --quiet; then
+            echo "Snapshot already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(downloads): sync release list from GitHub"
+          git push
