@@ -71,11 +71,11 @@
     }
     .dsh-wordmark-ink,
     .dsh-wordmark-badge {
-      fill: #000000;
+      fill: #ffffff;
     }
 
     .dsh-wordmark-badge-ink {
-      fill: #ffffff;
+      fill: #000000;
     }
 
   </style>
