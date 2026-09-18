@@ -21,7 +21,7 @@ const USER_AGENT = 'deepseek-harness-desktop-docs (+https://github.com/dsh-tauri
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const target = join(root, 'snippets', 'downloads.jsx')
 
-const START_MARKER = /(\/\* sync-releases:start[^\n]*\n)[\s\S]*?(\n[ \t]*\/\* sync-releases:end \*\/)/
+const START_MARKER = /(\/\* sync-releases:start[^\n]*\r?\n)[\s\S]*?(?:\r?\n)+([ \t]*\/\* sync-releases:end \*\/)/
 
 const decodeEntities = value => value
   .replace(/&nbsp;/g, ' ')
@@ -109,7 +109,10 @@ const get = async (url, attempt = 1) => {
 
 const main = async () => {
   const listHtml = await get(RELEASES_URL)
-  const releases = parseReleaseList(listHtml).slice(0, RELEASE_LIMIT)
+  // 手动触发的测试构建会以 `test-*` 发布，不应出现在下载页的版本列表里。
+  const releases = parseReleaseList(listHtml)
+    .filter(release => !release.tag.startsWith('test-'))
+    .slice(0, RELEASE_LIMIT)
   if (releases.length === 0)
     throw new Error('no releases parsed from the releases page')
 
@@ -132,11 +135,14 @@ const main = async () => {
     })
   }
 
-  const block = `  const SNAPSHOT = ${JSON.stringify(snapshot, null, 2).replace(/^/gm, '  ').trimStart()}\n`
   const source = readFileSync(target, 'utf8')
   if (!START_MARKER.test(source))
     throw new Error(`snapshot markers not found in ${target}`)
-  const next = source.replace(START_MARKER, (_match, head, tail) => `${head}${block}${tail}`)
+  // 沿用文件现有的换行符，否则在 Windows（core.autocrlf=true）上每次同步都会
+  // 产生只有行尾差异的改动。
+  const eol = source.includes('\r\n') ? '\r\n' : '\n'
+  const block = `  const SNAPSHOT = ${JSON.stringify(snapshot, null, 2).replace(/^/gm, '  ').trimStart()}`.replace(/\n/g, eol)
+  const next = source.replace(START_MARKER, (_match, head, marker) => `${head}${block}${eol}${eol}${marker}`)
 
   if (next === source) {
     console.log('snapshot already up to date')

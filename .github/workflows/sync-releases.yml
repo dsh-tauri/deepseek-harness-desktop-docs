@@ -1,8 +1,12 @@
 name: Sync releases
 
 on:
-  schedule:
-    - cron: "23 * * * *"
+  # Release 发布在 deepseek-harness-desktop，跨仓库不会被 `on: release` 命中，
+  # 也不支持跨仓库 workflow_run，所以由那边的 release workflow 派发这个事件。
+  # 派发需要 PAT 或 GitHub App token（默认 GITHUB_TOKEN 只能操作自己仓库），
+  # 在 deepseek-harness-desktop 配置 secret：DOCS_DISPATCH_TOKEN。
+  repository_dispatch:
+    types: [desktop-release]
   workflow_dispatch:
 
 permissions:
