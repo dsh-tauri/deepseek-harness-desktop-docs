@@ -1,12 +1,17 @@
 name: Sync releases
 
 on:
-  # Release 发布在 deepseek-harness-desktop，跨仓库不会被 `on: release` 命中，
-  # 也不支持跨仓库 workflow_run，所以由那边的 release workflow 派发这个事件。
-  # 派发需要 PAT 或 GitHub App token（默认 GITHUB_TOKEN 只能操作自己仓库），
-  # 在 deepseek-harness-desktop 配置 secret：DOCS_DISPATCH_TOKEN。
+  # 首选触发：deepseek-harness-desktop 发布 Release 后派发这个事件。
+  # 跨仓库不会被 `on: release` 命中，也不支持跨仓库 workflow_run
+  # （on.workflow_run 只有 workflows / types / branches，没有仓库维度），
+  # 所以只能由发布方派发 repository_dispatch；派发方需要 PAT 或 GitHub App token
+  # （默认 GITHUB_TOKEN 只能操作自己仓库）。
   repository_dispatch:
     types: [desktop-release]
+  # 兜底：在发布方接上派发之前，低频轮询保证版本列表不会长期停在旧版本。
+  # 派发接通后可以把这三行删掉，只留事件触发。
+  schedule:
+    - cron: "23 */6 * * *"
   workflow_dispatch:
 
 permissions:
