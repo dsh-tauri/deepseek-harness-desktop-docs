@@ -1,0 +1,70 @@
+---
+title: 安装
+description: 选择版本下载并安装 DeepSeek Harness Desktop（Windows、macOS、Linux）。
+---
+
+import { ReleaseDownloads } from "/snippets/downloads.jsx"
+
+桌面端安装包保持轻量：首次启动时应用会自行下载兼容的 Node.js 运行时和预构建 Harness 内核。
+
+## 选择版本并下载
+
+<ReleaseDownloads lang="zh-CN" />
+
+<Note>
+  安装包直接来自 GitHub Releases，本页不镜像也不缓存文件。版本列表由本仓库的定时工作流从发布页面同步，可能有一小时以内的延迟，以[发布页面](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/releases)为准。
+</Note>
+
+## 安装包类型
+
+| 平台 | 安装包 | 适用场景 |
+| --- | --- | --- |
+| Windows | `*-setup.exe` | 默认选择，NSIS 安装程序 |
+| Windows | `*_x64_en-US.msi`、`*_x64_zh-CN.msi` | 需要 MSI 分发时使用，例如企业部署 |
+| macOS | `*_aarch64.dmg` | Apple Silicon（M 系列） |
+| macOS | `*_x64.dmg` | Intel 芯片 |
+| Linux | `*_amd64.deb` | Debian、Ubuntu 等发行版，系统集成更完整 |
+| Linux | `*_amd64.AppImage` | 免安装，单文件运行 |
+
+macOS 也可以用 Homebrew 安装：
+
+```bash
+brew install dsh-tauri-desk/desktop/deepseek-harness
+```
+
+## 系统要求
+
+| 平台 | 要求 |
+| --- | --- |
+| Windows | Windows 10 或更高版本 |
+| macOS | macOS 10.15 或更高版本 |
+| Linux | 现代 64 位发行版 |
+
+首次启动需要网络。安装完成后，除模型供应商、插件或更新需要联网外，常规工作在本机进行。内置插件要求 Harness 内核 **0.1.5-rc.1** 或更高版本。
+
+## 安装并启动
+
+运行下载的安装包，然后从应用菜单打开 **DeepSeek Harness Desktop**。
+
+## 平台说明
+
+<AccordionGroup>
+  <Accordion title="Windows 安全提示">
+    确认安装包来自官方 GitHub Release。应用使用受支持 Windows 已包含的 WebView2。
+  </Accordion>
+  <Accordion title="macOS 阻止首次启动">
+    验证下载来源后，在**系统设置 → 隐私与安全性**中允许该应用运行。
+  </Accordion>
+  <Accordion title="Linux Wayland 黑屏">
+    优先使用 `.deb`。AppImage 仍然黑屏时可尝试：
+    ```bash
+    WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 GDK_BACKEND=x11 ./Deepseek*.AppImage
+    ```
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  正式版用户无需安装 Node.js、pnpm 或 Docker；只有开发桌面端源码时才需要这些工具。
+</Note>
+
+接下来阅读[首次运行](./getting-started/first-run)。
