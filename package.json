@@ -9,6 +9,7 @@
     "validate": "mint validate",
     "links": "mint broken-links --check-anchors --check-redirects",
     "a11y": "mint a11y",
+    "sync:releases": "node scripts/sync-releases.mjs",
     "check": "pnpm links && pnpm a11y && pnpm validate"
   },
   "devDependencies": {

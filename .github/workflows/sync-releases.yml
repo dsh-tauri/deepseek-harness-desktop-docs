@@ -1,0 +1,44 @@
+name: Sync releases
+
+on:
+  # 首选触发：deepseek-harness-desktop 发布 Release 后派发这个事件。
+  # 跨仓库不会被 `on: release` 命中，也不支持跨仓库 workflow_run
+  # （on.workflow_run 只有 workflows / types / branches，没有仓库维度），
+  # 所以只能由发布方派发 repository_dispatch；派发方需要 PAT 或 GitHub App token
+  # （默认 GITHUB_TOKEN 只能操作自己仓库）。
+  repository_dispatch:
+    types: [desktop-release]
+  # 兜底：在发布方接上派发之前，低频轮询保证版本列表不会长期停在旧版本。
+  # 派发接通后可以把这三行删掉，只留事件触发。
+  schedule:
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: docs-sync-releases
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Refresh the release snapshot from the GitHub releases page
+        run: node scripts/sync-releases.mjs
+      - name: Commit the refreshed snapshot
+        run: |
+          git add snippets/downloads.jsx
+          if git diff --cached --quiet; then
+            echo "Snapshot already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(downloads): sync release list from GitHub"
+          git push

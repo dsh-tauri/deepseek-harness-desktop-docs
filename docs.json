@@ -14,6 +14,24 @@
     "dark": "/logo-dark.svg"
   },
   "css": "/styles.css",
+  "redirects": [
+    {
+      "source": "/zh-CN/downloads",
+      "destination": "/zh-CN/installation"
+    },
+    {
+      "source": "/en/downloads",
+      "destination": "/en/installation"
+    },
+    {
+      "source": "/zh-CN/getting-started/installation",
+      "destination": "/zh-CN/installation"
+    },
+    {
+      "source": "/en/getting-started/installation",
+      "destination": "/en/installation"
+    }
+  ],
   "navigation": {
     "languages": [
       {
@@ -23,7 +41,7 @@
           "links": [
             {
               "label": "下载版本",
-              "href": "/zh-CN/downloads"
+              "href": "/zh-CN/installation"
             }
           ],
           "primary": {
@@ -39,8 +57,7 @@
             "pages": [
               "zh-CN/why",
               "zh-CN/quickstart",
-              "zh-CN/downloads",
-              "zh-CN/getting-started/installation",
+              "zh-CN/installation",
               "zh-CN/getting-started/first-run",
               "zh-CN/getting-started/configure-model"
             ]
@@ -110,7 +127,7 @@
           "links": [
             {
               "label": "Downloads",
-              "href": "/en/downloads"
+              "href": "/en/installation"
             }
           ],
           "primary": {
@@ -126,8 +143,7 @@
             "pages": [
               "en/why",
               "en/quickstart",
-              "en/downloads",
-              "en/getting-started/installation",
+              "en/installation",
               "en/getting-started/first-run",
               "en/getting-started/configure-model"
             ]
