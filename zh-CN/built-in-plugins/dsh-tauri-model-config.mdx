@@ -1,0 +1,91 @@
+---
+title: DSH Model Config
+description: 在桌面端模型设置页补齐上下文上限、图片输入、思考模式和本地端点兼容选项。
+---
+
+`dsh-tauri-model-config` 接管嵌入式 Harness 的**设置 → 模型**页。它注册与官方页面相同的
+`settings.section/models` 分区，并在补丁层关闭官方入口 `ui-settings-models`：两者声明的槽位互斥，
+不能同时启用。你看到的仍是同一页，只是多了官方不提供的配置项。
+
+{/* <!-- [模型设置页中的容量输入、图片输入与思考模式开关](/images/zh-CN/dsh-tauri-model-config.png) --> */}
+
+## 比官方页面多出的操作
+
+| 位置 | 操作 | 作用 |
+| --- | --- | --- |
+| 页面标题右侧 | **打开配置文件** | 用系统默认程序打开 `$DSH_HOME/settings.yaml`；文件尚未创建时打开它所在目录 |
+| 模型行 | **获取配置** | 仅在该条目只有 `id`、`name`、`description` 时出现，按 `id` 从提供方端点读取该模型的上下文与输出上限 |
+| 模型目录标题 | **自动配置所有模型** | 按按钮语义重新配置目录内模型；端点披露的容量会覆盖行内旧值，未披露的字段保持不动 |
+| 模型高级区 | **图片输入** | 写入该模型的 `input` 声明 |
+| 模型高级区 | **思考模式** | 写入该模型的 `reasoningEfforts` 声明，并可逐档勾选 |
+| 模型高级区 | **关闭 Developer 角色** | 为 OpenAI 兼容端点写入一组 `compat`，修复档位不生效与角色报错 |
+
+单行的**获取配置**只补空缺字段，不会覆盖你已填写的值。
+
+## 图片输入与思考模式
+
+**图片输入**开关写入该模型的 `input` 声明。**思考模式**开关打开时保留该行已有档位；没有档位时写入
+`off`、`low`、`medium`、`high`，并展开 `off` 到 `max` 的逐档勾选项——勾上即写入该档位，取消即移除。
+取消到空表时写入 `false`，表示显式声明“不支持思考”。
+
+两个开关都只表达**显式声明**。字段缺席表示“继承默认”，此时开关读为关，所以打开再关闭不会把
+“未表态”变成否定声明。
+
+### 关闭 Developer 角色
+
+声明了档位不等于档位能到达端点。pi-ai 默认把档位放进顶层的 `reasoning_effort`，并在模型具备思考能力时
+把系统提示的角色从 `system` 换成 `developer`；而 vLLM 这类 OpenAI 兼容端点从 `chat_template_kwargs`
+读思考参数、也不接受 `developer`，于是出现“档位选了没反应”和整轮 `Unexpected message role.`。
+
+**关闭 Developer 角色**一次写入这类端点需要的三项 `compat`：
+
+```yaml
+compat:
+  supportsDeveloperRole: false
+  thinkingFormat: chat-template
+  chatTemplateKwargs:
+    reasoning_effort:
+      $var: thinking.effort
+```
+
+`compat` 在 pi-ai 里逐协议校验，`thinkingFormat` 与 `chatTemplateKwargs` 只有 `openai-completions` 收。
+因此该开关只在路由显式声明 `openai-completions` 时出现；目录路由（协议由内置目录决定）不提供。
+关闭只摘掉这三项，条目里其它 `compat` 键与 chat template 参数原样保留。
+
+## 容量从哪里来
+
+容量按两条通道取值，先直连再回退：
+
+1. **宿主直连** `GET /endpoint/models`：宿主按当前 profile 解析端点与凭据，请求 `{baseURL}/models` 并归一化容量。
+2. **官方发现通道** `remote.llm.discoverModels(settingsNs, probe)`：覆盖端点地址不在用户设置里的提供方，例如内置的 DeepSeek 官方路由。
+
+图片与思考能力不在这两条通道的返回里。它们来自模型能力表 `GET /presets`：宿主在第一次需要时下载
+LiteLLM 的模型价目表，压成 `模型 id → [支持图片, 支持思考, 最大输入, 最大输出]` 后缓存在
+`$DSH_HOME/dsh-tauri-model-config/model-presets.json`，一天内直接用缓存；上游不可达时先用过期缓存，
+完全没有缓存时退回家族命名规则。
+
+并入草稿时的优先级：
+
+- 容量以端点披露为准；端点没有披露时用能力表的值，已有值不会被能力表覆盖。
+- 图片与思考先看能力表，表没给出“能”的结论时由家族规则按命名补一条，只做加法。
+- 能力表里的 `0` 表示“数据集没有给出这项事实”，不是“不支持”，因此不会被写成显式的
+  `reasoningEfforts: false` 或 `input: ['text']`。
+
+## 宿主路由
+
+| 方法 | 路径 | 作用 |
+| --- | --- | --- |
+| GET | `/api/desktop/dsh-tauri-model-config/endpoint/models` | 读取提供方端点的 `/models` 清单并归一化容量 |
+| GET | `/api/desktop/dsh-tauri-model-config/presets` | 取模型能力表（`force=true` 忽略缓存有效期） |
+| POST | `/api/desktop/dsh-tauri-model-config/config/open` | 用系统默认程序打开模型配置文件 |
+
+## 数据与边界
+
+- 请求事实来自表单当前显示的值（`provider`、`baseURL`、`api`，以及已输入但未保存的 `apiKey`）。凭据只在宿主侧解析，响应里不回显，也不进 URL。
+- 能力表需要一次网络请求：原始数据集约 2.6 MB，压缩后约 72 KB 落盘。离线且从未下载过时，只剩家族规则能补图片与思考能力，容量仍由端点清单提供。
+- 模型配置文件按 `$DSH_HOME`（非空白）→ `~/.dsh` 解析后取 `settings.yaml`。如果 profile 的 `cordis.yml` 为 `settings-file` 配了自定义 `path`，插件无法感知。
+- 文件不存在时打开的是它所在的目录，不会替你创建一个空文档。
+- 图片能力是社区口径的近似值，随时可以在高级区改；单行的**获取配置**不会覆盖手写值。
+- 插件没有操作系统沙箱，只在 Harness 与桌面端允许的权限范围内运行；它会读写 Harness 设置文档。
+
+[查看源码与完整说明](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-model-config)

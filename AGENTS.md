@@ -19,19 +19,19 @@ When asked to “update,” “sync,” “refresh,” or add documentation, dis
 1. Determine the docs repository root from the current working directory and `docs.json`.
 2. Inspect the parent directory and sibling Git repositories by repository identity, not folder name alone.
 3. Use `git remote -v`, `git config --get remote.origin.url`, package manifests, and repository metadata to identify:
-   - `dsh-tauri-desk/deepseek-harness-desktop` — desktop implementation and the first-party plugins under `packages/`.
-   - `dsh-tauri-desk/deepseek-harness-pkg` — packaged Harness distribution.
+   - `dsh-tauri/deepseek-harness-desktop` — desktop implementation and the first-party plugins under `packages/`.
+   - `dsh-tauri/deepseek-harness-pkg` — packaged Harness distribution.
 4. A sibling checkout is an optimization, not a requirement. If a source is absent or stale, read the public GitHub repository with `gh` or GitHub API.
 5. Never write an absolute workstation path into documentation or agent instructions.
 
 ### Canonical remote sources
 
-- Desktop source: <https://github.com/dsh-tauri-desk/deepseek-harness-desktop>
-- First-party plugins: <https://github.com/dsh-tauri-desk/deepseek-harness-desktop/tree/main/packages>
-- Packaged core: <https://github.com/dsh-tauri-desk/deepseek-harness-pkg>
+- Desktop source: <https://github.com/dsh-tauri/deepseek-harness-desktop>
+- First-party plugins: <https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages>
+- Packaged core: <https://github.com/dsh-tauri/deepseek-harness-pkg>
 - Upstream Harness: <https://github.com/deepseek-ai/deepseek-harness>
-- Releases: <https://github.com/dsh-tauri-desk/deepseek-harness-desktop/releases>
-- Roadmap: <https://github.com/orgs/dsh-tauri-desk/projects/3/views/2>
+- Releases: <https://github.com/dsh-tauri/deepseek-harness-desktop/releases>
+- Roadmap: <https://github.com/orgs/dsh-tauri/projects/3/views/2>
 
 Use the current desktop source and release assets to determine desktop behavior. Upstream Harness documentation explains Harness capabilities but does not prove that the desktop exposes them.
 
@@ -93,7 +93,7 @@ For release-sensitive updates:
 
 The comparison tracks:
 
-- <https://github.com/dsh-tauri-desk/deepseek-harness-desktop>
+- <https://github.com/dsh-tauri/deepseek-harness-desktop>
 - <https://github.com/anywhere-labs/dsh-desktop>
 - <https://github.com/dataelement/dsh-desktop>
 - <https://github.com/zouyuxuan122/Deepseek-Harness-EAC>

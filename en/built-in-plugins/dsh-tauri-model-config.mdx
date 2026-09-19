@@ -1,0 +1,98 @@
+---
+title: DSH Model Config
+description: Add context limits, image input, thinking modes, and local-endpoint compatibility options to the desktop model settings page.
+---
+
+`dsh-tauri-model-config` takes over the embedded Harness **Settings → Models** page. It registers the
+same `settings.section/models` section as the official page and disables the official entry
+`ui-settings-models` in its patch layer: the two declare the same slot and cannot be enabled
+together. You still see one page — it just exposes options the official page does not.
+
+{/* <!-- [Capacity inputs, image input, and thinking-mode switches on the model settings page](/images/en/dsh-tauri-model-config.png) --> */}
+
+## Actions the official page does not offer
+
+| Location | Action | Effect |
+| --- | --- | --- |
+| Next to the page title | **Open config file** | Opens `$DSH_HOME/settings.yaml` with the system default program; opens its directory when the file does not exist yet |
+| A model row | **Fetch config** | Appears only when the entry has just `id`, `name`, and `description`; reads that model's context and output limits from the provider endpoint by `id` |
+| The model catalog heading | **Configure all models** | Reconfigures the catalog models according to the button's meaning; capacity disclosed by the endpoint overwrites older row values, undisclosed fields stay untouched |
+| A model's advanced area | **Image input** | Writes the model's `input` declaration |
+| A model's advanced area | **Thinking mode** | Writes the model's `reasoningEfforts` declaration with per-level checkboxes |
+| A model's advanced area | **Disable Developer role** | Writes a `compat` block for OpenAI-compatible endpoints, fixing levels that never arrive and role errors |
+
+The per-row **Fetch config** action only fills empty fields; it never overwrites values you entered.
+
+## Image input and thinking mode
+
+The **Image input** switch writes the model's `input` declaration. Turning on **Thinking mode**
+keeps the levels already on that row; when there are none it writes `off`, `low`, `medium`, and
+`high` and expands per-level checkboxes from `off` to `max` — checking a level writes it, clearing
+it removes it. Clearing every level writes `false`, an explicit “no thinking support” declaration.
+
+Both switches express an **explicit declaration** only. An absent field means “inherit the
+default”, and the switch reads as off in that state, so toggling on and back off never turns
+“unstated” into a negative declaration.
+
+### Disable Developer role
+
+Declaring a level does not mean the level reaches the endpoint. pi-ai puts levels in the top-level
+`reasoning_effort` by default and swaps the system prompt role from `system` to `developer` when a
+model can think. OpenAI-compatible endpoints such as vLLM read thinking parameters from
+`chat_template_kwargs` and reject `developer`, which produces levels that appear to do nothing and
+a whole turn failing with `Unexpected message role.`
+
+**Disable Developer role** writes the three `compat` facts such an endpoint needs in one step:
+
+```yaml
+compat:
+  supportsDeveloperRole: false
+  thinkingFormat: chat-template
+  chatTemplateKwargs:
+    reasoning_effort:
+      $var: thinking.effort
+```
+
+pi-ai validates `compat` per protocol, and only `openai-completions` accepts `thinkingFormat` and
+`chatTemplateKwargs`. The switch therefore appears only when the route explicitly declares
+`openai-completions`; catalog routes, whose protocol the built-in catalog decides, do not offer it.
+Turning it off removes only those three entries and leaves other `compat` keys and chat template
+parameters untouched.
+
+## Where capacity comes from
+
+Capacity is resolved through two channels, direct first and fallback second:
+
+1. **Direct host call** `GET /endpoint/models`: the host resolves the endpoint and credentials from the current profile, requests `{baseURL}/models`, and normalizes capacity.
+2. **Official discovery channel** `remote.llm.discoverModels(settingsNs, probe)`: covers providers whose endpoint address is not in your settings, such as the built-in official DeepSeek route.
+
+Image and thinking capabilities are not in either response. They come from the model capability
+table at `GET /presets`: the host downloads LiteLLM's model price table on first use, compresses it
+to `model id → [supports images, supports thinking, max input, max output]`, and caches it at
+`$DSH_HOME/dsh-tauri-model-config/model-presets.json` for a day. When upstream is unreachable it
+uses a stale cache first, and with no cache at all it falls back to family naming rules.
+
+Merge priorities when writing the draft:
+
+- Capacity follows what the endpoint discloses; the capability table fills gaps and never overwrites an existing value.
+- Image and thinking check the capability table first, then let family rules add a positive entry; the rules only ever add.
+- A `0` in the capability table means “the dataset does not state this fact”, not “unsupported”, so it is never written as an explicit `reasoningEfforts: false` or `input: ['text']`.
+
+## Host routes
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| GET | `/api/desktop/dsh-tauri-model-config/endpoint/models` | Reads the provider endpoint's `/models` listing and normalizes capacity |
+| GET | `/api/desktop/dsh-tauri-model-config/presets` | Returns the model capability table (`force=true` ignores cache age) |
+| POST | `/api/desktop/dsh-tauri-model-config/config/open` | Opens the model config file with the system default program |
+
+## Data and boundaries
+
+- Requests use the values currently shown in the form (`provider`, `baseURL`, `api`, and an `apiKey` typed but not yet saved). Credentials are resolved on the host side only; they are never echoed in a response and never placed in a URL.
+- The capability table needs one network request: roughly 2.6 MB of raw dataset, about 72 KB on disk after compression. Offline with no prior download, only family rules can fill image and thinking capabilities, while capacity still comes from the endpoint listing.
+- The model config file resolves `$DSH_HOME` (when non-blank) and then `~/.dsh` to reach `settings.yaml`. If a profile's `cordis.yml` sets a custom `path` for `settings-file`, this plugin cannot see it.
+- When the file does not exist, the plugin opens its directory instead of creating an empty document for you.
+- Image capability is a community approximation and can be changed at any time in the advanced area; the per-row **Fetch config** action never overwrites hand-written values.
+- The plugin adds no operating-system sandbox and runs within the capabilities allowed by Harness and the desktop. It reads and writes the Harness settings document.
+
+[View source and the complete guide](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-model-config)

@@ -29,7 +29,7 @@ client half 还提供桌面侧栏的面板入口：插件调用 `definePanel(ctx
 `sidebar.panellist`，`render` 注册进主区域槽 `main`；返回的 `PanelHandle` 提供 `select()`、
 `close()` 和 `dispose()`。`dsh-tauri-panel-extension` 与 `dsh-tauri-panel-scheduler` 都通过该入口注册面板。
 
-该入口要求 Harness 内核 **0.1.5-rc.1** 或更高版本。旧版 `dsh-tauri-panel` 的 `panel.protocol`
+该入口与其他内置插件共用同一基线，要求 Harness 内核 **0.1.5-rc.2** 或更高版本。旧版 `dsh-tauri-panel` 的 `panel.protocol`
 反射服务与 `sidebar.panel.action` 槽已随包移除，不提供兼容路径。
 
 ## 边界
@@ -37,4 +37,4 @@ client half 还提供桌面侧栏的面板入口：插件调用 `definePanel(ctx
 `dsh-tauri` 只负责导航消息、面板入口与状态，不管理 Profile、内核、插件安装或文件系统。
 缺少该插件时，Harness 本身仍可运行，但桌面顶部栏不会显示依赖消息桥的导航按钮。
 
-[查看源码](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/tree/main/packages/dsh-tauri)
+[查看源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri)
