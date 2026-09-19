@@ -8,7 +8,7 @@ Tauri shell. They ship with the installer. Before startup, the desktop checks th
 and files and restores inconsistent or missing copies from bundled resources.
 
 <Note>
-  Built-in plugins require Harness core **0.1.5-rc.1** or later. Earlier cores do not provide the
+  Built-in plugins require Harness core **0.1.5-rc.2** or later. Earlier cores do not provide the
   client API these plugins rely on, so panel plugins will not load.
 </Note>
 
@@ -20,6 +20,10 @@ and files and restores inconsistent or missing copies from bundled resources.
   <Card title="DSH Tauri" icon="arrows-left-right" href="./dsh-tauri">
     The message bridge between the native navigation bar and embedded Harness client, plus the
     desktop sidebar panel entry.
+  </Card>
+  <Card title="DSH Model Config" icon="sliders" href="./dsh-tauri-model-config">
+    Takes over the model settings page and adds context and output limits, image input, thinking
+    modes, and local-endpoint compatibility options.
   </Card>
   <Card title="DSH Tauri UI" icon="sidebar" href="./dsh-tauri-ui">
     A desktop settings sidebar with safe fallback when required renderer capabilities are unavailable.
@@ -60,4 +64,4 @@ maintenance and recovery ownership.
   allowed by Harness and the desktop application.
 </Note>
 
-Source is available in the [`packages/`](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/tree/main/packages) directory of the desktop repository.
+Source is available in the [`packages/`](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages) directory of the desktop repository.

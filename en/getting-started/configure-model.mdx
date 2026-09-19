@@ -15,7 +15,8 @@ path is to add a DeepSeek API key from the embedded Harness settings.
 <Steps>
   <Step title="Open model settings">
     In the Harness sidebar, open **Settings → Models**. This page belongs to the embedded
-    Harness interface, not the desktop shell's **Configuration** dialog.
+    Harness interface, not the desktop shell's **Configuration** dialog. The desktop provides
+    it through the built-in [DSH Model Config](../built-in-plugins/dsh-tauri-model-config) plugin.
   </Step>
   <Step title="Enter your API key">
     Find the DeepSeek provider card, enter a key from the
@@ -46,8 +47,11 @@ and at least one model.
 
 <Note>
   Provider setup is a Harness feature and can evolve independently from the desktop
-  shell. For advanced routing, image input, and compatibility options, consult the
-  [upstream model guide](https://deepseek-harness.github.io/deepseek-harness/user/guide/providers).
+  shell. The desktop adds context and output limits, image input, thinking modes, and
+  local-endpoint compatibility options on top of the official page — see
+  [DSH Model Config](../built-in-plugins/dsh-tauri-model-config). For upstream routing and
+  provider semantics, consult the
+  [upstream model guide](https://deepseek-harness.github.io/deepseek-harness/guide/providers).
 </Note>
 
 Next, learn the [desktop and Harness interface](../guides/interface).

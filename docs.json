@@ -46,7 +46,7 @@
           ],
           "primary": {
             "type": "github",
-            "href": "https://github.com/dsh-tauri-desk/deepseek-harness-desktop",
+            "href": "https://github.com/dsh-tauri/deepseek-harness-desktop",
             "label": "GitHub"
           }
         },
@@ -82,6 +82,7 @@
             "pages": [
               "zh-CN/built-in-plugins/overview",
               "zh-CN/built-in-plugins/dsh-tauri",
+              "zh-CN/built-in-plugins/dsh-tauri-model-config",
               "zh-CN/built-in-plugins/dsh-tauri-ui",
               "zh-CN/built-in-plugins/dsh-tauri-worktree",
               "zh-CN/built-in-plugins/dsh-tauri-panel-extension",
@@ -132,7 +133,7 @@
           ],
           "primary": {
             "type": "github",
-            "href": "https://github.com/dsh-tauri-desk/deepseek-harness-desktop",
+            "href": "https://github.com/dsh-tauri/deepseek-harness-desktop",
             "label": "GitHub"
           }
         },
@@ -168,6 +169,7 @@
             "pages": [
               "en/built-in-plugins/overview",
               "en/built-in-plugins/dsh-tauri",
+              "en/built-in-plugins/dsh-tauri-model-config",
               "en/built-in-plugins/dsh-tauri-ui",
               "en/built-in-plugins/dsh-tauri-worktree",
               "en/built-in-plugins/dsh-tauri-panel-extension",
@@ -221,7 +223,7 @@
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/dsh-tauri-desk/deepseek-harness-desktop"
+      "github": "https://github.com/dsh-tauri/deepseek-harness-desktop"
     }
   }
 }

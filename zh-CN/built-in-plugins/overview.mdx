@@ -7,7 +7,7 @@ DeepSeek Harness Desktop 通过少量第一方插件连接 Harness 与 Tauri 桌
 启动前会检查其声明与文件；缺失或不一致时，桌面端会从内置资源恢复。
 
 <Note>
-  内置插件要求 Harness 内核 **0.1.5-rc.1** 或更高版本。更低版本的内核不提供插件所需的客户端 API，
+  内置插件要求 Harness 内核 **0.1.5-rc.2** 或更高版本。更低版本的内核不提供插件所需的客户端 API，
   面板类插件无法加载。
 </Note>
 
@@ -18,6 +18,9 @@ DeepSeek Harness Desktop 通过少量第一方插件连接 Harness 与 Tauri 桌
 <CardGroup cols={2}>
   <Card title="DSH Tauri" icon="arrows-left-right" href="./dsh-tauri">
     连接原生导航栏和嵌入式 Harness 客户端，并提供桌面侧栏的面板入口。
+  </Card>
+  <Card title="DSH Model Config" icon="sliders" href="./dsh-tauri-model-config">
+    接管模型设置页，补齐上下文与输出上限、图片输入、思考模式和本地端点兼容选项。
   </Card>
   <Card title="DSH Tauri UI" icon="sidebar" href="./dsh-tauri-ui">
     提供桌面化设置侧边栏，并在能力缺失时安全降级。
@@ -55,4 +58,4 @@ DeepSeek Harness Desktop 通过少量第一方插件连接 Harness 与 Tauri 桌
   它们仍在 Harness 与桌面端允许的权限范围内运行。
 </Note>
 
-源码位于桌面仓库的 [`packages/`](https://github.com/dsh-tauri-desk/deepseek-harness-desktop/tree/main/packages) 目录。
+源码位于桌面仓库的 [`packages/`](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages) 目录。

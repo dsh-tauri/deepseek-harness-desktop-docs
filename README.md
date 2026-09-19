@@ -1,7 +1,7 @@
 # DeepSeek Harness Desktop Docs
 
 Official bilingual documentation for
-[DeepSeek Harness Desktop](https://github.com/dsh-tauri-desk/deepseek-harness-desktop),
+[DeepSeek Harness Desktop](https://github.com/dsh-tauri/deepseek-harness-desktop),
 built with [Mintlify](https://mintlify.com/).
 
 ## Local development
@@ -36,5 +36,5 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 ## License
 
 Documentation content follows the licensing terms of the main project. See the
-[desktop repository](https://github.com/dsh-tauri-desk/deepseek-harness-desktop)
+[desktop repository](https://github.com/dsh-tauri/deepseek-harness-desktop)
 for details.
