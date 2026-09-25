@@ -1,0 +1,31 @@
+---
+title: DSH Tauri Running Changes
+description: 查看 Agent 回合运行期间的改动文件与行数统计。
+---
+
+`dsh-tauri-running-changes` 按 Agent 回合建立私有 Git 快照，并在回合运行期间于输入框上方显示改动提示条。它只负责记录与显示，恢复文件由推荐的 [DSH Rewind](https://github.com/SiriLee/dsh-rewind) 预设插件处理。
+
+## 用户可见功能
+
+- 回合运行期间在输入框上方显示 `{count} 个文件已更改`。
+- 展开后显示改动文件与 `+N -M` 行数统计。
+- 二进制改动单独标注为「二进制」。
+- 工作区不是 Git 仓库时不做快照，只在提示条中给出原因。
+
+## 数据与边界
+
+快照与账本存放在 `$DSH_HOME/dsh-tauri-running-changes/`，账本单位为 `sessions`。每个会话保留最近 50 个回合的快照，账本最多 200 条记录；单文件超过 64 MiB 的改动会被排除并标注，私有仓超过 2048 MB 时整仓隔离重建、旧回合转为已过期。
+
+<Note>
+  私有快照仓不会改变用户仓库的 HEAD、分支、index、stash 或提交历史。
+</Note>
+
+<Warning>
+  本插件不提供撤销或 redo。需要还原文件时请使用 dsh-rewind 预设插件。
+</Warning>
+
+## 兼容性
+
+需要系统已安装 Git。PATH 上没有 Git 与「工作区不是 Git 仓库」会分别诊断，并给出对应原因。
+
+[查看源码与完整协议](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-running-changes)

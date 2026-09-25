@@ -57,7 +57,7 @@ Never assume the documented inventory is still current.
 
 Do not maintain the built-in plugin list from memory.
 
-1. Read the desktop repository's current internal-plugin manifest, normally `src-tauri/resources/internal-plugins.json`.
+1. Read the desktop repository's current internal-plugin manifest, normally `src-tauri/resources/manifest.jsonc` (`plugins.built-in`).
 2. Read the current package inventory and READMEs under `packages/` in the desktop repository.
 3. Compare manifest IDs, package names, descriptions, versions, and repository URLs with:
    - both locale navigation groups;
