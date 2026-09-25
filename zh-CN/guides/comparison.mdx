@@ -7,7 +7,7 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 但在桌面技术、平台覆盖、插件策略和扩展功能上采用了不同取舍。
 
 <Note>
-  对比基于各项目截至 2026-09-11 的公开 README、仓库清单和最新 Release。
+  对比基于各项目截至 2026-09-25 的公开 README、仓库清单和最新 Release。
   “未确认”表示公开材料没有明确承诺，不代表项目一定不具备该能力。功能会快速变化，选择前请核对对应仓库。
 </Note>
 
@@ -23,7 +23,7 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 
 [anywhere-labs/dsh-desktop](https://github.com/anywhere-labs/dsh-desktop) 把桌面壳本身实现为 DSH/Cordis 插件，
 强调桌面能力与 Harness 插件生态使用同一种组合方式。它使用 Electron、固定运行特定上游版本，内置社区插件市场，
-并提供 Profile 级首次设置向导、窗口材质、浏览器打开和可选局域网访问。当前 Release 面向 Windows x64 与 macOS Universal。
+并提供 Profile 级首次设置向导、窗口材质、浏览器打开和可选局域网访问。官方安装包面向 Windows x64 与 macOS Universal，Linux 包只在 `-next` 版本线发布。
 
 ### dataelement/dsh-desktop
 
@@ -35,7 +35,7 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 
 [Deepseek Harness EAC](https://github.com/zouyuxuan122/Deepseek-Harness-EAC) 定位为开箱即用的一体化增强发行版。
 当前主线使用 Tauri 2，并在 Harness 上预装主题、文件树、文件变更、终端、插件市场、自动压缩和插件保护等较多能力。
-它提供 Windows 安装版与便携版、macOS Apple Silicon 版本，并通过较早的独立版本线维护 Linux x64 包。
+它提供 Windows 安装版与便携版，以及 Linux 的 DEB / AppImage；macOS Apple Silicon 只保留在较早的 v5.1.0。`.rpm` / `.pacman` 仍在独立的 v4.x `-linux` 版本线维护。
 
 ## 功能对照表
 
@@ -49,11 +49,13 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 | 桌面技术 | Tauri 2 | Electron 43 | Electron 43 | Tauri 2 |
 | Windows x64 | ✅ EXE / MSI | ✅ NSIS | ✅ NSIS | ✅ Setup |
 | Windows 便携版 | — | — | — | ✅ ZIP |
-| macOS Apple Silicon | ✅ DMG | ✅ Universal DMG | ✅ DMG / ZIP | ✅ DMG / APP ZIP |
-| macOS Intel | ✅ DMG | ✅ Universal DMG | ✅ DMG / ZIP | —（当前 v5.1.0） |
-| Linux x64 | ✅ DEB / AppImage | — | — | ◐ 独立旧版本线 |
+| macOS Apple Silicon | ✅ DMG | ✅ Universal DMG | ✅ DMG / ZIP | ◐ 仅 v5.1.0 |
+| macOS Intel | ✅ DMG | ✅ Universal DMG | ✅ DMG / ZIP | — |
+| Linux x64 | ✅ DEB / AppImage | ◐ 独立 `-next` 版本线 | — | ✅ DEB / AppImage |
 | 无需用户预装 Node.js | ✅ | ✅ | ✅ | ✅ |
 | Homebrew 安装 | ✅ | — | — | — |
+
+EAC 的 `.rpm` / `.pacman` 仅在独立的 v4.x `-linux` 版本线维护；anywhere-labs 的 Linux 包只在 `-next` 版本线发布。
 
 ### Harness 与桌面管理
 
@@ -73,7 +75,7 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 | 工作区 | ✅ 内核支持 | ✅ 内核支持 | ✅ 内核支持 | ✅ 内核支持 |
 | 会话级 Git Worktree 隔离 | ✅ 内置 `dsh-tauri-worktree` | 未确认 | 未确认 | 未确认 |
 | Worktree 检出回本地分支 | ✅，需用户明确批准 | 未确认 | 未确认 | 未确认 |
-| Turn 级文件改动撤销 | ✅ 内置 `dsh-tauri-turnrewind` | 未确认 | 未确认 | ✅ 预装行级 Diff 与还原 |
+| 回合改动追踪 | ✅ 内置 `dsh-tauri-running-changes`，恢复交由预设 dsh-rewind | 未确认 | 未确认 | ✅ 预装行级 Diff 与还原 |
 | 定时任务 | ✅ 内置 `dsh-tauri-panel-scheduler` | 未确认 | 未确认 | 未确认 |
 | 文件改动与 Diff | ✅ Harness 内置能力 | ✅ Harness/插件能力 | ✅ Harness 能力 | ✅ 预装行级 Diff 与还原 |
 | 会话终端 | ✅ Harness 内置能力 | ✅ Harness/插件能力 | ✅ Harness 能力 | ✅ 预装持久终端 |
@@ -106,14 +108,15 @@ DeepSeek Harness 的桌面客户端不止一种。它们都希望降低本地 Ha
 
 | 计划能力 | 当前状态 | 优先级 / 时间 | 与现有能力的关系 |
 | --- | --- | --- | --- |
-| 远程连接插件 | Planned | P2 · 2026-Q4 | 在默认仅回环访问之外，探索可选远程连接 |
-| Pull Request 支持 | Planned | P2 | 衔接现有 Worktree、分支检出与代码协作流程 |
+| 定时任务（`dsh-tauri-panel-scheduler`） | In Progress | P2 · 2026-Q4 | 插件已内置，继续完善调度与执行记录 |
+| 远程连接 | In Progress | P2 · 2026-Q4 | 在默认仅回环访问之外，探索可选远程连接 |
+| Pull Request 支持 | In Progress | P2 | 衔接现有 Worktree、分支检出与代码协作流程 |
 | 插件与 UI 系统性 UX/UI 优化 | Planned | P2 · 2026-Q4 | 改进内置插件与 `dsh-tauri-ui` 的完成度 |
 | v1.0 发布 | Planned | P1 · 2026-Q4 | 依次经过功能冻结、alpha、beta 与 stable |
-| Mint 双语文档仓库 | In Progress | P1 · 2026-Q4 | 当前文档工作，不是桌面运行时功能 |
+| 任务面板（task） | Planned | P2 · 2025-Q4 | 提供任务视图，仍在计划阶段 |
 
-Roadmap 还包含处于 **Idea** 阶段的候选项，例如插件签名校验、更多自动更新推送、更多预设插件、官网重构，
-以及低优先级的内置插件管理。Idea 仅表示调研方向，本页不把它们列为“即将支持”。
+Mint 双语文档仓库已完成（**Shipped**），不再列在上表。Roadmap 还包含处于 **Idea** 阶段的候选项，例如功能候选调研、
+官网重构，以及低优先级的内置 dsh 插件管理。Idea 仅表示调研方向，本页不把它们列为“即将支持”。
 
 <Warning>
   Roadmap 会变化。请以 GitHub Project 中最新的 Status、Priority 和 Quarter 为准；任何未进入 Shipped 的项目都不应出现在已交付功能对照中。
@@ -156,9 +159,9 @@ Tauri 项目使用系统 WebView 和 Rust 原生层，通常能获得更小的�
 ## 信息来源
 
 - [本项目仓库](https://github.com/dsh-tauri/deepseek-harness-desktop)与[发布页](https://github.com/dsh-tauri/deepseek-harness-desktop/releases)
-- [anywhere-labs/dsh-desktop](https://github.com/anywhere-labs/dsh-desktop)与 [v2.0.3](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.3)
-- [dataelement/dsh-desktop](https://github.com/dataelement/dsh-desktop)与 [v0.6.3](https://github.com/dataelement/dsh-desktop/releases/tag/v0.6.3)
-- [Deepseek Harness EAC](https://github.com/zouyuxuan122/Deepseek-Harness-EAC)与 [v5.1.0](https://github.com/zouyuxuan122/Deepseek-Harness-EAC/releases/tag/v5.1.0)
+- [anywhere-labs/dsh-desktop](https://github.com/anywhere-labs/dsh-desktop)与 [v2.0.14-next](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.14-next)
+- [dataelement/dsh-desktop](https://github.com/dataelement/dsh-desktop)与 [v0.9.2](https://github.com/dataelement/dsh-desktop/releases/tag/v0.9.2)
+- [Deepseek Harness EAC](https://github.com/zouyuxuan122/Deepseek-Harness-EAC)与 [v5.3.6](https://github.com/zouyuxuan122/Deepseek-Harness-EAC/releases/tag/v5.3.6)
 
 <Warning>
   四个项目都能运行具有本地代码执行能力的 Harness 与插件。无论选择哪一个，都应审查安装包来源、插件代码、

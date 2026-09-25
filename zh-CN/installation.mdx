@@ -5,7 +5,7 @@ description: 选择版本下载并安装 DeepSeek Harness Desktop（Windows、ma
 
 import { ReleaseDownloads } from "/snippets/downloads.jsx"
 
-桌面端安装包保持轻量：首次启动时应用会自行下载兼容的 Node.js 运行时和预构建 Harness 内核。
+桌面端安装包保持轻量：首次启动时应用会自行下载兼容的 Node.js 运行时和预构建 Harness 内核。离线 Bundle 安装包已将两者随包分发。
 
 ## 选择版本并下载
 
@@ -26,6 +26,10 @@ import { ReleaseDownloads } from "/snippets/downloads.jsx"
 | Linux | `*_amd64.deb` | Debian、Ubuntu 等发行版，系统集成更完整 |
 | Linux | `*_amd64.AppImage` | 免安装，单文件运行 |
 
+### 离线安装包（Bundle）
+
+Releases 另有 `Deepseek.Harness.Desktop_Bundle_<版本>` 系列：Windows `.exe`、macOS `_x64.dmg` / `_aarch64.dmg`、Linux `.deb`。Node.js 运行时与 Harness 内核随包分发，**安装后首次启动无需联网**，适合内网或白名单环境。预设与社区插件仍需联网，Git 相关能力（如工作树）需要系统已装 Git。Linux 的随包资源位于 `.deb` 的 `/usr/lib` 下，root 安装后需补齐该目录权限。
+
 macOS 也可以用 Homebrew 安装：
 
 ```bash
@@ -40,7 +44,7 @@ brew install dsh-tauri/desktop/deepseek-harness
 | macOS | macOS 10.15 或更高版本 |
 | Linux | 现代 64 位发行版 |
 
-首次启动需要网络。安装完成后，除模型供应商、插件或更新需要联网外，常规工作在本机进行。内置插件要求 Harness 内核 **0.1.5-rc.2** 或更高版本。
+常规安装包首次启动需要网络；离线 Bundle 安装包不需要。安装完成后，除模型供应商、插件或更新需要联网外，常规工作在本机进行。内置插件要求 Harness 内核 **0.1.5-rc.1** 或更高版本。
 
 ## 安装并启动
 

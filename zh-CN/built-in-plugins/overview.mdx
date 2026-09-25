@@ -7,7 +7,7 @@ DeepSeek Harness Desktop 通过少量第一方插件连接 Harness 与 Tauri 桌
 启动前会检查其声明与文件；缺失或不一致时，桌面端会从内置资源恢复。
 
 <Note>
-  内置插件要求 Harness 内核 **0.1.5-rc.2** 或更高版本。更低版本的内核不提供插件所需的客户端 API，
+  内置插件要求 Harness 内核 **0.1.5-rc.1** 或更高版本。更低版本的内核不提供插件所需的客户端 API，
   面板类插件无法加载。
 </Note>
 
@@ -31,8 +31,8 @@ DeepSeek Harness Desktop 通过少量第一方插件连接 Harness 与 Tauri 桌
   <Card title="DSH Tauri Panel Scheduler" icon="calendar" href="./dsh-tauri-panel-scheduler">
     创建定时任务，在独立 Agent 会话中执行并保留运行记录。
   </Card>
-  <Card title="DSH Tauri Turn Rewind" icon="rotate-left" href="./dsh-tauri-turnrewind">
-    按 Agent 回合查看并安全撤销工作区文件改动。
+  <Card title="DSH Tauri Running Changes" icon="file-pen" href="./dsh-tauri-running-changes">
+    在回合运行期间显示改动文件数与 `+N -M` 行数。
   </Card>
   <Card title="DSH Tauri Session" icon="archive" href="./dsh-tauri-session">
     管理已归档聊天，并将工作区删除操作改为归档。

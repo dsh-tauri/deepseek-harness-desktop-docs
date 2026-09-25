@@ -9,7 +9,7 @@ plugin strategy, and extensions.
 
 <Note>
   This comparison uses public READMEs, repository manifests, and latest releases as of
-  2026-09-11. “Not confirmed” means the public material makes no clear promise; it does not
+  2026-09-25. “Not confirmed” means the public material makes no clear promise; it does not
   prove that a feature is absent. Check the relevant repository before choosing.
 </Note>
 
@@ -30,7 +30,8 @@ completeness as an explicit goal.
 desktop shell itself as a DSH/Cordis plugin so desktop capabilities and Harness plugins use
 the same composition model. It uses Electron, pins an upstream version, includes a community
 plugin market, and provides a per-profile setup wizard, window materials, browser opening,
-and optional LAN access. Current releases target Windows x64 and macOS Universal.
+and optional LAN access. Official installers target Windows x64 and macOS Universal; Linux
+packages ship only on the `-next` line.
 
 ### dataelement/dsh-desktop
 
@@ -45,8 +46,9 @@ tunnel. Current releases cover Windows x64 and both macOS architectures, not Lin
 [Deepseek Harness EAC](https://github.com/zouyuxuan122/Deepseek-Harness-EAC) is positioned as
 an integrated, ready-to-use enhanced distribution. Its current main line uses Tauri 2 and
 bundles themes, a file tree, file changes, terminals, a plugin market, automatic compaction,
-and plugin protection. It ships Windows installer and portable packages, macOS Apple Silicon
-packages, and maintains Linux x64 through an older separate release line.
+and plugin protection. It ships Windows installer and portable packages plus Linux
+DEB/AppImage; macOS Apple Silicon remains only on the earlier v5.1.0. Its `.rpm`/`.pacman`
+packages stay on the separate v4.x `-linux` line.
 
 ## Feature matrix
 
@@ -60,11 +62,14 @@ packages, and maintains Linux x64 through an older separate release line.
 | Desktop stack | Tauri 2 | Electron 43 | Electron 43 | Tauri 2 |
 | Windows x64 | ✅ EXE / MSI | ✅ NSIS | ✅ NSIS | ✅ Setup |
 | Portable Windows package | — | — | — | ✅ ZIP |
-| macOS Apple Silicon | ✅ DMG | ✅ Universal DMG | ✅ DMG / ZIP | ✅ DMG / app ZIP |
-| macOS Intel | ✅ DMG | ✅ Universal DMG | ✅ DMG / ZIP | — in current v5.1.0 |
-| Linux x64 | ✅ DEB / AppImage | — | — | ◐ older separate line |
+| macOS Apple Silicon | ✅ DMG | ✅ Universal DMG | ✅ DMG / ZIP | ◐ v5.1.0 only |
+| macOS Intel | ✅ DMG | ✅ Universal DMG | ✅ DMG / ZIP | — |
+| Linux x64 | ✅ DEB / AppImage | ◐ separate `-next` line | — | ✅ DEB / AppImage |
 | No user-installed Node.js required | ✅ | ✅ | ✅ | ✅ |
 | Homebrew installation | ✅ | — | — | — |
+
+EAC maintains `.rpm`/`.pacman` only on the separate v4.x `-linux` line, and anywhere-labs
+publishes Linux packages only on the `-next` line.
 
 ### Harness and desktop management
 
@@ -84,7 +89,7 @@ packages, and maintains Linux x64 through an older separate release line.
 | Workspaces | ✅ core capability | ✅ core capability | ✅ core capability | ✅ core capability |
 | Per-session Git worktree | ✅ bundled `dsh-tauri-worktree` | Not confirmed | Not confirmed | Not confirmed |
 | Check worktree back to local branch | ✅ explicit approval required | Not confirmed | Not confirmed | Not confirmed |
-| Turn-level file undo | ✅ bundled `dsh-tauri-turnrewind` | Not confirmed | Not confirmed | ✅ bundled line diff/restore |
+| Turn change tracking | ✅ bundled `dsh-tauri-running-changes`, restore via the dsh-rewind preset | Not confirmed | Not confirmed | ✅ bundled line diff/restore |
 | Scheduled tasks | ✅ bundled `dsh-tauri-panel-scheduler` | Not confirmed | Not confirmed | Not confirmed |
 | File changes and diff | ✅ Harness capability | ✅ Harness/plugin | ✅ Harness | ✅ bundled line diff/restore |
 | Session terminal | ✅ Harness capability | ✅ Harness/plugin | ✅ Harness | ✅ bundled persistent terminal |
@@ -118,15 +123,17 @@ does not guarantee a release date.**
 
 | Planned capability | Status | Priority / timing | Relationship to current capabilities |
 | --- | --- | --- | --- |
-| Remote connection plugin | Planned | P2 · 2026-Q4 | Explore optional access beyond loopback |
-| Pull Request support | Planned | P2 | Connect worktrees, branch handback, and collaboration |
+| Scheduled tasks (`dsh-tauri-panel-scheduler`) | In Progress | P2 · 2026-Q4 | Plugin is bundled; refine scheduling and run history |
+| Remote connection | In Progress | P2 · 2026-Q4 | Explore optional access beyond loopback |
+| Pull Request support | In Progress | P2 | Connect worktrees, branch handback, and collaboration |
 | Plugin/UI UX improvements | Planned | P2 · 2026-Q4 | Improve the first-party plugins and `dsh-tauri-ui` |
 | v1.0 release | Planned | P1 · 2026-Q4 | Feature freeze, alpha, beta, then stable |
-| Mint bilingual docs | In Progress | P1 · 2026-Q4 | Documentation work, not runtime functionality |
+| Task panel (task) | Planned | P2 · 2025-Q4 | Provide a task view; still in planning |
 
-The roadmap also includes **Idea**-stage candidates such as plugin signature verification,
-more update delivery, more preset plugins, a website redesign, and low-priority built-in
-plugin management. Idea means research direction; this page does not call them “coming soon.”
+The Mint bilingual docs repository is now **Shipped** and no longer appears above. The roadmap
+also includes **Idea**-stage candidates such as feature research, a website redesign, and
+low-priority built-in dsh plugin management. Idea means research direction; this page does not
+call them “coming soon.”
 
 <Warning>
   Roadmaps change. Use the latest Status, Priority, and Quarter in GitHub Projects. Anything
@@ -174,9 +181,9 @@ Users who experiment with community plugins should compare recovery, not only pl
 ## Sources
 
 - [This project](https://github.com/dsh-tauri/deepseek-harness-desktop) and [releases](https://github.com/dsh-tauri/deepseek-harness-desktop/releases)
-- [anywhere-labs/dsh-desktop](https://github.com/anywhere-labs/dsh-desktop) and [v2.0.3](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.3)
-- [dataelement/dsh-desktop](https://github.com/dataelement/dsh-desktop) and [v0.6.3](https://github.com/dataelement/dsh-desktop/releases/tag/v0.6.3)
-- [Deepseek Harness EAC](https://github.com/zouyuxuan122/Deepseek-Harness-EAC) and [v5.1.0](https://github.com/zouyuxuan122/Deepseek-Harness-EAC/releases/tag/v5.1.0)
+- [anywhere-labs/dsh-desktop](https://github.com/anywhere-labs/dsh-desktop) and [v2.0.14-next](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.14-next)
+- [dataelement/dsh-desktop](https://github.com/dataelement/dsh-desktop) and [v0.9.2](https://github.com/dataelement/dsh-desktop/releases/tag/v0.9.2)
+- [Deepseek Harness EAC](https://github.com/zouyuxuan122/Deepseek-Harness-EAC) and [v5.3.6](https://github.com/zouyuxuan122/Deepseek-Harness-EAC/releases/tag/v5.3.6)
 
 <Warning>
   All four projects run Harness and plugins that can execute local code. Verify installers,

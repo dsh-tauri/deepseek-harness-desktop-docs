@@ -1,0 +1,31 @@
+---
+title: DSH Tauri Running Changes
+description: See the files and line counts changed while an Agent turn is running.
+---
+
+`dsh-tauri-running-changes` creates a private Git snapshot per Agent turn and shows a change chip above the input dock while the turn runs. It only records and reports; file restore is handled by the recommended [DSH Rewind](https://github.com/SiriLee/dsh-rewind) preset plugin.
+
+## User-visible behavior
+
+- Shows `{count} file(s) changed` above the input dock while a turn runs.
+- Expands to the changed files and `+N -M` line counts.
+- Labels binary changes as `binary`.
+- Skips snapshots when the workspace is not a Git repository and reports the reason on the chip.
+
+## Data and boundaries
+
+Snapshots and the ledger live under `$DSH_HOME/dsh-tauri-running-changes/`, with `sessions` as the per-session ledger unit. Each session keeps the most recent 50 turns, and a ledger retains up to 200 records. Changes to a single file over 64 MiB are excluded and labeled; when the private repository exceeds 2048 MB it is quarantined and rebuilt, and older turns become expired.
+
+<Note>
+  The private snapshot repository never changes the user's repository HEAD, branches, index, stash, or commit history.
+</Note>
+
+<Warning>
+  This plugin does not provide undo or redo. Use the dsh-rewind preset plugin to restore files.
+</Warning>
+
+## Compatibility
+
+Git must be installed. A missing Git binary and a non-Git workspace are diagnosed separately with their own reasons.
+
+[View source and the complete protocol](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-running-changes)

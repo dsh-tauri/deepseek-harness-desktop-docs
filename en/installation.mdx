@@ -5,7 +5,7 @@ description: Choose a version and install DeepSeek Harness Desktop on Windows, m
 
 import { ReleaseDownloads } from "/snippets/downloads.jsx"
 
-The desktop installer stays lightweight: on first launch the app downloads a compatible Node.js runtime and a prebuilt Harness core itself.
+The desktop installer stays lightweight: on first launch the app downloads a compatible Node.js runtime and a prebuilt Harness core itself. The offline Bundle installers ship both inside the package.
 
 ## Choose a version and download
 
@@ -26,6 +26,10 @@ The desktop installer stays lightweight: on first launch the app downloads a com
 | Linux | `*_amd64.deb` | Debian, Ubuntu, and similar distributions with fuller system integration |
 | Linux | `*_amd64.AppImage` | No installation required, runs as a single file |
 
+### Offline Bundle installers
+
+Releases also ship `Deepseek.Harness.Desktop_Bundle_<version>`: Windows `.exe`, macOS `_x64.dmg` / `_aarch64.dmg`, and Linux `.deb`. The Node.js runtime and Harness core travel with the package, so **the first launch after installation needs no network** — useful on intranets and allowlisted networks. Presets and community plugins still need network access, and Git-backed features such as worktrees need Git installed. On Linux the bundled resources live under `/usr/lib` inside the `.deb`; when installed as root, fix that directory's permissions.
+
 You can also install on macOS with Homebrew:
 
 ```bash
@@ -40,7 +44,7 @@ brew install dsh-tauri/desktop/deepseek-harness
 | macOS | macOS 10.15 or later |
 | Linux | Modern 64-bit distribution |
 
-The first launch requires a network connection. After setup, normal work remains local unless a model provider, plugin, or update needs network access. Built-in plugins require Harness core **0.1.5-rc.2** or later.
+The standard installers require a network connection on first launch; the offline Bundle installers do not. After setup, normal work remains local unless a model provider, plugin, or update needs network access. Built-in plugins require Harness core **0.1.5-rc.1** or later.
 
 ## Install and launch
 
