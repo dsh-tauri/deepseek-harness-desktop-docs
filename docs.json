@@ -82,7 +82,6 @@
             "pages": [
               "zh-CN/built-in-plugins/overview",
               "zh-CN/built-in-plugins/dsh-tauri",
-              "zh-CN/built-in-plugins/dsh-tauri-model-config",
               "zh-CN/built-in-plugins/dsh-tauri-ui",
               "zh-CN/built-in-plugins/dsh-tauri-worktree",
               "zh-CN/built-in-plugins/dsh-tauri-panel-extension",
@@ -90,7 +89,8 @@
               "zh-CN/built-in-plugins/dsh-tauri-turnrewind",
               "zh-CN/built-in-plugins/dsh-tauri-session",
               "zh-CN/built-in-plugins/dsh-tauri-pet",
-              "zh-CN/built-in-plugins/dsh-tauri-rightclick"
+              "zh-CN/built-in-plugins/dsh-tauri-rightclick",
+              "zh-CN/built-in-plugins/dsh-tauri-model-config"
             ]
           },
           {
@@ -169,7 +169,6 @@
             "pages": [
               "en/built-in-plugins/overview",
               "en/built-in-plugins/dsh-tauri",
-              "en/built-in-plugins/dsh-tauri-model-config",
               "en/built-in-plugins/dsh-tauri-ui",
               "en/built-in-plugins/dsh-tauri-worktree",
               "en/built-in-plugins/dsh-tauri-panel-extension",
@@ -177,7 +176,8 @@
               "en/built-in-plugins/dsh-tauri-turnrewind",
               "en/built-in-plugins/dsh-tauri-session",
               "en/built-in-plugins/dsh-tauri-pet",
-              "en/built-in-plugins/dsh-tauri-rightclick"
+              "en/built-in-plugins/dsh-tauri-rightclick",
+              "en/built-in-plugins/dsh-tauri-model-config"
             ]
           },
           {
