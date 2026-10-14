@@ -3,53 +3,57 @@ title: Mobile remote access
 description: Access Harness on your computer from a phone browser or DSH Mobile over LAN or a public tunnel.
 ---
 
-Your phone connects to Harness running on the computer; it does not run the core or tools locally. Keep the computer awake, the Harness service running, and any required tunnel online.
+Your phone accesses Harness on the computer; it does not run the core or tools locally. Keep the computer awake, the Harness service running, and any required tunnel online.
 
-**Share** at the top of the desktop provides sharing QR codes, links, and temporary pairing codes. To change the listen address, configure a named tunnel, or revoke authorization, open Harness **Settings → Remote access → Remote access** tab. See [DSH Tauri Remote](../built-in-plugins/dsh-tauri-remote) for SSH connections to other computers.
+## Connect to your computer
 
-## Connect on the same LAN
+Open **Share** at the top of the desktop and choose a connection method:
 
-1. Connect the phone and computer to the same trusted LAN. Open **Share → LAN** at the top of the desktop.
-2. Select **Enable LAN sharing** and wait for a usable QR code or link. Remote access is off by default; enabling sharing also enables authentication.
-3. Scan or open the link in a phone browser. Enter the temporary pairing code shown on the desktop when prompted.
-4. Confirm that the computer's sessions appear, then send a small task to verify the connection.
+<Tabs>
+  <Tab title="LAN">
+    Connect the phone and computer to the same trusted network, select **Enable LAN sharing**, then scan the QR code or open the link on your phone.
 
-{/* <!-- [LAN sharing status in the desktop Share menu; redact QR codes, links, and pairing codes](/images/mobile-remote-access-lan.webp) --> */}
+    <Frame>
+      <img src="/images/mobile-remote-access-localhost.png" alt="LAN sharing link, QR code, and temporary pairing code in the desktop Share menu" />
+    </Frame>
+  </Tab>
+  <Tab title="Public tunnel">
+    Select **Enable tunnel**, wait for it to become ready, then scan the QR code or open the link. The devices do not need to share a network.
 
-Use a LAN address reachable from the phone, not `127.0.0.1` or `localhost`. If connection fails, check the computer's firewall, selected network adapter, and Wi-Fi client isolation. If bound only to loopback, choose a LAN address in remote-access settings.
+    <Frame>
+      <img src="/images/mobile-remote-access-tunnel.png" alt="Public tunnel entry and enable button in the desktop Share menu" />
+    </Frame>
+  </Tab>
+</Tabs>
 
-## Connect from outside the LAN
+Enter the temporary pairing code shown on the desktop if prompted, then confirm that the computer's sessions appear. For failed LAN connections, check the firewall and Wi-Fi client isolation; do not use `127.0.0.1` or `localhost`.
 
-Select **Enable tunnel** in desktop **Share → Public tunnel**. Wait for it to become ready, then open its link or scan its QR code on the phone. The devices do not need to share Wi-Fi.
+## Remote-access settings
 
-| Mode | Purpose and prerequisites |
+Select the gear in the top-right corner of the **Share** panel, or open Harness **Settings → Remote access → Remote access** tab.
+
+| Setting | Purpose |
 | --- | --- |
-| Cloudflare Quick | No account required; assigns a random domain. The address may change after restarting, so get a fresh link |
-| Named tunnel | Enter a Cloudflare Tunnel Token and public hostname in remote-access settings, and configure the hostname's route in Cloudflare |
+| LAN / Listen address | Toggle LAN sharing and prefer the recommended address. Choose **all interfaces** for changing addresses or multiple adapters |
+| Public tunnel | Quick assigns a random domain without an account. Named mode requires a Tunnel Token, public hostname, and route configured in Cloudflare. Check its status and start or stop it as needed |
+| Access control | Get a temporary pairing code, generate a permanent access code, or revoke all paired access |
 
-{/* <!-- [Public tunnel mode and running status; redact links, QR codes, pairing codes, and Tunnel Tokens](/images/mobile-remote-access-tunnel.webp) --> */}
+<Frame>
+  <img src="/images/mobile-remote-access-settings.png" alt="Remote-access settings for LAN listening, public tunnel modes, and access control" />
+</Frame>
 
-Wait for the running state before sharing the entry. Select **Stop tunnel** when finished. This closes the public route but does not revoke paired devices.
+Temporary pairing codes last **5 minutes** and rotate after use; paired devices remember authorization long-term. Disabling sharing, stopping a tunnel, or rotating the permanent access code does not revoke issued sessions. Use **Revoke paired access** to clear all device grants, sessions, and access codes.
 
 <Warning>
-  Treat sharing links, QR codes, pairing codes, and Tunnel Tokens as credentials. Keep them out of public chat, screenshots, and issues. Remote access is not read-only: connected users can use the instance's sessions, tools, and granted permissions. Keep authentication enabled; never expose an unauthenticated service port directly to the internet.
+  Enabling sharing through the interface enables authentication. Remote access is not read-only: it provides the computer's sessions, tools, and granted permissions. Authorize only trusted devices, protect links, QR codes, access codes, and Tunnel Tokens, and never expose an unauthenticated service.
 </Warning>
 
 ## Use DSH Mobile
 
-DSH Mobile opens the computer's Harness in a WebView, with **Scan LAN automatically**, **Scan QR code**, and recent connection history. Scanning requires camera permission and a valid HTTP/HTTPS connection address in the QR code. Outside the LAN, scan the tunnel QR code rather than a LAN address.
+Get the Android APK or join iOS TestFlight from [Installation and downloads](../installation); unsigned IPAs require your own signing. The app supports **Scan LAN automatically**, **Scan QR code**, and recent connections. Scanning requires camera permission; use a tunnel QR code outside the LAN.
 
-Choose mobile assets from [Installation and downloads](../installation). Android has an APK; iOS currently has an unsigned IPA that requires your own signing and installation, not an App Store release.
-
-If automatic discovery finds no host, check Wi-Fi and desktop sharing, or use the QR code. Once connected, swipe left to view connection details; long-press a recent connection to rename or delete it. Deleting a phone's connection record does not revoke authorization on the computer.
+Once connected, swipe left to view connection details. Long-press a recent connection to rename or delete it; deleting the record does not revoke authorization on the computer.
 
 {/* <!-- [DSH Mobile LAN discovery, QR scanning, and recent connections; hide device addresses](/images/mobile-remote-access-app.webp) --> */}
 
-## Pair and revoke authorization
-
-- Temporary pairing codes are valid for **5 minutes** and rotate after use. Get a fresh code from the desktop after expiry.
-- Paired devices remember authorization long-term. Expiry of a pairing code does not sign them out.
-- Select **Revoke paired access** in the computer's remote-access settings to clear all device grants, sessions, and access codes. Every device must pair again. Rotating only the permanent access code does not revoke issued sessions.
-- Turn off LAN sharing and public tunnels when no longer needed. Also revoke authorization when withdrawing device access.
-
-[Data, privacy, and security](../help/data-and-privacy) · [Troubleshooting](../help/troubleshooting)
+[SSH connections to remote machines](../built-in-plugins/dsh-tauri-remote) · [Troubleshooting](../help/troubleshooting)
