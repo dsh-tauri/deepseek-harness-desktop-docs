@@ -5,7 +5,9 @@ description: 查看数据目录与占用空间，迁移到新位置或回滚。
 
 从桌面标题栏打开**运行配置 → 数据**，查看当前位置和占用空间。档案配置与迁移见 [Profile 与内核](./profiles-and-cores)；默认数据路径见[数据、隐私与安全](../help/data-and-privacy)。
 
-{/* <!-- [数据目录页的当前位置与占用空间；隐藏私密路径](/images/data-management-overview.webp) --> */}
+<Frame>
+  <img src="/images/data-management-overview.png" alt="数据页中的当前目录、DSH_HOME、迁移入口与占用空间" />
+</Frame>
 
 ## 迁移数据目录
 
@@ -16,7 +18,9 @@ Windows、macOS 和 Linux 正式版支持迁移；Debug 固定使用 `~/.dsh.dev
 3. 点击**开始迁移**并确认。程序停止本机服务，复制并校验数据，将旧目录改名保留，再更新用户级 `DSH_HOME`。
 4. 等待完成，确认会话、档案和插件正常；重开已打开的终端以读取新变量。
 
-{/* <!-- [数据目录迁移预检与回滚入口；隐藏私密路径](/images/data-management-migration.webp) --> */}
+<Frame>
+  <img src="/images/data-management-migration.png" alt="迁移数据目录的确认对话框与预检结果" />
+</Frame>
 
 ## 回滚到旧位置
 

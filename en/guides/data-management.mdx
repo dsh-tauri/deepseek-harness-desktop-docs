@@ -5,7 +5,9 @@ description: Check the data directory and disk usage, migrate to a new location,
 
 Open **Running → Data Directory** in the desktop title bar to check the current location and disk usage. See [Profiles and cores](./profiles-and-cores) for profile configuration and migration, or [Data, privacy, and security](../help/data-and-privacy) for default data paths.
 
-{/* <!-- [Current location and disk usage in Data Directory; hide private paths](/images/data-management-overview.webp) --> */}
+<Frame>
+  <img src="/images/data-management-overview.png" alt="Data Directory page showing the current location, DSH_HOME, migration controls, and disk usage" />
+</Frame>
 
 ## Migrate the data directory
 
@@ -16,7 +18,9 @@ Release builds on Windows, macOS, and Linux support migration. Debug always uses
 3. Select **Start migration** and confirm. The app stops the local service, copies and verifies data, renames and retains the old directory, then updates the user-level `DSH_HOME`.
 4. Wait for completion and verify sessions, profiles, and plugins. Reopen existing terminals to pick up the new variable.
 
-{/* <!-- [Data directory migration dry run and rollback controls; hide private paths](/images/data-management-migration.webp) --> */}
+<Frame>
+  <img src="/images/data-management-migration.png" alt="Data directory migration confirmation dialog with dry-run results" />
+</Frame>
 
 ## Roll back to the old location
 

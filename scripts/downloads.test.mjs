@@ -42,7 +42,7 @@ for (const lang of ['zh-CN', 'en']) {
   const tabs = source.slice(source.indexOf('<Tabs sync={false}>'), source.indexOf('</Tabs>'))
   assert.deepEqual([...tabs.matchAll(/<Tab title=\{copy\.(\w+)\}>/g)].map(match => match[1]), ['standard', 'bundle', 'mobile'])
   assert.match(tabs, /^<Tabs sync=\{false\}>\s*<Tab title=\{copy.standard\}>/)
-  assert.match(tabs, /<Tab title=\{copy.mobile\}>[\s\S]*?href=\{TESTFLIGHT_URL\}/)
+  assert.match(tabs, /<Tab title=\{copy.mobile\}>\s*\{renderGroups\("mobile"\)\}[\s\S]*?href=\{TESTFLIGHT_URL\}/)
   assert.doesNotMatch(tabs, /\.map\(/)
   assert.match(copy.testFlight, /iOS.*TestFlight/)
   assert.ok(copy.testFlightNote && copy.mobile && copy.noMobileAssets)

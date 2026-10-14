@@ -881,6 +881,7 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
           {renderGroups("bundle")}
         </Tab>
         <Tab title={copy.mobile}>
+          {renderGroups("mobile")}
           <div className="mt-4">
             <a
               className="inline-flex rounded-lg border border-zinc-950/15 dark:border-white/20 px-3 py-2 text-sm font-semibold text-zinc-950 dark:text-white hover:border-zinc-950/30 dark:hover:border-white/40"
@@ -892,7 +893,6 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
             </a>
             <p className="mt-2 text-sm text-zinc-950/70 dark:text-white/70">{copy.testFlightNote}</p>
           </div>
-          {renderGroups("mobile")}
         </Tab>
       </Tabs>
     </div>
