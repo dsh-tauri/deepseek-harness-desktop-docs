@@ -42,7 +42,7 @@ dsh --help
 ```
 
 <Note>
-  桌面端没有 LAN 开关。打包内核的局域网监听需通过 `DSH_PKG_ALLOW_LAN=1` 主动放行，不能绕过认证或工具权限。远程使用优先选择 [SSH 隧道](../built-in-plugins/dsh-tauri-ssh)，不要把服务直接暴露到公网。
+  本机服务默认不对外分享。用手机访问时，从顶部**远程**开启带认证的局域网分享或公网隧道，见[手机远程访问](../guides/mobile-remote-access)；连接其他电脑见[远程访问插件](../built-in-plugins/dsh-tauri-remote)。不要将无认证的服务直接暴露到公网。
 </Note>
 
 下载或启动失败时阅读[故障排除](../help/troubleshooting)；模型配置步骤见[配置模型](./configure-model)。

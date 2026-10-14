@@ -23,14 +23,16 @@ The desktop app adds lifecycle management and a controlled bridge to native feat
 Before Harness starts, the desktop checks the active profile and restores missing integrations or outdated paths from bundled copies. Failures are logged.
 The built-in bridge can recover automatically, but first-time preparation of runtimes, the core, and selected community plugins still needs network access.
 
-The current [release manifest](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/resources/manifest.jsonc) contains 11 built-in packages:
+The current [release manifest](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/resources/manifest.jsonc) contains 13 built-in packages:
 
 | Role | Built-in packages |
 | --- | --- |
-| Native bridge and UI | `dsh-tauri`, `dsh-tauri-ui` |
-| Workspaces and sessions | `dsh-tauri-worktree`, `dsh-tauri-archive`, `dsh-tauri-rightclick` |
-| Configuration and connections | `dsh-tauri-extension`, `dsh-tauri-model`, `dsh-tauri-ssh` |
+| Native bridge and UI | `dsh-tauri`, `dsh-tauri-ui`, `dsh-tauri-mobile-ui` |
+| Workspaces, sessions, and local kernels | `dsh-tauri-kernel`, `dsh-tauri-worktree`, `dsh-tauri-archive`, `dsh-tauri-rightclick` |
+| Configuration and connections | `dsh-tauri-extension`, `dsh-tauri-model`, `dsh-tauri-remote` |
 | Background and system features | `dsh-tauri-scheduler`, `dsh-tauri-pet`, `dsh-tauri-notification` |
+
+Mobile UI adapts the browser interface; Remote manages SSH and inbound sharing. Kernel connects existing Codex/Claude CLIs. Its interface requires Harness **0.2.1-alpha.2 or newer** and actual bridge capabilities; being bundled does not make every feature available on the older recommended core.
 
 Preset and community plugins are installed, upgraded, or removed as needed. `running-changes` is not shipped in this release. `dsh-win-terminal-inspector` is deprecated and startup attempts to remove it automatically; it is no longer an optional Minimal repair choice.
 
@@ -43,6 +45,8 @@ The desktop keeps a separate HMR patch layer for these plugins. Before Harness s
 The patch layer only defines the watch scope: the core's HMR performs the actual reload, disposing and re-importing the plugin and rebuilding its fiber without restarting the Harness service. Ignore rules cover `node_modules`, hidden directories, and `cache` and `data` directories.
 
 ## Communication path
+
+Mobile UI only adapts the client. Remote and Kernel communicate through their host HTTP routes; Kernel then starts local CLI subprocesses. Features needing native desktop capabilities use this bridge path:
 
 1. The embedded Harness client invokes an integration exposed by its client plugin.
 2. The plugin sends a structured request through the desktop bridge.

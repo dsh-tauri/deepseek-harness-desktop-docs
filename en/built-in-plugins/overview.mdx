@@ -3,10 +3,10 @@ title: Built-in plugins overview
 description: Understand the first-party desktop plugins shipped with DeepSeek Harness Desktop and their boundaries.
 ---
 
-The desktop currently ships 11 first-party plugins as resources. Startup checks restore missing or inconsistent copies.
+The desktop currently ships 13 first-party plugins as resources. Startup checks restore missing or inconsistent copies.
 
 <Note>
-  The recommended core is **0.2.0-rc.2**; the desktop's declared compatibility minimum remains **0.1.5-rc.1**. Passing the minimum check does not guarantee every plugin works on an older core.
+  The recommended core is **0.2.0-rc.2**; the desktop's declared compatibility minimum remains **0.1.5-rc.1**. Passing the minimum check does not guarantee every plugin works on an older core; local kernel entries require **0.2.1-alpha.2 or newer** and bridge capabilities.
 </Note>
 
 {/* <!-- [The current built-in plugins and their relationships](/images/built-in-plugins-overview.webp) --> */}
@@ -19,6 +19,12 @@ The desktop currently ships 11 first-party plugins as resources. Startup checks 
   </Card>
   <Card title="DSH Tauri UI" icon="sidebar" href="./dsh-tauri-ui">
     Desktop settings with capability-based fallback.
+  </Card>
+  <Card title="Mobile interface" icon="mobile-screen" href="./dsh-tauri-mobile-ui">
+    Touch-adapted sidebar, input, and settings for phone browsers.
+  </Card>
+  <Card title="Local kernels" icon="microchip" href="./dsh-tauri-kernel">
+    Connect installed Codex or Claude Code CLIs to sessions.
   </Card>
   <Card title="Worktree" icon="code-branch" href="./dsh-tauri-worktree">
     Isolated Git worktrees; checkout needs explicit user approval.
@@ -41,8 +47,8 @@ The desktop currently ships 11 first-party plugins as resources. Startup checks 
   <Card title="Model configuration" icon="sliders" href="./dsh-tauri-model">
     Providers, models, and endpoint compatibility settings.
   </Card>
-  <Card title="DSH Tauri SSH" icon="server" href="./dsh-tauri-ssh">
-    SSH connections, remote installation, and plugin/Skills sync.
+  <Card title="Remote access" icon="server" href="./dsh-tauri-remote">
+    SSH connections and sync, LAN sharing, and public tunnels.
   </Card>
   <Card title="DSH Tauri Notification" icon="bell" href="./dsh-tauri-notification">
     Turn completion, approval, and question notifications.

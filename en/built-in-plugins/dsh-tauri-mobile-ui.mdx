@@ -1,0 +1,26 @@
+---
+title: Mobile interface
+description: Use touch-adapted sessions, the sidebar, and settings in a phone browser.
+---
+
+`dsh-tauri-mobile-ui` adapts the Harness interface for phone browsers; it does not provide networking or authentication. First connect to the serving computer using [Mobile remote access](../guides/mobile-remote-access).
+
+## What changes on a phone
+
+- A top bar shows the current session, with sidebar and new-session controls. Swipe horizontally to open or close the sidebar.
+- Mobile settings separate the category list from details, with a back button. Theme, language, and settings controls remain available.
+- Sending a message or swiping vertically through the conversation dismisses the keyboard.
+
+Adaptation depends on touch capabilities and window size; narrowing a desktop window does not necessarily activate it. Mobile settings use the existing Harness settings, not a separate configuration.
+
+{/* <!-- [Session top bar, sidebar, and settings categories in a phone browser; hide private conversation content](/images/dsh-tauri-mobile-ui.webp) --> */}
+
+## Fallback and boundaries
+
+- Mobile devices keep the official settings dialog instead of the desktop settings sidebar. An incompatible settings structure leaves the native interface intact.
+- If session creation is unavailable, the new-session control reports failure rather than creating a separate session system.
+- The host entry is a no-op; interface logic runs in the browser. It neither installs a native phone app nor starts a core on the phone.
+
+Remote access still operates Harness on the computer. Share links or pairing codes only with trusted devices; the [Remote access plugin](./dsh-tauri-remote) manages network sharing and authorization.
+
+[Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-mobile-ui)

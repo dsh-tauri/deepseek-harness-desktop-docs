@@ -3,7 +3,7 @@ title: 桌面设置
 description: 配置本地服务、界面缩放、CLI 集成、档案、插件和核心引擎。
 ---
 
-从桌面标题栏打开**配置**。模型供应商、工具和 Agent 行为仍在嵌入的 Harness **设置**中管理。配色、界面缩放、终端模式与透明效果见[外观](./appearance)。
+从桌面标题栏打开**运行配置**。模型供应商、工具和 Agent 行为仍在嵌入的 Harness **设置**中管理。配色、界面缩放、终端模式与透明效果见[外观](./appearance)。
 
 <Frame>
   <img src="/images/desktop-settings.png" alt="打开调试面板的桌面配置对话框" />
@@ -20,7 +20,7 @@ description: 配置本地服务、界面缩放、CLI 集成、档案、插件和
 | 开机启动与关闭行为 | 默认关闭窗口隐藏到托盘，可改为退出应用 |
 | 版本、数据目录与日志 | 查看运行组件，打开目录或复制排障信息 |
 
-桌面端不提供 LAN 设置；打包内核的局域网放行不替代认证或权限，见[数据、隐私与安全](../help/data-and-privacy)。CLI 的 PATH 和 shell 配置影响见[命令行集成](./cli-integration)。
+顶部**远程**提供局域网与公网隧道分享；高级设置在 Harness **设置 → 远程访问**中，步骤与授权边界见[手机远程访问](./mobile-remote-access)。CLI 的 PATH 和 shell 配置影响见[命令行集成](./cli-integration)。
 
 ## 档案
 
@@ -33,6 +33,10 @@ description: 配置本地服务、界面缩放、CLI 集成、档案、插件和
 <Warning>
   重置、删除或覆盖还原会改变档案数据。先备份，确认恢复范围；档案备份不能替代工作区和完整会话数据备份。
 </Warning>
+
+## 数据
+
+在**数据**面板查看目录与占用，预检、迁移或回滚数据目录，步骤见[数据管理](./data-management)。档案配置与迁移见 [Profile 与内核](./profiles-and-cores)。
 
 ## 插件与核心
 

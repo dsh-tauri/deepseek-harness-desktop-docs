@@ -42,7 +42,7 @@ dsh --help
 ```
 
 <Note>
-  The desktop has no LAN toggle. LAN listening in the packaged core requires explicit opt-in with `DSH_PKG_ALLOW_LAN=1`; it does not bypass authentication or tool permissions. Prefer an [SSH tunnel](../built-in-plugins/dsh-tauri-ssh) for remote use, and do not expose the service directly to the public internet.
+  The local service is not shared by default. For phone access, use **Share** at the top to enable authenticated LAN sharing or a public tunnel; see [Mobile remote access](../guides/mobile-remote-access). For another computer, see the [Remote access plugin](../built-in-plugins/dsh-tauri-remote). Never expose an unauthenticated service directly to the internet.
 </Note>
 
 See [Troubleshooting](../help/troubleshooting) if downloads or startup fail, or [Configure a model](./configure-model) for model setup.

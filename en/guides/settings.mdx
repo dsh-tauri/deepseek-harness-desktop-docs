@@ -3,7 +3,7 @@ title: Desktop settings
 description: Configure the local service, interface scale, CLI integration, profiles, plugins, and core engine.
 ---
 
-Open **Configuration** in the desktop title bar. Model providers, tools, and agent behavior remain in the embedded Harness **Settings**. See [Appearance](./appearance) for colors, interface scale, terminal mode, and transparency.
+Open **Running** in the desktop title bar. Model providers, tools, and agent behavior remain in the embedded Harness **Settings**. See [Appearance](./appearance) for colors, interface scale, terminal mode, and transparency.
 
 <Frame>
   <img src="/images/desktop-settings.png" alt="Desktop Configuration dialog open on Debug" />
@@ -20,7 +20,7 @@ Open **Configuration** in the desktop title bar. Model providers, tools, and age
 | Launch on login and close behavior | Closing the window hides it to the tray by default; you can change this to quit |
 | Versions, data directory, and logs | View running components, open directories, or copy diagnostic information |
 
-The desktop has no LAN setting. Packaged-core LAN opt-in does not replace authentication or permissions; see [Data, privacy, and security](../help/data-and-privacy). See [CLI integration](./cli-integration) for PATH and shell configuration changes.
+**Share** at the top provides LAN and public-tunnel sharing; advanced settings are in Harness **Settings → Remote access**. See [Mobile remote access](./mobile-remote-access) for steps and authorization boundaries, or [CLI integration](./cli-integration) for PATH and shell configuration changes.
 
 ## Profiles
 
@@ -28,11 +28,15 @@ First installation uses the `tauri` profile; `web` is the built-in fallback prof
 
 1. Create or clone a profile in **Profiles**, using a short ASCII name.
 2. Select it, confirm the switch, and restart the service when prompted.
-3. Back up before modifying or deleting it; prefer **Restore as a new profile** to test recovery.
+3. Back up before modifying or deleting it; prefer **Restore as New** to test recovery.
 
 <Warning>
   Resetting, deleting, or restoring over a profile changes its data. Back up first and confirm the recovery scope. Profile backups do not replace workspace or complete session-data backups.
 </Warning>
+
+## Data directory
+
+Use **Data Directory** for disk usage, preflight checks, migration, and rollback; see [Data management](./data-management) for steps. See [Profiles and cores](./profiles-and-cores) for profile configuration and migration.
 
 ## Plugins and core engine
 

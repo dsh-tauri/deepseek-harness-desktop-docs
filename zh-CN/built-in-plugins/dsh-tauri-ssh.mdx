@@ -1,50 +1,8 @@
 ---
-title: 远程连接（SSH）
-description: 通过 SSH 连接远端 Harness，并同步插件与 Skills。
+title: 远程连接（旧 SSH 插件）
+description: 旧 SSH 插件已由 DSH Tauri Remote 接替。
 ---
 
-在**设置 → 服务器**管理远端机器。`dsh-tauri-ssh` 默认关闭，启用后才建立连接。
+`dsh-tauri-ssh` 已退出当前内置插件清单，SSH 连接与同步功能由 `dsh-tauri-remote` 接替。现在从 Harness **设置 → 远程访问**进入。
 
-{/* <!-- [SSH 服务器设置、连接状态与远端窗口入口](/images/dsh-tauri-ssh.webp) --> */}
-
-## 连接机器
-
-1. 启用 SSH，选择 `~/.ssh/config` 别名或**添加机器**。
-2. 检查主机、用户和 SSH 端口；按需设置远端端口、Profile 或启动命令。
-3. 点击**测试**或**连接**；连接成功后**打开**远端窗口。
-4. 在发起端选择**同步到远端**，勾选第三方插件与用户级 Skills。
-
-| 默认项 | 值或行为 |
-| --- | --- |
-| SSH / 远端 Web 端口 | `22` / `3080` |
-| 远端 Profile | `remote` |
-| 登录凭证 | 本机 SSH agent、密钥；可设置密码或私钥口令 |
-| 手动机器与配置别名 | 同 ID 的手动机器优先 |
-| 桌面内置插件 | 连接时自动同步；不在手动同步列表中 |
-| 第三方插件 / Skills | 远端执行 `dsh plugin add` / 写入 `~/.dsh/skills` |
-
-## 远端未安装 Harness
-
-使用**一键安装 dsh**下载、校验并部署到远端 `~/.dsh-desktop`，随后自动连接。
-
-| 自动安装平台 | 发行方式 |
-| --- | --- |
-| Linux x64 | 预打包 ZIP |
-| Linux arm64 | npm 包，在远端安装依赖 |
-| macOS Intel | 预打包 ZIP |
-| Windows / macOS Apple Silicon | 不支持此自动安装流程 |
-
-安装流程可能将本机 `.env` 中的 `DEEPSEEK_API_KEY` 与可选 `DEEPSEEK_BASE_URL` 写入远端 `~/.dsh/.env`；已有远端密钥不会被覆盖。检查安装结果，无本机密钥时在远端模型页配置。
-
-## 数据与安全
-
-- 机器配置（含已保存凭据）：`$DSH_HOME/ssh/machines.json`。
-- 首次连接自动记录主机指纹：`$DSH_HOME/ssh/known-hosts.json`；后续不匹配会拒绝连接。
-- 未设置 `DSH_HOME` 时使用 `~/.dsh`；连接 API 为本机回环上的 `/api-ssh`。
-- 远端 Web 服务通过 SSH 隧道访问，不需要将 Web 端口暴露到公网。
-
-<Warning>
-  首次指纹记录不等于预先验证服务器身份。仅连接可信机器；同步与安装会修改远端文件、执行代码，并可能复制 API 密钥。不要分享机器状态文件。
-</Warning>
-
-[插件管理](../guides/plugins) · [源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-ssh)
+继续阅读[远程访问插件](./dsh-tauri-remote)；用手机连接本机见[手机远程访问](../guides/mobile-remote-access)。

@@ -1,50 +1,8 @@
 ---
-title: Remote connections (SSH)
-description: Connect to a remote Harness over SSH and sync plugins and Skills.
+title: Remote connections (legacy SSH plugin)
+description: The legacy SSH plugin has been replaced by DSH Tauri Remote.
 ---
 
-Manage remote machines in **Settings → Servers**. `dsh-tauri-ssh` is off by default; enable it before connecting.
+`dsh-tauri-ssh` is no longer in the built-in inventory. `dsh-tauri-remote` now provides SSH connections and sync through Harness **Settings → Remote access**.
 
-{/* <!-- [SSH server settings, connection status, and remote window entry](/images/dsh-tauri-ssh.webp) --> */}
-
-## Connect a machine
-
-1. Enable SSH and choose a `~/.ssh/config` alias or **Add machine**.
-2. Check the host, user, and SSH port; optionally set a remote port, profile, or start command.
-3. Select **Test** or **Connect**, then **Open** the remote window.
-4. On the initiating machine, choose **Sync to remote** and select third-party plugins and user-level Skills.
-
-| Default | Value or behavior |
-| --- | --- |
-| SSH / remote Web port | `22` / `3080` |
-| Remote profile | `remote` |
-| Credentials | Local SSH agent and keys; optional password or key passphrase |
-| Manual machine vs config alias | A manual machine with the same ID takes precedence |
-| Built-in desktop plugins | Synced automatically on connection; excluded from manual selection |
-| Third-party plugins / Skills | Runs remote `dsh plugin add` / writes to `~/.dsh/skills` |
-
-## Install Harness on the remote
-
-Use **Install dsh** to download, verify, and deploy to remote `~/.dsh-desktop`, then connect automatically.
-
-| Automatic installation platform | Distribution |
-| --- | --- |
-| Linux x64 | Packaged ZIP |
-| Linux arm64 | npm package with dependencies installed remotely |
-| macOS Intel | Packaged ZIP |
-| Windows / macOS Apple Silicon | Not supported by this installation flow |
-
-Installation may copy `DEEPSEEK_API_KEY` and optional `DEEPSEEK_BASE_URL` from the local `.env` to remote `~/.dsh/.env`; an existing remote key is not overwritten. Check the installation result. If no local key exists, configure the remote Models page.
-
-## Data and security
-
-- Machine configuration, including saved credentials: `$DSH_HOME/ssh/machines.json`.
-- First connections automatically record host fingerprints in `$DSH_HOME/ssh/known-hosts.json`; later mismatches are rejected.
-- When `DSH_HOME` is unset, these paths use `~/.dsh`. The connection API is `/api-ssh` on local loopback.
-- The remote Web service is accessed through an SSH tunnel; its Web port need not be exposed publicly.
-
-<Warning>
-  Recording a first-seen fingerprint is not prior verification of the server's identity. Connect only to trusted machines. Installation and sync modify remote files, execute code, and may copy API keys. Do not share machine state files.
-</Warning>
-
-[Plugin management](../guides/plugins) · [Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-ssh)
+Continue with the [Remote access plugin](./dsh-tauri-remote), or see [Mobile remote access](../guides/mobile-remote-access) to connect a phone to this computer.

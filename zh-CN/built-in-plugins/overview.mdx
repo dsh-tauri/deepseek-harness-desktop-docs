@@ -3,10 +3,10 @@ title: 内置插件概览
 description: 了解 DeepSeek Harness Desktop 随安装包提供的第一方桌面插件及其职责边界。
 ---
 
-当前桌面端随资源分发 11 个第一方插件；启动前检查并恢复缺失或不一致的副本。
+当前桌面端随资源分发 13 个第一方插件；启动前检查并恢复缺失或不一致的副本。
 
 <Note>
-  推荐内核为 **0.2.0-rc.2**；桌面声明的兼容最低版本仍为 **0.1.5-rc.1**。最低版本检查不保证所有插件在旧内核上均可用。
+  推荐内核为 **0.2.0-rc.2**；桌面声明的兼容最低版本仍为 **0.1.5-rc.1**。最低版本检查不保证所有插件在旧内核上均可用；本机内核入口要求 **0.2.1-alpha.2 或更新版本**及桥接能力。
 </Note>
 
 {/* <!-- [当前内置插件及其依赖关系](/images/built-in-plugins-overview.webp) --> */}
@@ -19,6 +19,12 @@ description: 了解 DeepSeek Harness Desktop 随安装包提供的第一方桌�
   </Card>
   <Card title="DSH Tauri UI" icon="sidebar" href="./dsh-tauri-ui">
     桌面设置与能力缺失时的降级。
+  </Card>
+  <Card title="移动端界面" icon="mobile-screen" href="./dsh-tauri-mobile-ui">
+    手机浏览器的触控侧栏、输入与设置适配。
+  </Card>
+  <Card title="本机内核" icon="microchip" href="./dsh-tauri-kernel">
+    在会话中连接已安装的 Codex 或 Claude Code CLI。
   </Card>
   <Card title="工作树" icon="code-branch" href="./dsh-tauri-worktree">
     隔离 Git 工作树；检出须用户明确批准。
@@ -41,8 +47,8 @@ description: 了解 DeepSeek Harness Desktop 随安装包提供的第一方桌�
   <Card title="模型配置" icon="sliders" href="./dsh-tauri-model">
     提供商、模型与端点兼容设置。
   </Card>
-  <Card title="DSH Tauri SSH" icon="server" href="./dsh-tauri-ssh">
-    SSH 远端连接、安装与插件/Skills 同步。
+  <Card title="远程访问" icon="server" href="./dsh-tauri-remote">
+    SSH 远端连接与同步、局域网与公网隧道共享。
   </Card>
   <Card title="DSH Tauri Notification" icon="bell" href="./dsh-tauri-notification">
     完成提醒、审批与问题通知。

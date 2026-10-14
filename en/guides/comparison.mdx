@@ -56,10 +56,12 @@ This project uses the v0.20.0-beta.1 manifest. The official column uses public p
 
 ## Different remote-access mechanisms
 
+This project's column in this section was updated from current source on 2026-10-14. Other projects and the version table above retain the 2026-09-30 research; this is not a full comparison refresh.
+
 | Mechanism | This project | anywhere-labs | dataelement | DeepSeek official |
 | --- | --- | --- | --- | --- |
-| SSH remote host | Built-in `dsh-tauri-ssh`; connects to remote `dsh web` through a loopback tunnel | Not confirmed | Not confirmed | Not confirmed |
-| Phone continuation | Built-in paired bridge not confirmed; check third-party presets separately | Agents Anywhere (since 2.0.9) | Separate paired bridge: LAN / temporary internet tunnel | Not confirmed |
+| SSH remote host | Built-in `dsh-tauri-remote`; connects to remote `dsh web` through a loopback tunnel | Not confirmed | Not confirmed | Not confirmed |
+| Phone continuation | Built-in LAN / Cloudflare tunnel and pairing; browser or DSH Mobile continuation | Agents Anywhere (since 2.0.9) | Separate paired bridge: LAN / temporary internet tunnel | Not confirmed |
 
 - SSH runs Harness on a remote host; phone bridges continue desktop sessions. They are not the same kind of “remote support.”
 - anywhere's browser-opening option does not change the bind address; separately enabling LAN exposes an unauthenticated endpoint. Use only fully trusted networks.
