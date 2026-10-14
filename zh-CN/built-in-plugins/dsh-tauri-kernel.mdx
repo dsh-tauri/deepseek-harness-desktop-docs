@@ -1,0 +1,31 @@
+---
+title: 本机 Codex 与 Claude 内核
+description: 在 Harness 会话界面中使用已安装的 Codex 或 Claude Code CLI。
+---
+
+`dsh-tauri-kernel` 连接提供 Harness 服务的电脑上已有的 Codex 或 Claude Code CLI；它不安装 CLI，也不代替其登录或账户配置。
+
+## 使用前
+
+1. 在该电脑的终端确认 `codex --version` 或 `claude --version` 可用，并完成对应 CLI 登录。
+2. 使用 **0.2.1-alpha.2 或更新的 Harness 内核**。低于该门槛时界面隐藏入口；达到门槛后仍需实际桥接能力可用。
+3. 在会话起始区域的**内核**选择器选择 Codex 或 Claude，创建新会话。
+
+默认从 `PATH` 查找命令；需要指定安装位置时，插件配置支持 `codexPath`、`claudePath` 绝对路径，以及 `probeTimeoutMs` 探测超时。
+
+{/* <!-- [新建会话时的内核选择器与 Codex、Claude 检测状态](/images/dsh-tauri-kernel.webp) --> */}
+
+## 会话与兼容性
+
+- 选择内核会新建会话，不切换当前会话的内核，也不改动官方新建会话快捷键。
+- 会话绑定原生内核后不能更换；模型与推理深度调整只影响下一完整轮次。
+- 侧栏显示会话内核标识。原生会话 ID 与绑定写入 Harness 官方会话记录，供恢复时读取。
+- 未安装、未登录、协议不兼容或核心桥接不可用时，对应选择不可用；检测失败可重新检测。
+
+## 执行与安全
+
+宿主通过本机子进程通信：Codex 使用 `app-server --listen stdio://`，Claude 使用 `stream-json`。原生工具事件进入 Harness 会话，审批与问题交由 Harness 对应界面处理。
+
+这些 CLI 使用自己的凭据与服务，不能用 Harness 的 DeepSeek 模型配置代替。它们仍可执行命令、修改文件和访问网络；插件与 Profile 不提供额外的操作系统沙箱。
+
+[源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-kernel)

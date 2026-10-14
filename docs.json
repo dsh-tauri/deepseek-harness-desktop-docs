@@ -64,6 +64,14 @@
       "destination": "/en/built-in-plugins/dsh-tauri-model"
     },
     {
+      "source": "/zh-CN/built-in-plugins/dsh-tauri-ssh",
+      "destination": "/zh-CN/built-in-plugins/dsh-tauri-remote"
+    },
+    {
+      "source": "/en/built-in-plugins/dsh-tauri-ssh",
+      "destination": "/en/built-in-plugins/dsh-tauri-remote"
+    },
+    {
       "source": "/zh-CN/built-in-plugins/dsh-tauri-running-changes",
       "destination": "/zh-CN/built-in-plugins/overview"
     },
@@ -111,6 +119,8 @@
               "zh-CN/guides/settings",
               "zh-CN/guides/appearance",
               "zh-CN/guides/profiles-and-cores",
+              "zh-CN/guides/data-management",
+              "zh-CN/guides/mobile-remote-access",
               "zh-CN/guides/plugins",
               "zh-CN/guides/cli-integration",
               "zh-CN/guides/updates",
@@ -124,15 +134,17 @@
               "zh-CN/built-in-plugins/overview",
               "zh-CN/built-in-plugins/dsh-tauri",
               "zh-CN/built-in-plugins/dsh-tauri-ui",
+              "zh-CN/built-in-plugins/dsh-tauri-mobile-ui",
+              "zh-CN/built-in-plugins/dsh-tauri-kernel",
               "zh-CN/built-in-plugins/dsh-tauri-worktree",
               "zh-CN/built-in-plugins/dsh-tauri-extension",
               "zh-CN/built-in-plugins/dsh-tauri-scheduler",
+              "zh-CN/built-in-plugins/dsh-tauri-archive",
               "zh-CN/built-in-plugins/dsh-tauri-pet",
               "zh-CN/built-in-plugins/dsh-tauri-rightclick",
               "zh-CN/built-in-plugins/dsh-tauri-model",
-              "zh-CN/built-in-plugins/dsh-tauri-ssh",
-              "zh-CN/built-in-plugins/dsh-tauri-notification",
-              "zh-CN/built-in-plugins/dsh-tauri-archive"
+              "zh-CN/built-in-plugins/dsh-tauri-remote",
+              "zh-CN/built-in-plugins/dsh-tauri-notification"
             ]
           },
           {
@@ -200,6 +212,8 @@
               "en/guides/settings",
               "en/guides/appearance",
               "en/guides/profiles-and-cores",
+              "en/guides/data-management",
+              "en/guides/mobile-remote-access",
               "en/guides/plugins",
               "en/guides/cli-integration",
               "en/guides/updates",
@@ -213,15 +227,17 @@
               "en/built-in-plugins/overview",
               "en/built-in-plugins/dsh-tauri",
               "en/built-in-plugins/dsh-tauri-ui",
+              "en/built-in-plugins/dsh-tauri-mobile-ui",
+              "en/built-in-plugins/dsh-tauri-kernel",
               "en/built-in-plugins/dsh-tauri-worktree",
               "en/built-in-plugins/dsh-tauri-extension",
               "en/built-in-plugins/dsh-tauri-scheduler",
+              "en/built-in-plugins/dsh-tauri-archive",
               "en/built-in-plugins/dsh-tauri-pet",
               "en/built-in-plugins/dsh-tauri-rightclick",
               "en/built-in-plugins/dsh-tauri-model",
-              "en/built-in-plugins/dsh-tauri-ssh",
-              "en/built-in-plugins/dsh-tauri-notification",
-              "en/built-in-plugins/dsh-tauri-archive"
+              "en/built-in-plugins/dsh-tauri-remote",
+              "en/built-in-plugins/dsh-tauri-notification"
             ]
           },
           {

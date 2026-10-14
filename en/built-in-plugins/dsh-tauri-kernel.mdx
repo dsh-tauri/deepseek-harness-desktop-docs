@@ -1,0 +1,31 @@
+---
+title: Local Codex and Claude kernels
+description: Use an installed Codex or Claude Code CLI in the Harness session interface.
+---
+
+`dsh-tauri-kernel` connects to a Codex or Claude Code CLI already installed on the computer serving Harness. It does not install the CLI or replace its sign-in and account configuration.
+
+## Before you start
+
+1. Confirm that `codex --version` or `claude --version` works in that computer's terminal, and sign in to the corresponding CLI.
+2. Use **Harness core 0.2.1-alpha.2 or newer**. Earlier versions hide the entry; meeting the version threshold still requires the actual bridge capabilities.
+3. Choose Codex or Claude in the **Kernel** picker in the session start area to create a new session.
+
+Commands are discovered through `PATH` by default. Plugin configuration supports absolute `codexPath` and `claudePath` overrides and a `probeTimeoutMs` detection timeout.
+
+{/* <!-- [Kernel picker and Codex and Claude detection status when starting a session](/images/dsh-tauri-kernel.webp) --> */}
+
+## Sessions and compatibility
+
+- Choosing a kernel creates a new session. It neither switches the current session's kernel nor changes official new-session shortcuts.
+- A native session's kernel binding cannot change. Model and reasoning changes apply only to the next complete turn.
+- The sidebar identifies the session kernel. Native session IDs and bindings are written to official Harness session records for recovery.
+- An uninstalled CLI, missing sign-in, incompatible protocol, or unavailable core bridge disables the corresponding choice. Failed detection can be retried.
+
+## Execution and security
+
+The host communicates through local subprocesses: Codex uses `app-server --listen stdio://`; Claude uses `stream-json`. Native tool events enter the Harness session, while approvals and questions use the corresponding Harness interfaces.
+
+These CLIs use their own credentials and services; Harness's DeepSeek model configuration does not replace them. They can still execute commands, modify files, and access the network. The plugin and profiles add no OS sandbox.
+
+[Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-kernel)

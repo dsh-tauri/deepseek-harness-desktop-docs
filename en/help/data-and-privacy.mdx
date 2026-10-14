@@ -19,18 +19,19 @@ Harness listens on loopback by default, and the desktop embeds its Web interface
 | Desktop settings | `.store.dat` in application data |
 | Harness service log | `logs/dsh-web.log` in application data |
 | Profile backups | `$DSH_HOME/.backups/`; contents cover only the active profile directory |
+| Recovery archives | `recovery-backups/` in application data, outside `$DSH_HOME`; includes sessions, shared storage, and all profiles |
 | Service address | Prefer `http://127.0.0.1:3080`; another port may be used if it is busy |
 
-Open the actual data directory from desktop **Configuration → Application**. Do not infer the active environment from a directory name alone.
+Open the actual data directory from desktop **Running → Data Directory**. Do not infer the active environment from a directory name alone.
 
 ## Back up and restore
 
-1. Back up the active profile in **Configuration → Profiles**. Credentials are excluded by default; treat backups as sensitive files if you include them.
-2. Prefer **Restore as a new profile** and verify it rather than overwriting the current environment.
-3. Separately back up workspaces, uncommitted changes, and complete Harness data you need to preserve.
+1. Create a profile backup in **Running → Profiles → Backup**; prefer **Restore as New** and verify it.
+2. Use **Export recovery archive** to preserve sessions. Follow its included manual recovery instructions, not the profile restore button.
+3. Back up workspaces and uncommitted changes separately; migrate or roll back directories in **Running → Data Directory**. See [Data management](../guides/data-management) for directory migration steps.
 
 <Warning>
-  Built-in backups are not snapshots of all of `$DSH_HOME`. They exclude workspaces and complete session data outside the profile. Stop active tasks and check which directories you need before deleting, resetting, restoring over data, or migrating.
+  Profile backups exclude sessions outside the profile. Recovery archives also exclude workspace files, dependencies, and existing backups. **Include credentials** only controls `.credentials.yaml`; other configuration can still contain secrets. Treat all backups as sensitive. Stop relevant clients and check scope before deleting, resetting, restoring over data, or migrating.
 </Warning>
 
 ## Network and remote access
@@ -40,9 +41,9 @@ Open the actual data directory from desktop **Configuration → Application**. D
 | First installation and updates | Download runtimes, the core, and tools from release or fallback sources |
 | Model requests | Send requests and necessary context to the chosen provider; check its data policy first |
 | Plugin installation and execution | Access npm/GitHub during installation; plugins can execute local code and contact remote services |
-| Remote use | Prefer an [SSH tunnel](../built-in-plugins/dsh-tauri-ssh); do not expose the service directly to the public internet |
+| Remote use | The [Remote access plugin](../built-in-plugins/dsh-tauri-remote) provides SSH, authenticated LAN sharing, and Cloudflare tunnels; authorize only trusted devices |
 
-The desktop has no LAN setting. The packaged core permits LAN listening only with `DSH_PKG_ALLOW_LAN=1`. This does not replace upstream authentication, access tokens, or tool permissions, and host trust is not authentication.
+Enable sharing through desktop **Share** or Harness **Settings → Remote access**; see [Mobile remote access](../guides/mobile-remote-access). Paired authorization persists. Disabling sharing or rotating an access code does not revoke issued sessions. Use **Revoke paired access** to withdraw device access; never expose an unauthenticated service. Host trust is not authentication, and pairing does not replace tool permissions.
 
 <Warning>
   Profiles, workspaces, and Git worktrees are not operating system sandboxes. For untrusted code or plugins, use a separate user, container, or virtual machine, least-privilege credentials, and reviewed tool authorization. Keep keys and private data out of chat, screenshots, logs, and issues.

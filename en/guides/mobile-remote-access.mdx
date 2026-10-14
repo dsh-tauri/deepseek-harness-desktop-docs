@@ -1,0 +1,55 @@
+---
+title: Mobile remote access
+description: Access Harness on your computer from a phone browser or DSH Mobile over LAN or a public tunnel.
+---
+
+Your phone connects to Harness running on the computer; it does not run the core or tools locally. Keep the computer awake, the Harness service running, and any required tunnel online.
+
+**Share** at the top of the desktop provides sharing QR codes, links, and temporary pairing codes. To change the listen address, configure a named tunnel, or revoke authorization, open Harness **Settings → Remote access → Remote access** tab. See [DSH Tauri Remote](../built-in-plugins/dsh-tauri-remote) for SSH connections to other computers.
+
+## Connect on the same LAN
+
+1. Connect the phone and computer to the same trusted LAN. Open **Share → LAN** at the top of the desktop.
+2. Select **Enable LAN sharing** and wait for a usable QR code or link. Remote access is off by default; enabling sharing also enables authentication.
+3. Scan or open the link in a phone browser. Enter the temporary pairing code shown on the desktop when prompted.
+4. Confirm that the computer's sessions appear, then send a small task to verify the connection.
+
+{/* <!-- [LAN sharing status in the desktop Share menu; redact QR codes, links, and pairing codes](/images/mobile-remote-access-lan.webp) --> */}
+
+Use a LAN address reachable from the phone, not `127.0.0.1` or `localhost`. If connection fails, check the computer's firewall, selected network adapter, and Wi-Fi client isolation. If bound only to loopback, choose a LAN address in remote-access settings.
+
+## Connect from outside the LAN
+
+Select **Enable tunnel** in desktop **Share → Public tunnel**. Wait for it to become ready, then open its link or scan its QR code on the phone. The devices do not need to share Wi-Fi.
+
+| Mode | Purpose and prerequisites |
+| --- | --- |
+| Cloudflare Quick | No account required; assigns a random domain. The address may change after restarting, so get a fresh link |
+| Named tunnel | Enter a Cloudflare Tunnel Token and public hostname in remote-access settings, and configure the hostname's route in Cloudflare |
+
+{/* <!-- [Public tunnel mode and running status; redact links, QR codes, pairing codes, and Tunnel Tokens](/images/mobile-remote-access-tunnel.webp) --> */}
+
+Wait for the running state before sharing the entry. Select **Stop tunnel** when finished. This closes the public route but does not revoke paired devices.
+
+<Warning>
+  Treat sharing links, QR codes, pairing codes, and Tunnel Tokens as credentials. Keep them out of public chat, screenshots, and issues. Remote access is not read-only: connected users can use the instance's sessions, tools, and granted permissions. Keep authentication enabled; never expose an unauthenticated service port directly to the internet.
+</Warning>
+
+## Use DSH Mobile
+
+DSH Mobile opens the computer's Harness in a WebView, with **Scan LAN automatically**, **Scan QR code**, and recent connection history. Scanning requires camera permission and a valid HTTP/HTTPS connection address in the QR code. Outside the LAN, scan the tunnel QR code rather than a LAN address.
+
+Choose mobile assets from [Installation and downloads](../installation). Android has an APK; iOS currently has an unsigned IPA that requires your own signing and installation, not an App Store release.
+
+If automatic discovery finds no host, check Wi-Fi and desktop sharing, or use the QR code. Once connected, swipe left to view connection details; long-press a recent connection to rename or delete it. Deleting a phone's connection record does not revoke authorization on the computer.
+
+{/* <!-- [DSH Mobile LAN discovery, QR scanning, and recent connections; hide device addresses](/images/mobile-remote-access-app.webp) --> */}
+
+## Pair and revoke authorization
+
+- Temporary pairing codes are valid for **5 minutes** and rotate after use. Get a fresh code from the desktop after expiry.
+- Paired devices remember authorization long-term. Expiry of a pairing code does not sign them out.
+- Select **Revoke paired access** in the computer's remote-access settings to clear all device grants, sessions, and access codes. Every device must pair again. Rotating only the permanent access code does not revoke issued sessions.
+- Turn off LAN sharing and public tunnels when no longer needed. Also revoke authorization when withdrawing device access.
+
+[Data, privacy, and security](../help/data-and-privacy) · [Troubleshooting](../help/troubleshooting)

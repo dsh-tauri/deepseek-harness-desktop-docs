@@ -22,14 +22,16 @@ Harness 插件可扩展宿主运行时、贡献工具并添加 UI 集成。桌�
 Harness 启动前，桌面自动检查活动 Profile，并从应用内置副本恢复缺失或指向旧路径的集成；失败会写入日志。
 内置桥可自动恢复，但首次准备运行时、内核及选中的社区插件仍需要网络。
 
-当前[发布清单](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/resources/manifest.jsonc)包含 11 个内置包：
+当前[发布清单](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/resources/manifest.jsonc)包含 13 个内置包：
 
 | 分工 | 内置包 |
 | --- | --- |
-| 原生桥与 UI | `dsh-tauri`、`dsh-tauri-ui` |
-| 工作区与会话 | `dsh-tauri-worktree`、`dsh-tauri-archive`、`dsh-tauri-rightclick` |
-| 配置与连接 | `dsh-tauri-extension`、`dsh-tauri-model`、`dsh-tauri-ssh` |
+| 原生桥与 UI | `dsh-tauri`、`dsh-tauri-ui`、`dsh-tauri-mobile-ui` |
+| 工作区、会话与本机内核 | `dsh-tauri-kernel`、`dsh-tauri-worktree`、`dsh-tauri-archive`、`dsh-tauri-rightclick` |
+| 配置与连接 | `dsh-tauri-extension`、`dsh-tauri-model`、`dsh-tauri-remote` |
 | 后台与系统 | `dsh-tauri-scheduler`、`dsh-tauri-pet`、`dsh-tauri-notification` |
+
+移动端界面负责浏览器适配；远程访问插件负责 SSH 与入站共享。本机内核插件连接已有 Codex/Claude CLI，界面要求 Harness **0.2.1-alpha.2 或更新版本**及实际桥接能力；内置分发不等于所有功能在推荐旧内核上可用。
 
 预设和社区插件按需安装、升级或移除。`running-changes` 未随当前版本发布；`dsh-win-terminal-inspector` 已弃用，启动时会尝试自动移除，不再提供可选 Minimal 修复入口。
 
@@ -42,6 +44,8 @@ Harness 启动前，桌面自动检查活动 Profile，并从应用内置副本�
 补丁层只管监听范围：真正的热重载由核心 HMR 完成，卸载并重新导入该插件后重建它的 fiber，不重启 Harness 服务。忽略规则覆盖 `node_modules`、隐藏目录，以及 `cache`、`data` 目录。
 
 ## 通信路径
+
+移动端插件仅适配客户端；Remote 与 Kernel 通过各自宿主 HTTP 路由通信，后者再启动本机 CLI 子进程。以下是需要原生桌面能力时的桥接路径：
 
 1. 嵌入式 Harness 客户端调用客户端插件暴露的集成。
 2. 插件通过桌面桥发送结构化请求。

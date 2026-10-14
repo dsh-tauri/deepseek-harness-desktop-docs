@@ -1,0 +1,56 @@
+---
+title: Remote access
+description: Use a remote Harness over SSH or share your local Harness with trusted devices.
+---
+
+Manage both directions in Harness **Settings → Remote access**: connect to Harness on another machine, or let devices such as your phone access this one. `dsh-tauri-remote` replaces `dsh-tauri-ssh`; SSH connections, LAN listening, and public tunnels are off by default.
+
+{/* <!-- [SSH, sync, and sharing tabs in Remote access settings; redact host details and credentials](/images/dsh-tauri-remote.webp) --> */}
+
+## Connect to a remote machine over SSH
+
+1. Open **Connect to SSH server**, enable connections, and choose a `~/.ssh/config` alias or **Add machine**.
+2. Check the host, user, and SSH port; optionally set a remote port, profile, or start command.
+3. Select **Test** or **Connect**, then **Open** the remote window.
+4. On the initiating machine, use **Sync to remote** to select third-party plugins and user-level Skills.
+
+| Default | Value or behavior |
+| --- | --- |
+| SSH / remote Web port | `22` / `3080` |
+| Remote profile | `remote` |
+| Credentials | Local SSH agent and keys; optional password or key passphrase |
+| Manual machine vs config alias | A manual machine with the same ID takes precedence |
+| Built-in desktop plugins | Synced automatically on connection; excluded from manual selection |
+| Third-party plugins / Skills | Runs remote `dsh plugin add` / writes to `~/.dsh/skills` |
+
+Local `file:`, `link:`, `workspace:`, and HTTP URL plugin dependencies cannot be manually synced. Skills can be selected from local `$DSH_HOME/skills` and `~/.agents/skills`.
+
+### Install Harness on the remote
+
+Use **Install dsh** to download, verify, and deploy to remote `~/.dsh-desktop`, then connect automatically. This flow supports Linux x64, Linux arm64, and macOS Intel, but not remote Windows or macOS Apple Silicon. Linux arm64 uses an npm package with dependencies installed remotely; the others use packaged ZIPs.
+
+Installation may copy `DEEPSEEK_API_KEY` and optional `DEEPSEEK_BASE_URL` from local `$DSH_HOME/.env` to remote `~/.dsh/.env`; an existing remote key is not overwritten. Check the result. If no local key exists, configure the remote Models page.
+
+## Share this machine with a phone or another device
+
+In the **Remote access** tab, select a LAN listening address or start a Cloudflare public tunnel, then share the link or QR code. Tunnels support account-free Quick mode and named mode with a Tunnel token and public hostname. A public tunnel can run without LAN listening.
+
+Enabling sharing through the interface enables authentication. Temporary pairing codes last 5 minutes and rotate after use; paired devices remember their authorization. Regenerating the permanent access code invalidates the old code but not authorized sessions. Use **Revoke paired access** to clear all device and session authorization.
+
+See [Mobile remote access](../guides/mobile-remote-access) for the procedure. The [Mobile interface plugin](./dsh-tauri-mobile-ui) adapts the phone interface.
+
+## Data and trust boundaries
+
+| Data | Current default path |
+| --- | --- |
+| Machine configuration, including saved credentials | `$DSH_HOME/remote/machines.json` |
+| SSH host fingerprints | `$DSH_HOME/remote/known-hosts.json` |
+| Sharing, access codes, and tunnel configuration | `$DSH_HOME/remote/access.json` |
+
+When `DSH_HOME` is unset, it uses `~/.dsh`. Machine and fingerprint files in the old `ssh/` directory migrate only when the new files are absent; old files remain intact. Management APIs use `/api/tauri/remote` and allow management only from local loopback sources. Remote clients cannot change SSH or sharing settings.
+
+- SSH Web access uses a loopback tunnel; the remote Web port need not be public. First connections record fingerprints automatically and later mismatches are rejected. Recording a first-seen fingerprint is not prior verification of server identity.
+- LAN and public sharing expose an operational Harness, not a read-only chat page. Authorize only trusted devices; treat links, access codes, Tunnel tokens, and state files as sensitive.
+- Installation and sync modify remote files, execute code, and may copy API keys. Profiles are not OS sandboxes.
+
+[Plugin management](../guides/plugins) · [Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-remote)

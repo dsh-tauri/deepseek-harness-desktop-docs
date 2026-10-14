@@ -1,0 +1,56 @@
+---
+title: 远程访问
+description: 通过 SSH 使用远端 Harness，或把本机 Harness 分享给可信设备。
+---
+
+在 Harness **设置 → 远程访问**管理两个方向：连接其他机器上的 Harness，或让手机等设备访问本机。`dsh-tauri-remote` 已接替旧 `dsh-tauri-ssh`；SSH、局域网监听与公网隧道默认关闭。
+
+{/* <!-- [远程访问设置的 SSH、同步与共享标签页；遮盖主机信息和凭据](/images/dsh-tauri-remote.webp) --> */}
+
+## SSH 连接远端机器
+
+1. 打开**连接 SSH**，启用连接，选择 `~/.ssh/config` 别名或**添加机器**。
+2. 检查主机、用户和 SSH 端口；按需设置远端端口、Profile 或启动命令。
+3. 点击**测试**或**连接**；成功后**打开**远端窗口。
+4. 在发起端的**同步远端**选择第三方插件与用户级 Skills。
+
+| 默认项 | 值或行为 |
+| --- | --- |
+| SSH / 远端 Web 端口 | `22` / `3080` |
+| 远端 Profile | `remote` |
+| 登录凭证 | 本机 SSH agent、密钥；可设置密码或私钥口令 |
+| 手动机器与配置别名 | 同 ID 的手动机器优先 |
+| 桌面内置插件 | 连接时自动同步；不在手动同步列表中 |
+| 第三方插件 / Skills | 远端执行 `dsh plugin add` / 写入 `~/.dsh/skills` |
+
+本地 `file:`、`link:`、`workspace:` 和 HTTP URL 插件依赖不能手动同步。Skills 可从本机 `$DSH_HOME/skills` 与 `~/.agents/skills` 选择。
+
+### 远端未安装 Harness
+
+使用**一键安装 dsh**下载、校验并部署到远端 `~/.dsh-desktop`，随后自动连接。此流程支持 Linux x64、Linux arm64 与 macOS Intel；不支持远端 Windows 或 macOS Apple Silicon。Linux arm64 使用 npm 包并在远端安装依赖，其余使用预打包 ZIP。
+
+安装可能把本机 `$DSH_HOME/.env` 中的 `DEEPSEEK_API_KEY` 与可选 `DEEPSEEK_BASE_URL` 写入远端 `~/.dsh/.env`；已有远端密钥不覆盖。检查安装结果，无本机密钥时在远端模型页配置。
+
+## 分享本机给手机或其他设备
+
+在**远程访问**页签选择局域网监听地址，或启动 Cloudflare 公网隧道，再分享链接或二维码。隧道支持免账号 Quick 模式和使用 Tunnel Token、公开主机名的具名模式；公网隧道可独立于局域网监听开启。
+
+通过界面开启共享时会启用认证。临时配对码 5 分钟有效，使用后轮换；设备配对后会记住授权。永久访问码重新生成只使旧码失效，不撤销已授权会话；要清除全部设备与会话授权，使用**撤销配对授权**。
+
+操作步骤见[手机远程访问](../guides/mobile-remote-access)。手机界面由[移动端界面插件](./dsh-tauri-mobile-ui)适配。
+
+## 数据与可信边界
+
+| 数据 | 当前默认路径 |
+| --- | --- |
+| 机器配置，含已保存凭据 | `$DSH_HOME/remote/machines.json` |
+| SSH 主机指纹 | `$DSH_HOME/remote/known-hosts.json` |
+| 共享、访问码与隧道配置 | `$DSH_HOME/remote/access.json` |
+
+`DSH_HOME` 未设置时使用 `~/.dsh`。旧 `ssh/` 下机器与指纹文件会在新文件不存在时迁移，旧文件保留。管理 API 为 `/api/tauri/remote`，仅本机回环来源可管理；远程客户端不能修改 SSH 或共享设置。
+
+- SSH Web 服务通过回环隧道访问，无需公开远端 Web 端口。首次连接自动记录指纹，后续不匹配会拒绝；首次记录不等于预先验证服务器身份。
+- 局域网与公网共享提供可操作的 Harness，不是只读聊天页面。只授权可信设备；链接、访问码、Tunnel Token 与状态文件均应视为敏感数据。
+- 安装与同步会修改远端文件、执行代码，并可能复制 API 密钥；Profile 不是操作系统沙箱。
+
+[插件管理](../guides/plugins) · [源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-remote)
