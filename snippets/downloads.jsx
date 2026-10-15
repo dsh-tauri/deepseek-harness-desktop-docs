@@ -13,6 +13,11 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
       "prerelease": false,
       "assets": [
         {
+          "name": "Deepseek.Harness.Android_0.24.1.apk",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/Deepseek.Harness.Android_0.24.1.apk",
+          "size": "21.9 MB"
+        },
+        {
           "name": "Deepseek.Harness.Desktop_0.24.1_aarch64.dmg",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/Deepseek.Harness.Desktop_0.24.1_aarch64.dmg",
           "size": "12.8 MB"
@@ -46,6 +51,46 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
           "name": "Deepseek.Harness.Desktop_0.24.1_x64_zh-CN.msi",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/Deepseek.Harness.Desktop_0.24.1_x64_zh-CN.msi",
           "size": "13.1 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.24.1.deb",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/Deepseek.Harness.Desktop_Bundle_0.24.1.deb",
+          "size": "188 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.24.1.exe",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/Deepseek.Harness.Desktop_Bundle_0.24.1.exe",
+          "size": "118 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.24.1_aarch64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/Deepseek.Harness.Desktop_Bundle_0.24.1_aarch64.dmg",
+          "size": "190 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.24.1_x64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/Deepseek.Harness.Desktop_Bundle_0.24.1_x64.dmg",
+          "size": "197 MB"
+        },
+        {
+          "name": "Deepseek.Harness.iOS_0.24.1_unsigned.ipa",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/Deepseek.Harness.iOS_0.24.1_unsigned.ipa",
+          "size": "13.2 MB"
+        },
+        {
+          "name": "SHA256SUMS-Android.txt",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/SHA256SUMS-Android.txt",
+          "size": null
+        },
+        {
+          "name": "SHA256SUMS-iOS.txt",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/SHA256SUMS-iOS.txt",
+          "size": null
+        },
+        {
+          "name": "THIRD_PARTY_NOTICES.md",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.24.1/THIRD_PARTY_NOTICES.md",
+          "size": "5.24 KB"
         }
       ]
     },
