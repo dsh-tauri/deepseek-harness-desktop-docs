@@ -13,6 +13,11 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
       "prerelease": true,
       "assets": [
         {
+          "name": "Deepseek.Harness.Android_0.25.2-beta.1.apk",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/Deepseek.Harness.Android_0.25.2-beta.1.apk",
+          "size": "21.9 MB"
+        },
+        {
           "name": "Deepseek.Harness.Desktop_0.25.2-beta.1_aarch64.AppImage",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/Deepseek.Harness.Desktop_0.25.2-beta.1_aarch64.AppImage",
           "size": "88.8 MB"
@@ -56,6 +61,46 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
           "name": "Deepseek.Harness.Desktop_0.25.2-beta.1_x64_zh-CN.msi",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/Deepseek.Harness.Desktop_0.25.2-beta.1_x64_zh-CN.msi",
           "size": "13.4 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.25.2-beta.1.deb",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/Deepseek.Harness.Desktop_Bundle_0.25.2-beta.1.deb",
+          "size": "196 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.25.2-beta.1.exe",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/Deepseek.Harness.Desktop_Bundle_0.25.2-beta.1.exe",
+          "size": "121 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.25.2-beta.1_aarch64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/Deepseek.Harness.Desktop_Bundle_0.25.2-beta.1_aarch64.dmg",
+          "size": "199 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.25.2-beta.1_x64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/Deepseek.Harness.Desktop_Bundle_0.25.2-beta.1_x64.dmg",
+          "size": "206 MB"
+        },
+        {
+          "name": "Deepseek.Harness.iOS_0.25.2-beta.1_unsigned.ipa",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/Deepseek.Harness.iOS_0.25.2-beta.1_unsigned.ipa",
+          "size": "13.2 MB"
+        },
+        {
+          "name": "SHA256SUMS-Android.txt",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/SHA256SUMS-Android.txt",
+          "size": null
+        },
+        {
+          "name": "SHA256SUMS-iOS.txt",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/SHA256SUMS-iOS.txt",
+          "size": null
+        },
+        {
+          "name": "THIRD_PARTY_NOTICES.md",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.25.2-beta.1/THIRD_PARTY_NOTICES.md",
+          "size": "5.68 KB"
         }
       ]
     },
