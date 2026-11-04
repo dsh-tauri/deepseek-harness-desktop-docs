@@ -3,7 +3,7 @@ title: Build and release
 description: Build platform installers and understand the automated release pipeline.
 ---
 
-Tauri packages the React frontend, Rust backend, and bundled resources into native installers. GitHub Actions runs the release pipeline.
+Tauri packages the React frontend, Rust backend, bundled plugins, and the Electron runtime into native installers. GitHub Actions runs the release pipeline.
 
 ## Local build
 
@@ -18,39 +18,39 @@ node node_modules/vitest/vitest.mjs run --project unit
 pnpm tauri build
 ```
 
-`pnpm tauri build` uses `pnpm build` to build plugins and the frontend before compiling and bundling Rust. Complete the E2E and Rust checks in [Testing and quality checks](./testing); platform bundles require a compatible OS and its signing tools.
+`pnpm tauri build` runs `pnpm build:plugins` and `pnpm build` before compiling and bundling Rust together with the Electron runtime. Complete the E2E and Rust checks in [Testing and quality checks](./testing); platform bundles require a compatible OS and its signing tools.
 
 ## Current release artifacts
 
-The current desktop source is `0.20.0-beta.1`. The [`v0.20.0-beta.1` prerelease](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.20.0-beta.1) provides these installers:
+The current desktop source is `0.30.3`. [`v0.30.3`](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.30.3) provides these installers:
 
 | Platform | Release assets |
 | --- | --- |
-| Windows x64 | `.exe`, plus English and Simplified Chinese `.msi` installers |
+| Windows x64 | `.exe`, plus an English `.msi` |
 | macOS Apple Silicon | `aarch64.dmg` |
 | macOS Intel | `x64.dmg` |
-| Linux x64 | `.AppImage`, `.deb` |
+| Linux x64 | `amd64.AppImage`, `amd64.deb` |
+| Linux ARM64 | `aarch64.AppImage`, `arm64.deb` |
+| Android | `.apk`, appended after the desktop release |
+| iOS | Unsigned `.ipa`, appended after the desktop release; TestFlight is the other channel |
 
-The separate stable release is [`v0.19.1`](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.19.1). Do not label the prerelease stable or infer unreleased architectures from source code or CI targets.
+The offline **Bundle** is built by the separate [bundle workflow](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/.github/workflows/release-bundle.yml) after a stable release succeeds; the latest stable release currently has no Bundle assets. Do not label a prerelease stable or infer unreleased architectures from source code or CI targets.
 
 {/* <!-- [GitHub Actions release pipeline](/images/release-pipeline.webp) --> */}
 
 ## Release flow
 
-The [release workflow](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/.github/workflows/release.yml) runs for a `v*` tag, a merged `release/*` PR from the same repository, or a manual trigger. Manual runs produce test prereleases.
+The [release workflow](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/.github/workflows/release.yml) runs for a `v*` tag, a merged `release/*` PR from the same repository, or a manual trigger. Manual runs produce `test-*` prereleases.
 
 1. Align package, Cargo, and Tauri versions, release notes, and both documentation languages.
-2. Complete frontend type checking, linting, the three test layers, and cross-platform Rust checks.
-3. Build Windows, both macOS architectures, and Linux x64 artifacts in parallel; verify signing, notarization, and installation behavior.
+2. Complete frontend type checking, linting, Vitest, and cross-platform Rust checks.
+3. Build Windows, both macOS architectures, and both Linux architectures in parallel; verify signing, notarization, and installation behavior.
 4. A single publishing job gathers successful outputs. Prereleases are marked accordingly; only stable releases update latest.
+
+The nightly workflow builds `main` daily as `0.0.0-nightly.<date>.<sha>`, writes two prerelease Releases, and keeps the last 10 days.
 
 <Warning>
   Never expose signing certificates, notarization credentials, or update keys in logs,
   documentation, pull requests, or local fixtures. Use repository secrets and the
   established release workflow.
 </Warning>
-
-The current public release provides Linux x64 artifacts only; do not label Linux ARM as
-supported until matching artifacts are built and verified.
-
-

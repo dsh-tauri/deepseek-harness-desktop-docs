@@ -6,7 +6,7 @@ description: Compare this project, two community clients, and DeepSeek's officia
 Start with installers, runtime management, and recovery; then compare plugins and remote access.
 
 <Note>
-  As of 2026-09-30, using public READMEs, manifests, release notes, actual Release Assets, and the official download page.
+  As of 2026-11-04, using public READMEs, manifests, release notes, actual Release Assets, and the official download page.
   “Not confirmed” means no clear statement was found, not that a feature is absent; do not combine claims across release channels.
 </Note>
 
@@ -14,7 +14,7 @@ Start with installers, runtime management, and recovery; then compare plugins an
 
 | Project | Desktop stack | Main tradeoff |
 | --- | --- | --- |
-| This project | Tauri 2 + React; separate Harness service | First-party desktop additions and runtime management; community plugins are optional |
+| This project | Tauri 2 commands and Rust services, with windows rendered by a bundled Electron / Chromium runtime; separate Harness service | First-party desktop additions and multiple cores; community plugins are optional |
 | anywhere-labs/dsh-desktop | Electron; the desktop is a DSH/Cordis plugin | Plugin composition, Profile setup, and Agents Anywhere phone control |
 | dataelement/dsh-desktop | Electron | Local-first, portable Agent presets, PPT, and a paired phone bridge |
 | DeepSeek official desktop | Electron; bundled full Harness Web UI and Host | Official public preview; desktop and core update together, with plugins enabled as needed |
@@ -27,41 +27,39 @@ Only publicly downloadable installer assets count below; a README build target i
 
 | Project | Formal channel | Preview / experimental channel | Installer assets on those channels |
 | --- | --- | --- | --- |
-| This project | [v0.19.1](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.19.1) | [v0.20.0-beta.1](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.20.0-beta.1) | Both: Win x64 EXE/MSI; macOS arm64/x64 DMG; Linux x64 AppImage/DEB |
-| anywhere-labs | [v2.0.17](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.17) | [Beta.1](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.17-beta.1); [Next](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.17-next) | All three: Win x64 Setup; macOS Universal DMG; Linux x64 AppImage/DEB/tar.gz |
-| dataelement | [v0.10.0](https://github.com/dataelement/dsh-desktop/releases/tag/v0.10.0) | [v0.10.0-beta](https://github.com/dataelement/dsh-desktop/releases/tag/v0.10.0-beta) | Both: Win x64 Setup; macOS arm64/x64 DMG/ZIP; README explicitly says Linux is not currently supported |
-| DeepSeek official | No separate formal channel listed | [Public preview download](https://www.deepseek.com/download/) | Win x64 EXE (Windows 10+); macOS arm64 DMG (Apple silicon, macOS 13+) |
+| This project | [v0.30.3](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.30.3) | Daily [Nightly](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/nightly) and `v*` alphas | Formal: Win x64 EXE/MSI; macOS arm64/x64 DMG; Linux amd64/aarch64 AppImage and amd64/arm64 DEB; Android APK; unsigned iOS IPA |
+| anywhere-labs | [v2.0.18](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.18) | [Beta](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.21-beta.1); [Next](https://github.com/anywhere-labs/dsh-desktop/releases/tag/v2.0.21-next) | All three: Win x64 Setup (Next/Beta also ship a Portable ZIP); macOS Universal DMG; Linux x64/arm64 AppImage, DEB, tar.gz |
+| dataelement | [v0.13.2](https://github.com/dataelement/dsh-desktop/releases/tag/v0.13.2) | Pre-release tags | Both: Win x64 Setup; macOS arm64/x64 DMG/ZIP; README explicitly says Linux is not currently supported |
+| DeepSeek official | No separate formal channel listed | [Public preview download](https://www.deepseek.com/download/) | Win x64 EXE; macOS arm64 DMG (Apple silicon, macOS 13+) |
 
-- This project's v0.19.1 also has Bundle assets; the seven v0.20.0-beta.1 installer assets currently contain no Bundle.
-- anywhere now ships Linux on formal/Beta channels, not just Next; Linux has compatibility mode only and no ARM64 package yet.
+- This project's offline Bundle is appended by a separate workflow after a stable release; v0.30.3 and v0.30.2 currently have no Bundle among their 13 assets, while v0.30.0 has four.
+- anywhere ships Linux on every channel, with three formats for each of x64 and arm64, and runs a pinned upstream version.
 - GitHub `latest` / `prerelease=false` does not mean a formal channel: anywhere's `latest` points to experimental Next; dataelement's beta tag also has this flag.
 - The official download page explicitly excludes Intel Macs and provides no Linux desktop package; a macOS x64 build target in source does not establish public release support.
 
 ## Management, plugins, and recovery
 
-This project uses the v0.20.0-beta.1 manifest. The official column uses public preview pages and current desktop source; source version numbers are not treated as installer versions.
+This project uses the v0.30.3 manifest. The official column uses public preview pages and current desktop source; source version numbers are not treated as installer versions.
 
 | Comparison | This project | anywhere-labs | dataelement | DeepSeek official |
 | --- | --- | --- | --- | --- |
-| Profiles / runtime | Native Profiles; multiple cores, local `dsh` reuse, CLI registration | Profile wizard/switching; pinned Harness | Preserves Profile data; pinned Harness | Dedicated `desktop` Profile; core follows desktop updates, optional CLI registration |
-| Plugin strategy | First-party built-ins; `dshmarket` and others are optional presets | Desktop as a plugin; bundled community market | Harness plugins; third-party plugins installed as needed | Shared Harness plugin manager; Creator mode builds plugins |
-| Distinctive management | Skills/source management and MCP configuration: `dsh-tauri-extension` | Profile settings and plugin CLI | `.dshpreset` import/export, model providers, PPT | Plugin management, execution traces, and developer tools |
+| Profiles / runtime | Built-in `desktop` Profile; multiple cores, local `dsh` reuse, CLI registration | Profile wizard/switching; pinned Harness | Preserves Profile data; pinned Harness | Dedicated `desktop` Profile; core follows desktop updates, optional CLI registration |
+| Plugin strategy | 13 first-party built-ins; `dshmarket` and others are optional presets | Desktop as a plugin; bundled community market | Harness plugins; third-party plugins installed as needed | Shared Harness plugin manager; Creator mode builds plugins |
+| Distinctive management | Plugins, Skills and sources, MCP: `dsh-tauri-extension` | Profile settings and plugin CLI | `.dshpreset` import/export, model providers, PPT | Plugin management, execution traces, and developer tools |
 | Worktree / scheduling | Session Git Worktrees; scheduled runs and history | Not confirmed | Not confirmed | Worktrees not confirmed; scheduling requires enabling a plugin, off by default |
-| Plugin failure recovery | Identifies implicated plugins and guides removal | Recovery assistant | Diagnostics; non-destructive Safe Mode | Native recovery dialog; disable third-party plugins, back up Profile patch, and restart |
+| Plugin failure recovery | Identifies implicated plugins and guides removal; release-age rejections offer an authorization retry | Recovery assistant | Diagnostics; non-destructive Safe Mode | Native recovery dialog; disable third-party plugins, back up Profile patch, and restart |
 
-- This project recommends core `0.2.0-rc.2`, minimum `0.1.5-rc.1`; anywhere's current three channels pin `0.2.0-rc.2`.
-- dataelement's manifest and v0.10.0 release notes use `0.1.7-rc.2`; its README still says rc.1. Use the version manifest.
-- Current IDs here include `dsh-tauri-scheduler`, `dsh-tauri-archive`, and `dsh-tauri-model`; Beta adds native notifications through `dsh-tauri-notification`.
+- This project recommends core `0.2.1-rc.5`, minimum `0.2.1-rc.1`; anywhere pins `0.2.1-rc.3` on its channels.
+- dataelement currently pins `@deepseek-ai/dsh@0.2.2-alpha.2`, which does not match its README wording. Use the version manifest.
+- Built-in IDs here include `dsh-tauri-scheduler`, `dsh-tauri-archive`, `dsh-tauri-model`, and `dsh-tauri-notification`. The local Codex/Claude kernel entry moved to the deprecated list and is now provided by the `dsh-third-kernel` preset.
 - Official Desktop and CLI share product data such as sessions and settings, but keep plugin activation and executable dependencies separate; this is not multiple-core switching.
 
 ## Different remote-access mechanisms
 
-This project's column in this section was updated from current source on 2026-10-14. Other projects and the version table above retain the 2026-09-30 research; this is not a full comparison refresh.
-
 | Mechanism | This project | anywhere-labs | dataelement | DeepSeek official |
 | --- | --- | --- | --- | --- |
 | SSH remote host | Built-in `dsh-tauri-remote`; connects to remote `dsh web` through a loopback tunnel | Not confirmed | Not confirmed | Not confirmed |
-| Phone continuation | Built-in LAN / Cloudflare tunnel and pairing; browser or DSH Mobile continuation | Agents Anywhere (since 2.0.9) | Separate paired bridge: LAN / temporary internet tunnel | Not confirmed |
+| Phone continuation | Built-in LAN / Cloudflare tunnel and pairing; browser or DSH Mobile (Android APK / iOS TestFlight) continuation | Agents Anywhere (since 2.0.9) | Separate paired bridge: LAN / temporary internet tunnel | Not confirmed |
 
 - SSH runs Harness on a remote host; phone bridges continue desktop sessions. They are not the same kind of “remote support.”
 - anywhere's browser-opening option does not change the bind address; separately enabling LAN exposes an unauthenticated endpoint. Use only fully trusted networks.
@@ -69,7 +67,7 @@ This project's column in this section was updated from current source on 2026-10
 
 ## How to choose
 
-- For multiple cores, first-party panels, Worktrees, scheduling, or SSH hosts, start with this project and check the formal/Beta channel.
+- For multiple cores, first-party panels, Worktrees, scheduling, or SSH hosts, start with this project and check the stable/Nightly distinction.
 - For a plugin-composed desktop and Agents Anywhere, consider anywhere; for portable presets, PPT, and paired phone access, consider dataelement.
 - To use the official Harness desktop preview directly, check the official download page, confirm your OS and architecture, then enable plugins as needed.
 
@@ -80,8 +78,8 @@ This project's column in this section was updated from current source on 2026-10
 
 ## Sources
 
-- This project: [README](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/README.md), [Beta manifest](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/v0.20.0-beta.1/src-tauri/resources/manifest.jsonc), [first-party plugins](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages).
-- anywhere: [README](https://github.com/anywhere-labs/dsh-desktop/blob/master/README.md), [formal release manifest](https://github.com/anywhere-labs/dsh-desktop/blob/v2.0.17/dsh-plugin-desktop/package.json).
+- This project: [README](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/README.md), [runtime manifest](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/apps/desktop/src-tauri/resources/manifest.jsonc), [first-party plugins](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages).
+- anywhere: [README](https://github.com/anywhere-labs/dsh-desktop/blob/master/README.md), [desktop plugin manifest](https://github.com/anywhere-labs/dsh-desktop/blob/master/dsh-plugin-desktop/package.json).
 - dataelement: [README](https://github.com/dataelement/dsh-desktop/blob/main/README.md), [dependency manifest](https://github.com/dataelement/dsh-desktop/blob/main/package.json). Channel assets and notes are linked above.
 - DeepSeek official: [download page](https://www.deepseek.com/download/), [Harness product page](https://www.deepseek.com/harness/), [desktop README](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/desktop/README.md), [desktop manifest](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/desktop/package.json). The download page establishes platform availability; desktop source establishes technology and recovery boundaries.
 - For plans, see the live [GitHub Project](https://github.com/orgs/dsh-tauri/projects/3/views/2). This page copies no Status, Priority, or Quarter fields and does not label shipped SSH/scheduling as planned.

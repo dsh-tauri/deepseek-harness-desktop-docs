@@ -9,7 +9,7 @@ Plugins add tools, panels, and system integrations.
 
 | Type | Source and control |
 | --- | --- |
-| Preset | Six optional community plugins offered by the guide; downloaded after approval and can be updated or removed |
+| Preset | Twelve optional community plugins offered by the guide; the manifest's `checked` field decides initial selection, and downloads start after approval |
 | Other community plugins | Installed manually or through a marketplace; check sources, compatibility, and execution capabilities first |
 
 <Tabs>
@@ -37,14 +37,19 @@ Plugins add tools, panels, and system integrations.
 
 | Display name | Package ID | Initial selection |
 | --- | --- | --- |
-| DSH Market | `dshmarket` | Recommended, selected |
+| DSH NearToken | `dsh-neartoken` | Recommended, selected |
 | DSH Better Sidebar | `dsh-better-sidebar` | Recommended, selected |
 | DSH Rewind | `dsh-rewind-plugin` | Recommended, selected |
-| DSH Bridge | `@wenbin_wb/dsh-bridge` | Recommended, not selected |
-| DSH IM | `@xmanrui/dsh-im` | Recommended, not selected |
+| DSH Office Kit | `dsh-office-kit` | Recommended, not selected |
+| DSH Optimize | `dsh-ops` | Recommended, not selected |
+| DSH Third Kernel | `dsh-third-kernel` | Recommended, not selected |
+| DSH Market | `dshmarket` | Optional, not selected |
+| DSH IM | `@xmanrui/dsh-im` | Optional, not selected |
+| DSH GenUI | `@changfenhuang/dsh-genui` | Optional, not selected |
+| DSH Context | `dsh-context` | Optional, not selected |
 | Billion Context | `billion-context` | Optional, not selected |
 
-Presets do not count as built-ins or suit every task. Check maintenance, network dependencies, and data handling before installing. Presets such as DSH Market use the dedicated installation flow in the first-run guide or plugin management—not a chat request to the agent.
+Presets do not count as built-ins or suit every task. The manifest is overwritten on every install, so the desktop reopens the preset wizard when its contents change; you can also re-enter it through **Open preset** in plugin management. Check maintenance, network dependencies, and data handling before installing. Presets use the dedicated installation flow in the first-run guide or plugin management—not a chat request to the agent.
 
 ## Local plugins and hot reload
 
@@ -78,7 +83,7 @@ Hot reload is on by default. Before Harness starts, the desktop turns the source
 3. Restart Harness when prompted and confirm plugins load.
 4. If an operation is interrupted, use the recovery entry point shown in the panel; the desktop repairs missing built-ins.
 
-Harness `0.2.0-rc.2` is recommended; `0.1.5-rc.1` is the minimum accepted version. Compatibility rules still restrict available core and plugin versions. Preserve logs after startup failures, then use an explicit recovery action; see [Troubleshooting](../help/troubleshooting).
+Harness `0.2.1-rc.5` is recommended; `0.2.1-rc.1` is the minimum accepted version. Compatibility rules still restrict available core and plugin versions. pnpm does not resolve versions published less than 24 hours ago by default, and the panel offers an authorization path for upgrades blocked by that release-age policy. Preserve logs after startup failures, then use an explicit recovery action; see [Troubleshooting](../help/troubleshooting).
 
 <Warning>
   Installing a plugin installs executable local code. Profiles are not operating system sandboxes. “Built-in,” “recommended,” and “open source” do not mean risk-free.

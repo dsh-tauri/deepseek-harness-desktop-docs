@@ -27,9 +27,11 @@ description: 了解原生桌面导航栏与嵌入式 Harness 客户端之间的�
 
 当前的 [`dsh-tauri-extension`](./dsh-tauri-extension) 与 [`dsh-tauri-scheduler`](./dsh-tauri-scheduler) 使用这一入口。已移除的 `dsh-tauri-panel` 的 `panel.protocol` 与 `sidebar.panel.action` 不提供兼容路径。
 
+窗口由 `tauri-runtime-electron` 在 Electron 中承载；宿主命令、CSP 与 ACL 仍在 Rust 侧，内嵌客户端通过父窗口消息访问白名单命令。
+
 ## 兼容与安全边界
 
-- 当前桌面推荐 Harness **0.2.0-rc.2**，接受的最低版本为 **0.1.5-rc.1**。最低版本不保证每项 API 都存在；适配取决于实际服务与能力探测。
+- 当前桌面推荐 Harness **0.2.1-rc.5**，接受的最低版本为 **0.2.1-rc.1**。最低版本不保证每项 API 都存在；适配取决于实际服务与能力探测。
 - 宿主仅在桌面注入 `DSH_TAURI_EMBEDDED=1` 时启用内嵌载体鉴权适配。独立启动的 `dsh web` 继续使用 browser-session 鉴权。
 - Tauri 调用经父窗口消息转发。桌面壳核对 iframe 来源与 origin，只执行白名单命令；缺少宿主桥时调用会失败，不会自动获得其他原生权限。
 - 客户端桥只在嵌入环境启用。插件缺失或初始化失败时，依赖它的桌面导航与原生调用没有通用替代路径。
@@ -38,4 +40,4 @@ description: 了解原生桌面导航栏与嵌入式 Harness 客户端之间的�
   消息校验不是执行沙箱。Harness 和插件可以执行本地代码；Profile 不是操作系统沙箱。
 </Warning>
 
-[查看源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri)
+[查看源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-tauri)

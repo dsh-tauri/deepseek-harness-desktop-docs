@@ -26,8 +26,8 @@ description: 配置回合完成、权限审批与问题的桌面通知。
 
 ## 数据与边界
 
-- 设置与自定义声音存储在当前 WebView 的 `dsh-tauri-notification` 本地存储命名空间，不是独立备份文件。
+- 设置与自定义声音存储在当前 Chromium 窗口 的 `dsh-tauri-notification` 本地存储命名空间，不是独立备份文件。
 - 点击与交互依赖桌面通知桥、宿主服务及会话 API；操作系统通知策略仍可能抑制通知。
 - 通知可能显示回答摘要、命令或问题。在共享屏幕或锁屏上注意敏感内容。
 
-[设置指南](../guides/settings) · [源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-notification)
+[设置指南](../guides/settings) · [源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-notification)

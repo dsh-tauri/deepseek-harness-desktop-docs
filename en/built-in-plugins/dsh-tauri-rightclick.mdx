@@ -47,9 +47,9 @@ Bulk archiving and workspace deletion show a confirmation first. Renaming a work
 
 ## Host access and compatibility boundaries
 
-- Opening a directory uses `/api/desktop/dsh-tauri-rightclick/open/path` and the system file manager on the machine running the Harness host.
-- Opening an external link uses `/api/desktop/dsh-tauri-rightclick/open/url` and that machine's default browser. Only `http` / `https` URLs are accepted, not arbitrary URL schemes.
+- Opening a directory uses `/api/tauri/rightclick/open/path` and the system file manager on the machine running the Harness host.
+- Opening an external link uses `/api/tauri/rightclick/open/url` and that machine's default browser. Only `http` / `https` URLs are accepted, not arbitrary URL schemes.
 - Loading the Web UI in another wrapper or an ordinary browser does not imply support for every action. Host routes, session services, and clipboard capabilities are still required.
 - Disabling the plugin cleans up listeners and overlays. It does not edit upstream packages, the desktop shell, or other plugins' files.
 
-[View source and extension protocol](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-rightclick)
+[View source and extension protocol](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-rightclick)

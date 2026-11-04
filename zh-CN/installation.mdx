@@ -19,10 +19,10 @@ import { ReleaseDownloads } from "/snippets/downloads.jsx"
 
 | 平台 | Bundle 安装包 |
 | --- | --- |
-| Windows x64 | `Deepseek.Harness.Desktop_Bundle_0.19.1.exe` |
-| macOS Apple Silicon | `Deepseek.Harness.Desktop_Bundle_0.19.1_aarch64.dmg` |
-| macOS Intel | `Deepseek.Harness.Desktop_Bundle_0.19.1_x64.dmg` |
-| Linux x64（Debian / Ubuntu） | `Deepseek.Harness.Desktop_Bundle_0.19.1.deb` |
+| Windows x64 | `Deepseek.Harness.Desktop_Bundle_<版本>.exe` |
+| macOS Apple Silicon | `Deepseek.Harness.Desktop_Bundle_<版本>_aarch64.dmg` |
+| macOS Intel | `Deepseek.Harness.Desktop_Bundle_<版本>_x64.dmg` |
+| Linux x64（Debian / Ubuntu） | `Deepseek.Harness.Desktop_Bundle_<版本>.deb` |
 
 Bundle 随包携带运行时、Harness 与内置插件，减少首次启动下载；模型访问与后续更新仍可能需要联网。所选版本没有 Bundle 时，上方不会显示该列表。
 
@@ -32,16 +32,23 @@ Bundle 随包携带运行时、Harness 与内置插件，减少首次启动下�
 
 | 平台 | 要求与架构 | 安装包 |
 | --- | --- | --- |
-| Windows | Windows 10+、WebView2；x64 | `.exe` / `_x64_en-US.msi` / `_x64_zh-CN.msi` |
-| macOS | macOS 12+；Web 界面需 Safari 17.4+ 能力；Apple Silicon / Intel | `_aarch64.dmg` / `_x64.dmg` |
-| Linux | x64；WebKit2GTK 4.1 运行库 | `.deb` / `.AppImage` |
+| Windows | Windows 10+；x64 | `.exe` / `_x64_en-US.msi` |
+| macOS | macOS 12+；Apple Silicon / Intel | `_aarch64.dmg` / `_x64.dmg` |
+| Linux | x64 / ARM64；glibc 2.35 上限（基于 Ubuntu 22.04 构建） | `.deb` / `.AppImage` |
 
-架构和安装包类型以所选版本的实际资源为准。Git 工作树等 Git 功能还需要系统安装 Git。
+界面由安装包内置的 Chromium 运行时渲染，不依赖系统 WebView。架构和安装包类型以所选版本的实际资源为准。Git 工作树等 Git 功能还需要系统安装 Git。
 
 macOS 也可通过 Homebrew 安装：
 
 ```bash
 brew install dsh-tauri/desktop/deepseek-harness
+```
+
+Fedora 43+（x64 / ARM64）可通过 Copr 仓库安装，升级随 `dnf upgrade` 进行，应用内更新随之关闭；跟进预发布版可改装 `dsh-tauri-beta`（与 `dsh-tauri` 互斥）：
+
+```bash
+sudo dnf copr enable fairyband/dsh-tauri
+sudo dnf install dsh-tauri
 ```
 
 ## 安装并启动
@@ -55,17 +62,13 @@ brew install dsh-tauri/desktop/deepseek-harness
 ## 平台问题
 
 <AccordionGroup>
-  <Accordion title="Windows 安全提示或缺少 WebView2">
-    先确认安装包来自官方 Release。若缺少 WebView2，安装 Microsoft 提供的 WebView2 Runtime 后重试。
+  <Accordion title="Windows 安全提示">
+    先确认安装包来自官方 Release，再按系统提示允许运行。安装包已内置 Chromium 运行时，不需要另外安装 WebView2。
   </Accordion>
   <Accordion title="macOS 阻止首次启动">
-    验证下载来源后，在**系统设置 → 隐私与安全性**中允许应用运行。系统版本满足最低要求时，也需确认 WebView 的兼容能力。
+    验证下载来源后，在**系统设置 → 隐私与安全性**中允许应用运行。
   </Accordion>
-  <Accordion title="Linux Wayland 黑屏">
-    可先尝试 `.deb`。AppImage 仍然黑屏时尝试：
-    ```bash
-    WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 GDK_BACKEND=x11 ./Deepseek*.AppImage
-    ```
-    更多启动、权限和显示问题见[故障排除](./help/troubleshooting)。
+  <Accordion title="Linux 下窗口显示异常">
+    优先使用 `.deb` 并确认桌面合成器可用。窗口显示或桌宠定位异常时，可在 Pets 设置中开启 XWayland 选项后重启应用，见[故障排除](./help/troubleshooting)。
   </Accordion>
 </AccordionGroup>

@@ -47,9 +47,9 @@ description: 为会话、工作区、文本、链接和输入框提供原生风�
 
 ## 本机访问与兼容边界
 
-- 打开目录使用 `/api/desktop/dsh-tauri-rightclick/open/path`，交给运行 Harness 宿主的机器上的系统文件管理器。
-- 打开外链使用 `/api/desktop/dsh-tauri-rightclick/open/url`，仅接受 `http` / `https`，交给该机器的默认浏览器；不接受任意 URL scheme。
+- 打开目录使用 `/api/tauri/rightclick/open/path`，交给运行 Harness 宿主的机器上的系统文件管理器。
+- 打开外链使用 `/api/tauri/rightclick/open/url`，仅接受 `http` / `https`，交给该机器的默认浏览器；不接受任意 URL scheme。
 - 其他封装端或普通浏览器不能仅凭 Web UI 可加载就视为支持全部操作；仍需对应的宿主路由、会话服务和剪贴板能力。
 - 停用插件会清理监听器与浮层。它不修改上游包、桌面壳或其他插件的文件。
 
-[查看源码与扩展协议](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-rightclick)
+[查看源码与扩展协议](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-rightclick)

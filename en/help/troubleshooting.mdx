@@ -21,8 +21,8 @@ Preserve errors and logs first, then change one thing at a time. Do not start by
 | A plugin prevents startup | Record the named plugin and raw error; use the recovery page's individual plugin snapshot restore or removal action |
 | Model request fails | Check credentials, balance, endpoint, and model name; see [Configure a model](../getting-started/configure-model) |
 | `dsh` is not found | Confirm CLI integration is enabled, then check PATH and command resolution in a new terminal; see [CLI integration](../guides/cli-integration) |
-| Windows lacks WebView2 | Install Microsoft's WebView2 Runtime and retry |
-| macOS blocks startup | Verify the download source, then allow the app in **System Settings → Privacy & Security**; also check WebView compatibility |
+| Windows blocks the app | Verify the installer came from the official Release, then allow it to run; WebView2 is not required |
+| macOS blocks startup | Verify the download source, then allow the app in **System Settings → Privacy & Security** |
 
 ## Plugin recovery and safe mode
 
@@ -34,13 +34,9 @@ Preserve errors and logs first, then change one thing at a time. Do not start by
   Safe mode is for startup troubleshooting, not security isolation. It removes non-built-in plugins from the `safe` profile and renames unparseable patches to `.broken-<timestamp>`. Switch back to the original profile after recovery. Back up before resetting, deleting, or restoring over a profile.
 </Warning>
 
-## Black window on Linux
+## Window display issues on Linux
 
-On Wayland, try `.deb` first. If AppImage still shows a black window, try:
-
-```bash
-WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 GDK_BACKEND=x11 ./Deepseek*.AppImage
-```
+Prefer `.deb` and confirm the desktop session's compositor is available. If the window renders black or the pet overlay is positioned incorrectly, enable the XWayland option in pet settings and restart the app to use the X11 backend. If it persists, keep the logs and include your desktop environment and GPU driver details.
 
 ## Separate development and release environments
 

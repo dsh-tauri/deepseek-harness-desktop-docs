@@ -3,8 +3,8 @@ title: 快速开始
 description: 通过轻量、免配置的桌面应用在本机运行 DeepSeek Harness。
 ---
 
-DeepSeek Harness Desktop 通过原生 Tauri 桌面壳，统一管理本地运行时、Harness
-内核、插件与更新。安装后即可开始使用，无需自行配置 Node.js、pnpm 或 Docker。
+DeepSeek Harness Desktop 通过原生 Tauri 桌面壳（窗口与界面由安装包内置的 Chromium 渲染），
+统一管理本地运行时、Harness 内核、插件与更新。安装后即可开始使用，无需自行配置 Node.js、pnpm 或 Docker。
 
 <Frame>
   <img src="/images/home-overview.png" alt="DeepSeek Harness Desktop 中文主界面" />
@@ -18,17 +18,17 @@ DeepSeek Harness Desktop 通过原生 Tauri 桌面壳，统一管理本地运行
     让应用准备本地运行时并打开 Harness。
   </Card>
   <Card title="了解架构" icon="diagram-project" href="./architecture/overview">
-    理解 Tauri、Harness 服务和插件如何协作。
+    理解桌面壳、Harness 服务和插件如何协作。
   </Card>
 </CardGroup>
 
 ## 桌面端提供什么
 
-- 使用 Tauri 2 构建的轻量原生桌面壳。
+- 使用 Tauri 2 + Electron 运行时构建的原生桌面壳，界面不依赖系统 WebView。
 - 带区域下载回退的运行时与 Harness 内核安装流程。
 - 统一管理 Profile、内核与插件的双语界面。
-- 为新终端会话注册 `dsh` 命令。
-- 第一方桌面集成与可选预设插件。
+- 为新终端会话注册 `dsh` / `pnpm` 命令。
+- 13 个第一方内置插件与可选社区预设。
 - 桌面端和 Harness 内核相互独立的更新机制。
 
 <Warning>

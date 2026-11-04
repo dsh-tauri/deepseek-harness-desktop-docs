@@ -6,7 +6,7 @@ description: 了解 DeepSeek Harness Desktop 随安装包提供的第一方桌�
 当前桌面端随资源分发 13 个第一方插件；启动前检查并恢复缺失或不一致的副本。
 
 <Note>
-  推荐内核为 **0.2.0-rc.2**；桌面声明的兼容最低版本仍为 **0.1.5-rc.1**。最低版本检查不保证所有插件在旧内核上均可用；本机内核入口要求 **0.2.1-alpha.2 或更新版本**及桥接能力。
+  推荐内核为 **0.2.1-rc.5**，桌面声明的兼容最低版本为 **0.2.1-rc.1**。内置插件均要求 `dsh >= 0.2.1-rc.1`；低于该版本的内核即使本地已安装也不会被启用。
 </Note>
 
 {/* <!-- [当前内置插件及其依赖关系](/images/built-in-plugins-overview.webp) --> */}
@@ -23,14 +23,14 @@ description: 了解 DeepSeek Harness Desktop 随安装包提供的第一方桌�
   <Card title="移动端界面" icon="mobile-screen" href="./dsh-tauri-mobile-ui">
     手机浏览器的触控侧栏、输入与设置适配。
   </Card>
-  <Card title="本机内核" icon="microchip" href="./dsh-tauri-kernel">
-    在会话中连接已安装的 Codex 或 Claude Code CLI。
+  <Card title="第三方内核" icon="microchip" href="./dsh-tauri-kernel">
+    已迁移：接入本机 Codex 与 Claude Code 的方式改由社区插件 DSH Third Kernel 提供。
   </Card>
   <Card title="工作树" icon="code-branch" href="./dsh-tauri-worktree">
     隔离 Git 工作树；检出须用户明确批准。
   </Card>
   <Card title="插件与扩展" icon="puzzle-piece" href="./dsh-tauri-extension">
-    Skills、技能来源与 MCP 管理。
+    插件管理、技能（Skills）、技能来源与 MCP 管理。
   </Card>
   <Card title="定时任务" icon="calendar" href="./dsh-tauri-scheduler">
     定时任务、独立会话与执行记录。
@@ -57,8 +57,9 @@ description: 了解 DeepSeek Harness Desktop 随安装包提供的第一方桌�
 
 ## 分发与权限
 
-- 清单以当前桌面 `plugins.built-in` 为准；旧 Running Changes 不再属于内置集合。
-- 社区预设另行安装；扩展插件的 Skills/MCP 面板不包含市场。
+- 清单以当前桌面 `plugins.built-in` 为准；`dsh-tauri-kernel`、`dsh-tauri-ssh` 等已移入 `depercated` 弃用名单，不再随包分发。
+- 社区预设另行安装；扩展面板的插件页只是 Harness 内置插件页的入口，不包含插件市场。
+- 插件市场由预设 `dshmarket` 提供，不是内置能力。
 - “内置”不提供额外操作系统沙箱。Harness 与插件仍可执行本地代码。
 
 [插件管理](../guides/plugins) · [当前源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages)

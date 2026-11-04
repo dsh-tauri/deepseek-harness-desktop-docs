@@ -1,43 +1,48 @@
 ---
 title: Project structure
-description: Navigate the frontend, Rust backend, services, tasks, tests, and release automation.
+description: Navigate the desktop app, native backend, first-party plugins, services, tests, and release automation.
 ---
 
-The repository keeps the React frontend and Rust backend in one Tauri application while
-separating platform services by responsibility.
+The repository is a pnpm workspace: `apps/` holds the desktop and mobile apps, `packages/` holds the first-party plugins, and `crates/` pulls in native dependencies such as the Electron runtime as submodules.
 
 ```text
 deepseek-harness-desktop/
-├── src/                    # React frontend
-├── packages/               # First-party plugins and shared packages
-├── src-tauri/
-│   ├── src/
-│   │   ├── bridge/         # Tauri command boundary
-│   │   ├── config/         # Paths, constants, and settings
-│   │   ├── desktop/        # Native windows and webviews
-│   │   ├── service/        # Runtime and desktop services
-│   │   └── task/           # Periodic task entry points
-│   ├── resources/          # Runtime manifest and bundled plugin outputs
-│   ├── vendor/             # Patched native dependencies
-│   └── tauri.conf.json
+├── apps/
+│   ├── desktop/            # Desktop app
+│   │   ├── src/            # React frontend (Vite + Tailwind CSS 4)
+│   │   └── src-tauri/
+│   │       ├── src/
+│   │       │   ├── bridge/     # Tauri command boundary
+│   │       │   ├── config/     # Paths, constants, and settings
+│   │       │   ├── desktop/    # Windows, menus, and OS integration
+│   │       │   ├── service/    # Runtime and desktop services
+│   │       │   └── task/       # Periodic task entry points
+│   │       ├── resources/      # Runtime manifest and bundled plugin outputs
+│   │       ├── vendor/         # Patched native dependencies
+│   │       └── tauri.conf.json
+│   └── native/             # Expo / React Native mobile app
+├── packages/
+│   ├── builtin-plugin-*/   # First-party plugin sources; builds land in desktop resources
+│   └── builtin-plugin-config/  # Shared configuration and types
+├── crates/                 # Submodules: electron-rs, tauri-runtime-electron, notification plugin
 ├── scripts/                # Plugin build, maintenance, and release scripts
-├── test/                   # Unit, plugin, and desktop E2E tests
+├── config/                 # Vitest project configuration
+├── tests/                  # Unit tests and desktop E2E
 ├── docs/                   # In-repository engineering notes
 └── .github/workflows/      # CI and release pipelines
 ```
 
 ## Frontend
 
-`src/` contains components, configuration, hooks, internationalization, layouts,
-stores, styles, and utilities. It renders installation and loading states, desktop
-settings, and UI surrounding the embedded Harness client.
+`apps/desktop/src/` contains components, configuration, hooks, internationalization, layouts, stores, styles, and utilities. It renders installation and loading states, desktop settings, and UI surrounding the embedded Harness client.
 
-## Rust backend
+## Native backend
 
-The `src-tauri/src/service/` modules are organized around capabilities such as
-downloads, core selection, profiles, plugins, CLI integration, updates, workflows, and
-scheduling. `bridge/` exposes selected capabilities as Tauri commands; UI code should
-not bypass that boundary.
+The `apps/desktop/src-tauri/src/service/` modules are organized around capabilities such as downloads, core selection, profiles, plugins, CLI integration, updates, workflows, and scheduling. `bridge/` exposes selected capabilities as Tauri commands; UI code should not bypass that boundary. Windows and the event loop run inside Electron through `crates/tauri-runtime-electron`, while Rust keeps commands, CSP, and ACL.
+
+## First-party plugins
+
+Each `packages/builtin-plugin-*` directory is its own package; `pnpm build:plugins` deploys them into `apps/desktop/src-tauri/resources/node_modules` at build time. The `plugins.built-in` list in `resources/manifest.jsonc` decides which IDs ship with the app, and plugin sources are no longer hosted in a separate repository.
 
 {/* <!-- [Source tree and major module ownership](/images/project-structure.webp) --> */}
 
@@ -45,17 +50,16 @@ not bypass that boundary.
 
 | Change | Start here |
 | --- | --- |
-| React view or state | `src/` |
-| First-party plugins | `packages/` |
-| Native command contract | `src-tauri/src/bridge/` |
-| Paths or persisted settings | `src-tauri/src/config/` |
-| Window or webview behavior | `src-tauri/src/desktop/` |
-| Core, profile, plugin, CLI, or update behavior | `src-tauri/src/service/` |
-| Startup, restart, and process orchestration | `src-tauri/src/service/workflow/` |
-| Periodic status checks | `src-tauri/src/task/` |
-| CI or packaging | `.github/workflows/`, [Tauri configuration](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/tauri.conf.json) |
+| React view or state | `apps/desktop/src/` |
+| First-party plugins | `packages/builtin-plugin-*/` |
+| Native command contract | `apps/desktop/src-tauri/src/bridge/` |
+| Paths or persisted settings | `apps/desktop/src-tauri/src/config/` |
+| Window, menu, or OS integration | `apps/desktop/src-tauri/src/desktop/` |
+| Core, profile, plugin, CLI, or update behavior | `apps/desktop/src-tauri/src/service/` |
+| Startup, restart, and process orchestration | `apps/desktop/src-tauri/src/service/workflow/` |
+| Periodic status checks | `apps/desktop/src-tauri/src/task/` |
+| Mobile app | `apps/native/` |
+| CI or packaging | `.github/workflows/`, [Tauri configuration](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/apps/desktop/src-tauri/tauri.conf.json) |
 
 Keep operating-system differences behind focused Rust services and preserve the release
 and debug isolation model when adding paths, ports, or stores.
-
-

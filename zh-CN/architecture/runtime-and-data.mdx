@@ -9,14 +9,15 @@ description: 了解桌面端如何选择运行时、启动 Harness，并隔离�
 
 | 项目 | 当前值 |
 | --- | --- |
-| 桌面版本 | `0.20.0-beta.1`（预发布） |
-| Harness 内核 | 推荐 `0.2.0-rc.2`；当前清单与本地 CLI 校验最低值为 `0.1.5-rc.1` |
+| 桌面版本 | `0.30.3`（正式版） |
+| Harness 内核 | 推荐 `0.2.1-rc.5`；清单与本地 CLI 校验最低值为 `0.2.1-rc.1` |
 | 托管环境 | Node.js `v22.22.0`、pnpm `11.7.0` |
+| 界面运行时 | 安装包内置的 Chromium（Electron），不依赖系统 WebView |
 
-- 最低内核版本不是所有插件的兼容性保证。
+- 最低内核版本不是所有插件的兼容性保证；低于最低版本的内核即使被本地安装也不会被启用。
 - 复用兼容的本地工具；缺失或原生模块 ABI 不兼容时可回退托管副本。
-- 托管内核来自 [deepseek-harness-pkg](https://github.com/dsh-tauri/deepseek-harness-pkg)，优先官方 GitHub 资源，失败时尝试镜像。
-- 版本以[运行时清单](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/resources/manifest.jsonc)为准。
+- 托管内核来自 [deepseek-harness-pkg](https://github.com/dsh-tauri-desk/deepseek-harness-pkg)，优先官方 GitHub 资源，失败时按顺序尝试镜像。
+- 版本以[运行时清单](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/apps/desktop/src-tauri/resources/manifest.jsonc)为准。
 
 ## 正式版与 Debug 隔离
 
@@ -25,13 +26,14 @@ description: 了解桌面端如何选择运行时、启动 Harness，并隔离�
 | 内容 | 正式版 | Debug |
 | --- | --- | --- |
 | 默认端口 | `3080` | `3081` |
+| 默认档案 | `desktop` | `desktop`（数据根独立） |
 | Harness 数据根 | 非空 `DSH_HOME`，否则 `~/.dsh` | 强制 `~/.dsh.dev`，忽略继承的 `DSH_HOME` |
 | 托管 Node | `<AppData>/runtime/` | `<AppData>/dev/runtime/` |
 | 默认托管内核 | `<AppData>/dependencies/dsh/` | `<AppData>/dev/dependencies/dsh/` |
 | 托管依赖 | `<AppData>/dependencies/` | `<AppData>/dev/dependencies/` |
 | 设置存储 | `.store.dat` | `.store.dev.dat` |
 | 服务日志 | `<AppData>/logs/dsh-web.log` | `<AppData>/dev/logs/dsh-web.dev.log` |
-| CLI PATH 修改 | 默认启用，可在设置关闭 | 不修改用户 PATH，也不覆盖正式版 `dsh` shim |
+| CLI PATH 修改 | 默认启用，可在设置关闭 | 不写入正式版 `dsh` shim，也不注册用户 PATH |
 
 {/* <!-- [运行时与数据目录边界](/images/runtime-data.webp) --> */}
 
@@ -42,6 +44,6 @@ description: 了解桌面端如何选择运行时、启动 Harness，并隔离�
 
 ## 命令行集成
 
-正式版默认启用 `dsh` / `pnpm` shim，可在设置关闭。Windows 注册用户级 PATH；Unix 在 `~/.zshrc` 与 `~/.bashrc` 中维护自己的标记块，不覆盖其他配置。重新打开终端后使用。
+正式版默认启用 `dsh` / `pnpm` shim，可在设置关闭。Windows 在 `%LOCALAPPDATA%\deepseek-harness\bin` 生成 shim 并注册用户级 PATH；Unix 写入 `~/.local/bin`，并在 `~/.zshrc` 与 `~/.bashrc` 中维护自己的标记块，不覆盖其他配置。重新打开终端后使用。
 
 <Warning>Harness 与插件可使用用户权限执行本地代码。Profile 和 Debug 目录隔离不是操作系统沙箱。</Warning>

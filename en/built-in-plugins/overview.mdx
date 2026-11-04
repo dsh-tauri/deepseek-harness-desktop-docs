@@ -6,7 +6,7 @@ description: Understand the first-party desktop plugins shipped with DeepSeek Ha
 The desktop currently ships 13 first-party plugins as resources. Startup checks restore missing or inconsistent copies.
 
 <Note>
-  The recommended core is **0.2.0-rc.2**; the desktop's declared compatibility minimum remains **0.1.5-rc.1**. Passing the minimum check does not guarantee every plugin works on an older core; local kernel entries require **0.2.1-alpha.2 or newer** and bridge capabilities.
+  The recommended core is **0.2.1-rc.5**, and the declared compatibility minimum is **0.2.1-rc.1**. Built-in plugins all require `dsh >= 0.2.1-rc.1`; a locally installed core below that minimum is not activated.
 </Note>
 
 {/* <!-- [The current built-in plugins and their relationships](/images/built-in-plugins-overview.webp) --> */}
@@ -23,14 +23,14 @@ The desktop currently ships 13 first-party plugins as resources. Startup checks 
   <Card title="Mobile interface" icon="mobile-screen" href="./dsh-tauri-mobile-ui">
     Touch-adapted sidebar, input, and settings for phone browsers.
   </Card>
-  <Card title="Local kernels" icon="microchip" href="./dsh-tauri-kernel">
-    Connect installed Codex or Claude Code CLIs to sessions.
+  <Card title="Third-party kernels" icon="microchip" href="./dsh-tauri-kernel">
+    Migrated: local Codex and Claude Code entries now come from the DSH Third Kernel community preset.
   </Card>
   <Card title="Worktree" icon="code-branch" href="./dsh-tauri-worktree">
     Isolated Git worktrees; checkout needs explicit user approval.
   </Card>
   <Card title="Extensions" icon="puzzle-piece" href="./dsh-tauri-extension">
-    Skills, skill sources, and MCP management.
+    Plugin management, skills, skill sources, and MCP management.
   </Card>
   <Card title="Scheduled tasks" icon="calendar" href="./dsh-tauri-scheduler">
     Scheduled tasks, independent sessions, and run history.
@@ -57,8 +57,9 @@ The desktop currently ships 13 first-party plugins as resources. Startup checks 
 
 ## Distribution and permissions
 
-- The current desktop `plugins.built-in` manifest is authoritative. Running Changes is no longer in the built-in set.
-- Community presets are installed separately; the Extensions Skills/MCP panel has no marketplace.
-- “Built in” adds no OS sandbox. Harness and plugins can still execute local code.
+- The current desktop `plugins.built-in` manifest is authoritative; `dsh-tauri-kernel`, `dsh-tauri-ssh`, and others moved to the `depercated` list and are no longer shipped.
+- Community presets are installed separately; the Extensions plugin tab is only an entry point to the Harness built-in plugin page and has no marketplace.
+- The plugin marketplace comes from the `dshmarket` preset, not a built-in capability.
+- "Built in" adds no OS sandbox. Harness and plugins can still execute local code.
 
 [Plugin management](../guides/plugins) · [Current source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages)

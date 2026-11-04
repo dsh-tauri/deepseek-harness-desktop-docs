@@ -21,8 +21,8 @@ description: 按症状处理下载、启动、插件、显示、模型和 CLI �
 | 插件阻止启动 | 记录问题插件与原始错误，使用恢复页的单插件快照还原或卸载入口 |
 | 模型请求失败 | 检查凭据、余额、端点和模型名称，见[配置模型](../getting-started/configure-model) |
 | 找不到 `dsh` | 确认 CLI 集成已启用，在全新终端检查 PATH 和命令解析，见 [CLI 集成](../guides/cli-integration) |
-| Windows 缺少 WebView2 | 安装 Microsoft 提供的 WebView2 Runtime 后重试 |
-| macOS 阻止启动 | 核实下载来源后，在**系统设置 → 隐私与安全性**允许运行；同时检查 WebView 兼容能力 |
+| Windows 阻止运行 | 核实安装包来自官方 Release，再按系统提示允许运行；不需要另外安装 WebView2 |
+| macOS 阻止启动 | 核实下载来源后，在**系统设置 → 隐私与安全性**允许运行 |
 
 ## 插件恢复与安全模式
 
@@ -34,13 +34,9 @@ description: 按症状处理下载、启动、插件、显示、模型和 CLI �
   安全模式用于启动排障，不是安全沙箱。它会移除 `safe` 档案中的非内置插件，并把无法解析的补丁改名为 `.broken-<时间戳>`。恢复后切回原档案；重置、删除或覆盖还原前先备份。
 </Warning>
 
-## Linux 黑屏
+## Linux 窗口显示异常
 
-Wayland 下可先尝试 `.deb`。AppImage 仍黑屏时尝试：
-
-```bash
-WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 GDK_BACKEND=x11 ./Deepseek*.AppImage
-```
+优先使用 `.deb`，并确认桌面会话的合成器可用。窗口黑屏或桌宠定位异常时，可在 Pets 设置中开启 XWayland 选项后重启应用，让窗口改用 X11 后端。仍异常时保留日志，并附上桌面环境与显卡驱动信息。
 
 ## 区分开发与正式环境
 

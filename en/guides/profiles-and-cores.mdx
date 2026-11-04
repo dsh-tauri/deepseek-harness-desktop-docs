@@ -7,7 +7,7 @@ description: Separate Harness configuration with profiles and choose the active 
 
 ## Choose a profile
 
-First installation creates and uses the `tauri` profile; `web` is the default profile started officially. Other profiles live under `$DSH_HOME/profiles/<id>`. Session data lives outside profiles, so switching profiles does not isolate all session history.
+First installation creates and uses the built-in `desktop` profile, which cannot be deleted; `web` is Harness's own default profile. Other profiles live under `$DSH_HOME/profiles/<id>`. Session data lives outside profiles, so switching profiles does not isolate all session history.
 
 1. Create or clone a profile in desktop **Configuration → Profiles**.
 2. Pause active tasks and record workspaces and uncommitted changes.
@@ -37,11 +37,11 @@ Cores come from every version published in the official GitHub [Releases](https:
 
 | Source | Purpose |
 | --- | --- |
-| Automatic | Prefer a compatible local CLI core; otherwise use the managed core |
-| Local | Use a compatible local Harness installation detected by the desktop |
-| App | Use a prebuilt distribution downloaded by the desktop |
+| Automatic | With no explicit choice, prefer a compatible local CLI core; otherwise use the prebuilt core |
+| Local | Use a local Harness installation detected by the desktop that meets the minimum version |
+| App | Use a prebuilt distribution downloaded by the desktop, or the core bundled with the offline installer |
 
-The current recommended core is `0.2.0-rc.2`; the minimum accepted version is `0.1.5-rc.1`. Desktop and plugin compatibility rules still filter the version list; not every upstream version is guaranteed to work.
+The current recommended core is `0.2.1-rc.5`; the minimum accepted version is `0.2.1-rc.1`. A local core below the minimum is skipped and the prebuilt core is used instead; upgrading the local core restores local priority automatically. Desktop and plugin compatibility rules still filter the version list; not every upstream version is guaranteed to work.
 
 ## Before switching or upgrading
 

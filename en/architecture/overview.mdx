@@ -3,8 +3,10 @@ title: Architecture overview
 description: Understand how the Tauri shell, local Harness service, and embedded web UI work together.
 ---
 
-DeepSeek Harness Desktop is a Tauri 2 application that manages a local Harness service
-and displays its web interface inside a native window.
+DeepSeek Harness Desktop is a Tauri 2 application: Rust owns windows, commands, and OS
+integration, while the window and interface render in the Electron / Chromium runtime bundled
+with the installer. The desktop app manages a local Harness service and displays its web
+interface inside that window.
 
 {/* <!-- [Desktop architecture and process boundaries](/images/architecture-overview.webp) --> */}
 
@@ -14,7 +16,7 @@ This diagram shows the local runtime path: the desktop UI communicates with the 
 
 ```text
 +---------------------------+      +---------------------------+
-| Tauri window / WebView    |      | Native backend            |
+| Window / Chromium WebView  |      | Native backend            |
 | Desktop UI (React)        |<---->| Rust / Tauri 2            |
 | Settings, profiles, etc.  | IPC  | Runtime & service manager |
 |                           |      +-------------+-------------+
@@ -44,6 +46,7 @@ IPC represents commands and events between the desktop UI and native backend. Lo
 | Layer | Technology | Responsibility |
 | --- | --- | --- |
 | Desktop UI | React 19, TypeScript, Vite, Tailwind CSS 4 | Setup, settings, profiles, plugins, updates, and native window states |
+| Window runtime | Electron (Chromium) with `tauri-runtime-electron` | Hosts desktop windows and webviews while Rust drives the event loop, commands, and ACL |
 | Native backend | Rust and Tauri 2 | Runtime discovery, downloads, service lifecycle, files, CLI integration, and OS APIs |
 | Harness service | Managed or compatible local `dsh` core | Sessions, tools, profiles, plugins, and the local web application |
 | Embedded client | Harness web UI at a loopback URL | The primary session experience inside the desktop window |
@@ -62,6 +65,7 @@ IPC represents commands and events between the desktop UI and native backend. Lo
 
 The web client, Rust backend, Harness process, plugins, model providers, and opened workspace are separate components, not separate security sandboxes.
 Tauri commands narrow native capabilities; Harness tools and plugins can still execute local code with the user's permissions. Profiles are not operating-system sandboxes.
+Chromium's process sandbox isolates renderer processes only; it does not limit the user permissions held by plugins and the Harness process.
 
 Next, inspect [Runtime and data](./runtime-and-data) or the
 [Plugin system](./plugin-system).

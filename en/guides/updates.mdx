@@ -9,11 +9,11 @@ The desktop and Harness core update independently. Save active tasks and reposit
 
 | Component | Entry point | What to check |
 | --- | --- | --- |
-| Desktop app | **Help → Check for updates** | Download and restart when prompted; use the official Release's platform assets |
+| Desktop app | **Help → Check for updates** | Download and restart when prompted; use the official Release's platform assets. When installed by a system package manager such as Copr, update through that manager instead |
 | Managed Harness core | Update prompt or **Configuration → Core Engine** | Choose compatible versions only; no desktop reinstall is needed |
 | Optional plugins | **Configuration → Plugins** | Check sources, versions, and errors; restart the service when prompted |
 
-The desktop checks for managed-core updates. Network failures do not cause it to delete installed cores, but missing components on first installation still need downloading. The recommended core is `0.2.0-rc.2`; the minimum accepted version is `0.1.5-rc.1`, subject to compatibility rules.
+The desktop checks for managed-core updates. Network failures do not cause it to delete installed cores, but missing components on first installation still need downloading. The recommended core is `0.2.1-rc.5`; the minimum accepted version is `0.2.1-rc.1`, subject to compatibility rules. Preview cores above the recommended version do not trigger automatic update prompts; download them manually from the **Core Engine** panel.
 
 {/* <!-- [Desktop and Harness update dialogs](/images/updates.webp) --> */}
 

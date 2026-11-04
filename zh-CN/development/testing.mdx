@@ -1,6 +1,6 @@
 ---
 title: 测试与质量检查
-description: 提交修改前运行前端、Rust 与跨平台检查。
+description: 提交修改前运行前端、Rust、移动端与跨平台检查。
 ---
 
 开发期间运行最快的相关检查；提交 Pull Request 前按修改范围补齐真实进程与平台测试。
@@ -19,35 +19,35 @@ node node_modules/vitest/vitest.mjs run --project unit
 | 脚本 | 测试范围 | 额外准备 |
 | --- | --- | --- |
 | `test:unit` | Vitest 单元与组件测试 | 共享包与插件构建产物 |
-| `test:e2e:plugin` | L2：真实 Harness 与 Chromium | 插件产物、Chromium、独立 Harness 运行时 |
-| `test:e2e:desktop` | L3：真实 Tauri 窗口与 WebDriver | 嵌入前端的 Debug 二进制；当前 CI 在 Windows 运行 |
+| `test:e2e:desktop` | 真实桌面窗口与 CDP 驱动 | 嵌入前端的 Debug 二进制；CI 在 Ubuntu、macOS 与 Windows 矩阵运行 |
+| `test:native` | 移动端独立 Vitest 工程 | `apps/native/` 依赖 |
 
 按仓内测试协议显式使用 `run`，例如：
 
 ```bash
-node node_modules/vitest/vitest.mjs run --project plugin
+node node_modules/vitest/vitest.mjs run --project unit
 node node_modules/vitest/vitest.mjs run --project desktop
 ```
 
-`pnpm test` 选择全部三个 project，不只是前端单元测试。使用隔离测试目录，让测试管理服务生命周期；不要复用正式版服务。
+`pnpm test` 选择全部 Vitest project，不只是前端单元测试。使用隔离测试目录，让测试管理服务生命周期；不要复用正式版服务。移动端测试使用独立配置，不进入根 `unit`、`desktop` project。
 
 ## Rust 检查
 
-在 `src-tauri/` 中：
+在 `apps/desktop/src-tauri/` 中：
 
 ```bash
 cargo check --locked
 cargo test --all-features --locked
 ```
 
-CI 的 Rust 矩阵为 Ubuntu 22.04、macOS 14 与 Windows；平台依赖与[开发环境](./setup)相同。
+CI 的 Rust 矩阵为 Ubuntu 22.04（x64 / arm64）、macOS 26（Apple Silicon / Intel）与 Windows；Rust 版本固定为 `1.98.1`，平台依赖与[开发环境](./setup)相同。
 
 ## 手动场景
 
 - 安装与恢复：首次下载、中断、重试、本地内核复用及更新失败。
 - 服务生命周期：健康检查、端口避让与回落、重启、关闭、日志及正式版/Debug 隔离。
-- Profile 与插件：切换 Profile、增删预设或社区插件、恢复内置桥。
-- 平台打包：Windows 安装包、macOS 签名/公证验证、Linux `.deb`、AppImage 与 Wayland 冒烟测试。
+- Profile 与插件：切换 Profile、增删预设或社区插件、恢复内置桥、被 pnpm 发布保护期拦下时的授权重试。
+- 平台打包：Windows 安装包、macOS 签名/公证验证、Linux `.deb`、AppImage 与 XWayland 冒烟测试。
 
 {/* <!-- [CI 检查与跨平台测试矩阵](/images/testing.webp) --> */}
 
@@ -57,5 +57,3 @@ CI 的 Rust 矩阵为 Ubuntu 22.04、macOS 14 与 Windows；平台依赖与[开�
 - 确认未提交密钥、本机隐私路径或生成的应用数据。
 - 涉及路径或端口时同时测试正式版和 Debug。
 - 用户可见变化需同步两种文档语言。
-
-

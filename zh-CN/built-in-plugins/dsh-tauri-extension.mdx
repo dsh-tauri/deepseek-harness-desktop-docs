@@ -3,7 +3,7 @@ title: 插件与扩展
 description: 管理 Skills、技能来源与 MCP 服务器。
 ---
 
-在侧栏打开**扩展**。`dsh-tauri-extension` 提供 Skills 与 MCP 两个标签页。
+在侧栏打开**扩展**。`dsh-tauri-extension` 提供 **插件**、**技能** 与 **MCP** 三个标签页；**插件**页只是 Harness 内置插件管理页的入口，插件市场由预设 `dshmarket` 提供。
 
 <Tabs>
   <Tab title="Skills 管理">
@@ -34,8 +34,8 @@ description: 管理 Skills、技能来源与 MCP 服务器。
 ## 数据与边界
 
 - 自定义技能及来源记录位于 `$DSH_HOME/skills/`；MCP 配置写入当前 Profile。
-- 宿主路由前缀为 `/api/desktop/dsh-tauri-extension`。
-- 插件不含市场；社区插件见[插件管理](../guides/plugins)。
+- 宿主路由前缀为 `/api/tauri/extension`。
+- 插件本身不含市场；社区插件与市场见[插件管理](../guides/plugins)。
 - Skills 与 MCP 可触发本地代码执行，导入前确认来源与权限。
 
-[源码与第三方声明](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-extension)
+[源码与第三方声明](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-extension)

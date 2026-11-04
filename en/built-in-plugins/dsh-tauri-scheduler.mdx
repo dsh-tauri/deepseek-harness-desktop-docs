@@ -43,10 +43,10 @@ Chat tools: `scheduler_create`, `scheduler_list`, `scheduler_update`, and `sched
 - Uses the computer's local time zone; the computer must be awake and the host running.
 - Runs up to 4 tasks concurrently, with a 30-minute limit per run.
 - Tasks and records live under `$DSH_HOME/crons/`; the latest 200 run records are retained.
-- Host routes use `/api/desktop/dsh-tauri-scheduler`.
+- Host routes use `/api/tauri/scheduler`.
 
 <Warning>
   Tasks can execute Agent instructions and local tools. Review the workspace and permissions before saving. Tasks do not run during sleep or while the service is stopped.
 </Warning>
 
-[Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-scheduler)
+[Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-scheduler)

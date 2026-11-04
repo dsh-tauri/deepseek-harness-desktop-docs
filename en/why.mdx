@@ -58,15 +58,16 @@ responsiveness, stability, detail consistency, and recovery**.
 
 Tauri 2 is a means toward that goal, but not the only reason for the project:
 
-- reuse the system WebView instead of bundling another complete Chromium runtime;
+- keep Tauri's command, ACL, and Rust service layers while the window renders in a bundled Electron / Chromium runtime, trading installer size for consistent behavior across platforms;
 - manage processes, downloads, updates, PATH, and OS integration in Rust;
 - keep Harness as an independent local service while the desktop adds only necessary host capabilities;
 - update the desktop and Harness core separately to avoid unnecessary replacement.
 
 <Info>
-  “Lightweight” is not only installer size. The Harness core, Node.js, pnpm, plugins,
-  startup time, memory, input latency, and recovery all affect the experience. We will
-  improve from measured results rather than claim performance leadership merely because we use Tauri.
+  “Lightweight” is not only installer size. The bundled Chromium adds install size and
+  memory overhead; the Harness core, Node.js, pnpm, plugins, startup time, input latency,
+  and recovery also affect the experience. We will improve from measured results rather
+  than claim performance leadership from the framework choice alone.
 </Info>
 
 ## Stay restrained and objective
