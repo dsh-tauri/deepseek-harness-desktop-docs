@@ -44,7 +44,7 @@ description: 对比本项目、两个社区客户端与 DeepSeek 官方桌面端
 | 比较项 | 本项目 | anywhere-labs | dataelement | DeepSeek 官方 |
 | --- | --- | --- | --- | --- |
 | Profile / 运行时 | 内置 `desktop` Profile；多内核切换、复用本地 `dsh`、CLI 注册 | Profile 向导/切换；固定 Harness | 保留 Profile 数据；固定 Harness | 专用 `desktop` Profile；内核随桌面更新，可选 CLI 注册 |
-| 插件策略 | 13 个内置包（12 个桌面插件 + 共享样式包）；`dshmarket` 等为可选预设 | 桌面即插件；内置社区市场 | Harness 插件；第三方插件按需安装 | 共用 Harness 插件管理器；Creator mode 创建插件 |
+| 插件策略 | 13 个第一方内置插件；`dshmarket` 等为可选预设 | 桌面即插件；内置社区市场 | Harness 插件；第三方插件按需安装 | 共用 Harness 插件管理器；Creator mode 创建插件 |
 | 特色管理入口 | 插件、Skills 与来源、MCP：`dsh-tauri-extension` | Profile 设置与插件 CLI | `.dshpreset` 导入/导出、模型供应商、PPT | 插件管理、运行轨迹与开发者工具 |
 | Worktree / 定时任务 | 会话 Git Worktree；定时执行与运行历史 | 未确认 | 未确认 | Worktree 未确认；定时任务需启用插件，非默认开启 |
 | 插件故障恢复 | 定位问题插件并引导移除；发布保护期拦截可授权重试 | 恢复助手 | 故障诊断；非破坏性 Safe Mode | 原生恢复对话框；禁用第三方插件、备份 Profile patch 后重启 |

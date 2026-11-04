@@ -3,7 +3,7 @@ title: Built-in plugins overview
 description: Understand the first-party desktop plugins shipped with DeepSeek Harness Desktop and their boundaries.
 ---
 
-The desktop currently ships 13 built-in packages: 12 first-party desktop plugins plus the shared styling package `dsh-taiwind`. Startup checks restore missing or inconsistent copies.
+The desktop currently ships 13 first-party plugins as resources. Startup checks restore missing or inconsistent copies.
 
 <Note>
   The recommended core is **0.2.1-rc.5**, and the declared compatibility minimum is **0.2.1-rc.1**. Built-in plugins all require `dsh >= 0.2.1-rc.1`; a locally installed core below that minimum is not activated.
@@ -19,9 +19,6 @@ The desktop currently ships 13 built-in packages: 12 first-party desktop plugins
   </Card>
   <Card title="DSH Tauri UI" icon="sidebar" href="./dsh-tauri-ui">
     Desktop settings with capability-based fallback.
-  </Card>
-  <Card title="DSH Taiwind" icon="palette" href="./dsh-taiwind">
-    One Tailwind stylesheet shared by plugins; plugin authors only.
   </Card>
   <Card title="Mobile interface" icon="mobile-screen" href="./dsh-tauri-mobile-ui">
     Touch-adapted sidebar, input, and settings for phone browsers.

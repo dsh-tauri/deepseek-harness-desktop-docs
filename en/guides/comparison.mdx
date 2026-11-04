@@ -44,7 +44,7 @@ This project uses the v0.30.3 manifest. The official column uses public preview 
 | Comparison | This project | anywhere-labs | dataelement | DeepSeek official |
 | --- | --- | --- | --- | --- |
 | Profiles / runtime | Built-in `desktop` Profile; multiple cores, local `dsh` reuse, CLI registration | Profile wizard/switching; pinned Harness | Preserves Profile data; pinned Harness | Dedicated `desktop` Profile; core follows desktop updates, optional CLI registration |
-| Plugin strategy | 13 built-in packages (12 desktop plugins plus a shared styling package); `dshmarket` and others are optional presets | Desktop as a plugin; bundled community market | Harness plugins; third-party plugins installed as needed | Shared Harness plugin manager; Creator mode builds plugins |
+| Plugin strategy | 13 first-party built-ins; `dshmarket` and others are optional presets | Desktop as a plugin; bundled community market | Harness plugins; third-party plugins installed as needed | Shared Harness plugin manager; Creator mode builds plugins |
 | Distinctive management | Plugins, Skills and sources, MCP: `dsh-tauri-extension` | Profile settings and plugin CLI | `.dshpreset` import/export, model providers, PPT | Plugin management, execution traces, and developer tools |
 | Worktree / scheduling | Session Git Worktrees; scheduled runs and history | Not confirmed | Not confirmed | Worktrees not confirmed; scheduling requires enabling a plugin, off by default |
 | Plugin failure recovery | Identifies implicated plugins and guides removal; release-age rejections offer an authorization retry | Recovery assistant | Diagnostics; non-destructive Safe Mode | Native recovery dialog; disable third-party plugins, back up Profile patch, and restart |
