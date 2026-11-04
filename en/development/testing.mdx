@@ -1,6 +1,6 @@
 ---
 title: Testing and quality checks
-description: Run frontend, Rust, and cross-platform checks before submitting a change.
+description: Run frontend, Rust, mobile, and cross-platform checks before submitting a change.
 ---
 
 Run the fastest relevant checks while developing. Before a pull request, add real-process and platform tests for the behavior you changed.
@@ -19,35 +19,35 @@ node node_modules/vitest/vitest.mjs run --project unit
 | Script | Scope | Additional preparation |
 | --- | --- | --- |
 | `test:unit` | Vitest unit and component tests | Shared-package and plugin build outputs |
-| `test:e2e:plugin` | L2: real Harness and Chromium | Plugin outputs, Chromium, isolated Harness runtime |
-| `test:e2e:desktop` | L3: real Tauri window and WebDriver | Debug binary with embedded frontend; current CI runs on Windows |
+| `test:e2e:desktop` | Real desktop windows driven over CDP | Debug binary with embedded frontend; CI runs it on Ubuntu, macOS, and Windows |
+| `test:native` | Separate Vitest project for the mobile app | Dependencies under `apps/native/` |
 
 Use explicit `run` commands as required by the repository's test protocol:
 
 ```bash
-node node_modules/vitest/vitest.mjs run --project plugin
+node node_modules/vitest/vitest.mjs run --project unit
 node node_modules/vitest/vitest.mjs run --project desktop
 ```
 
-`pnpm test` selects all three projects, not just unit tests. Use isolated test directories and let tests manage their services; never reuse a release service.
+`pnpm test` selects every Vitest project, not just unit tests. Use isolated test directories and let tests manage their services; never reuse a release service. Mobile tests use their own configuration and stay outside the root `unit` and `desktop` projects.
 
 ## Rust checks
 
-From `src-tauri/`:
+From `apps/desktop/src-tauri/`:
 
 ```bash
 cargo check --locked
 cargo test --all-features --locked
 ```
 
-The Rust CI matrix covers Ubuntu 22.04, macOS 14, and Windows with the prerequisites in [Development setup](./setup).
+The Rust CI matrix covers Ubuntu 22.04 (x64 and arm64), macOS 26 (Apple Silicon and Intel), and Windows, with Rust pinned to `1.98.1` and the prerequisites in [Development setup](./setup).
 
 ## Manual scenarios
 
 - Installation and recovery: first download, interruption, retry, local-core reuse, and failed updates.
 - Service lifecycle: health, port fallback and return, restart, shutdown, logs, and release/debug isolation.
-- Profiles and plugins: profile switching, preset or community plugin changes, and built-in bridge recovery.
-- Platform packaging: Windows installers, macOS signing/notarization verification, Linux `.deb`, AppImage, and a Wayland smoke test.
+- Profiles and plugins: profile switching, preset or community plugin changes, built-in bridge recovery, and authorization retries when pnpm release-age policy blocks an upgrade.
+- Platform packaging: Windows installers, macOS signing/notarization verification, Linux `.deb`, AppImage, and an XWayland smoke test.
 
 {/* <!-- [CI checks and cross-platform test matrix](/images/testing.webp) --> */}
 
@@ -57,5 +57,3 @@ The Rust CI matrix covers Ubuntu 22.04, macOS 14, and Windows with the prerequis
 - Confirm no secrets, local paths, or generated application data are committed.
 - Test both release-sensitive and debug-sensitive path or port changes.
 - Document user-visible changes in both documentation languages.
-
-

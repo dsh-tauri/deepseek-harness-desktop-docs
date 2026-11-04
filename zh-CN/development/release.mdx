@@ -3,7 +3,7 @@ title: 构建与发布
 description: 构建平台安装包并理解自动化发布流水线。
 ---
 
-Tauri 将 React 前端、Rust 后端和内置资源打包为原生安装程序；GitHub Actions 执行发布流程。
+Tauri 把 React 前端、Rust 后端、内置插件与 Electron 运行时打包为原生安装程序；GitHub Actions 执行发布流程。
 
 ## 本地构建
 
@@ -18,34 +18,35 @@ node node_modules/vitest/vitest.mjs run --project unit
 pnpm tauri build
 ```
 
-`pnpm tauri build` 通过 `pnpm build` 先构建插件与前端，再编译并打包 Rust 应用。按[测试与质量检查](./testing)补齐 E2E 与 Rust 检查；平台包需要兼容系统及对应签名工具。
+`pnpm tauri build` 先通过 `pnpm build:plugins` 与 `pnpm build` 生成插件和前端，再编译并打包 Rust 应用与 Electron 运行时。按[测试与质量检查](./testing)补齐 E2E 与 Rust 检查；平台包需要兼容系统及对应签名工具。
 
 ## 当前发布产物
 
-当前桌面源码为 `0.20.0-beta.1`。[`v0.20.0-beta.1` 预发布](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.20.0-beta.1)实际提供以下安装包：
+当前桌面源码为 `0.30.3`。[`v0.30.3`](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.30.3) 实际提供以下安装包：
 
 | 平台 | 发布资产 |
 | --- | --- |
-| Windows x64 | `.exe`，以及英文、简体中文两份 `.msi` |
+| Windows x64 | `.exe`，以及英文 `.msi` |
 | macOS Apple Silicon | `aarch64.dmg` |
 | macOS Intel | `x64.dmg` |
-| Linux x64 | `.AppImage`、`.deb` |
+| Linux x64 | `amd64.AppImage`、`amd64.deb` |
+| Linux ARM64 | `aarch64.AppImage`、`arm64.deb` |
+| Android | `.apk`，桌面端发布后追加 |
+| iOS | 未签名 `.ipa`，桌面端发布后追加；另有 TestFlight 渠道 |
 
-稳定版另见 [`v0.19.1`](https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.19.1)。不要把预发布标为稳定版，或从源码与 CI 目标推断未发布的架构。
+离线 **Bundle** 由单独的[捆绑版工作流](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/.github/workflows/release-bundle.yml)在正式发布成功后追加构建，当前最新正式版没有 Bundle 资产。不要把预发布标为稳定版，或从源码与 CI 目标推断未发布的架构。
 
 {/* <!-- [GitHub Actions 发布流水线](/images/release-pipeline.webp) --> */}
 
 ## 发布流程
 
-[发布工作流](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/.github/workflows/release.yml)由 `v*` tag、合并本仓库的 `release/*` PR 或手动触发；手动运行生成测试预发布。
+[发布工作流](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/.github/workflows/release.yml)由 `v*` tag、合并本仓库的 `release/*` PR 或手动触发；手动运行生成 `test-*` 预发布。
 
 1. 对齐 package、Cargo 与 Tauri 版本、发布说明和双语文档。
-2. 完成前端类型检查、lint、三层测试与跨平台 Rust 检查。
-3. 并行构建 Windows、两种 macOS 架构及 Linux x64 产物；验证签名、公证与安装行为。
+2. 完成前端类型检查、lint、Vitest 与跨平台 Rust 检查。
+3. 并行构建 Windows、两种 macOS 架构及两种 Linux 架构产物；验证签名、公证与安装行为。
 4. 单一发布任务汇总成功产物；预发布标记为 prerelease，稳定版才更新 latest。
 
+夜间版工作流每天构建 `main`，以 `0.0.0-nightly.<日期>.<sha>` 写入两个预发布 Release，并保留最近 10 天。
+
 <Warning>不得在日志、文档、Pull Request 或 fixture 中暴露签名证书、公证凭据或更新密钥。</Warning>
-
-当前公开版本只提供 Linux x64 产物；构建并验证对应产物前，不要声明支持 Linux ARM。
-
-

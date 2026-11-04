@@ -19,10 +19,10 @@ The version selector above lists **Bundle** downloads separately for each releas
 
 | Platform | Bundle installer |
 | --- | --- |
-| Windows x64 | `Deepseek.Harness.Desktop_Bundle_0.19.1.exe` |
-| macOS Apple Silicon | `Deepseek.Harness.Desktop_Bundle_0.19.1_aarch64.dmg` |
-| macOS Intel | `Deepseek.Harness.Desktop_Bundle_0.19.1_x64.dmg` |
-| Linux x64 (Debian / Ubuntu) | `Deepseek.Harness.Desktop_Bundle_0.19.1.deb` |
+| Windows x64 | `Deepseek.Harness.Desktop_Bundle_<version>.exe` |
+| macOS Apple Silicon | `Deepseek.Harness.Desktop_Bundle_<version>_aarch64.dmg` |
+| macOS Intel | `Deepseek.Harness.Desktop_Bundle_<version>_x64.dmg` |
+| Linux x64 (Debian / Ubuntu) | `Deepseek.Harness.Desktop_Bundle_<version>.deb` |
 
 Bundles include runtimes, Harness, and built-in plugins to reduce first-launch downloads. Model access and later updates may still need a network connection. Releases without Bundles do not show this download list.
 
@@ -32,16 +32,23 @@ These are the actual release assets and system requirements:
 
 | Platform | Requirements and architecture | Installer |
 | --- | --- | --- |
-| Windows | Windows 10+, WebView2; x64 | `.exe` / `_x64_en-US.msi` / `_x64_zh-CN.msi` |
-| macOS | macOS 12+; the Web interface needs Safari 17.4+ capabilities; Apple Silicon / Intel | `_aarch64.dmg` / `_x64.dmg` |
-| Linux | x64; WebKit2GTK 4.1 runtime | `.deb` / `.AppImage` |
+| Windows | Windows 10+; x64 | `.exe` / `_x64_en-US.msi` |
+| macOS | macOS 12+; Apple Silicon / Intel | `_aarch64.dmg` / `_x64.dmg` |
+| Linux | x64 / ARM64; glibc up to 2.35 (built on Ubuntu 22.04) | `.deb` / `.AppImage` |
 
-Available architectures and installer types depend on the selected release's actual assets. Git features such as worktrees also require Git installed on your system.
+The interface renders in the Chromium runtime bundled with the installer, so it does not depend on the system WebView. Available architectures and installer types depend on the selected release's actual assets. Git features such as worktrees also require Git installed on your system.
 
 On macOS, you can also use Homebrew:
 
 ```bash
 brew install dsh-tauri/desktop/deepseek-harness
+```
+
+On Fedora 43+ (x64 / ARM64), install from the Copr repository. Updates then follow `dnf upgrade`, and in-app updates are turned off; switch to `dsh-tauri-beta` for pre-releases (mutually exclusive with `dsh-tauri`):
+
+```bash
+sudo dnf copr enable fairyband/dsh-tauri
+sudo dnf install dsh-tauri
 ```
 
 ## Install and launch
@@ -55,17 +62,13 @@ Model requests, plugin installation, and updates may still need network access.
 ## Platform issues
 
 <AccordionGroup>
-  <Accordion title="Windows security prompt or missing WebView2">
-    Confirm the installer came from the official Release. If WebView2 is missing, install Microsoft's WebView2 Runtime and retry.
+  <Accordion title="Windows security prompt">
+    Confirm the installer came from the official Release, then allow it to run. The installer already bundles a Chromium runtime, so WebView2 is not required.
   </Accordion>
   <Accordion title="macOS blocks first launch">
-    Verify the download source, then allow the app in **System Settings → Privacy & Security**. Even when macOS meets the minimum version, check WebView compatibility too.
+    Verify the download source, then allow the app in **System Settings → Privacy & Security**.
   </Accordion>
-  <Accordion title="Black window on Linux Wayland">
-    Try `.deb` first. If AppImage still shows a black window, try:
-    ```bash
-    WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 GDK_BACKEND=x11 ./Deepseek*.AppImage
-    ```
-    See [Troubleshooting](./help/troubleshooting) for more startup, permission, and display issues.
+  <Accordion title="Window display issues on Linux">
+    Prefer `.deb` and confirm the desktop compositor is available. If the window or pet overlay renders incorrectly, enable the XWayland option in pet settings and restart the app. See [Troubleshooting](./help/troubleshooting).
   </Accordion>
 </AccordionGroup>

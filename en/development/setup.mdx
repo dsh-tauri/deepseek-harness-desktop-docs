@@ -3,26 +3,26 @@ title: Development setup
 description: Prepare a local environment and run DeepSeek Harness Desktop from source.
 ---
 
-Development requires both the JavaScript frontend toolchain and the Rust/Tauri platform
-toolchain. The released app does not require these tools.
+Development requires the JavaScript toolchain, the Rust toolchain, and the native build
+dependencies for your platform. The released app does not require these tools.
 
 ## Prerequisites
 
-- Node.js 22; use `22.22.0` to match the managed environment.
-- Rust `1.93+` with Cargo, required by the [patched notification dependency](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/vendor/tauri-plugin-notifications/Cargo.toml).
+- Node.js 22 (CI uses `22.22.0` to match the managed environment).
+- Rust `1.98.1` with Cargo: CI pins this version, and other versions may fail after dependency upgrades.
 - Corepack and the desktop repository's pinned pnpm `11.7.0`, not the separate documentation repository's version.
-- Git and platform-specific Tauri dependencies.
+- Git, plus network access for the `crates/` and `source/` submodules on first checkout.
 
 <Tabs>
   <Tab title="Windows">
-    Install Microsoft C++ Build Tools with the MSVC workload and WebView2.
+    Install Microsoft C++ Build Tools with the MSVC workload. The interface renders in bundled Chromium, so no WebView2 development dependency is needed.
   </Tab>
   <Tab title="macOS">Install and select Xcode `16+` with Swift `6`. The notification backend uses Swift 6 typed throws; older Command Line Tools alone are insufficient.</Tab>
   <Tab title="Ubuntu / Debian">
-    WebKitGTK `4.1` and Tauri native build packages are required:
+    GTK, appindicator, and packaging tools are required:
     ```bash
     sudo apt update
-    sudo apt install libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+    sudo apt install libappindicator3-dev librsvg2-dev patchelf gstreamer1.0-plugins-good gstreamer1.0-plugins-bad
     ```
   </Tab>
 </Tabs>
@@ -32,7 +32,7 @@ toolchain. The released app does not require these tools.
 <Steps>
   <Step title="Clone the repository">
     ```bash
-    git clone https://github.com/dsh-tauri/deepseek-harness-desktop.git
+    git clone --recurse-submodules https://github.com/dsh-tauri/deepseek-harness-desktop.git
     cd deepseek-harness-desktop
     ```
   </Step>
@@ -48,7 +48,7 @@ toolchain. The released app does not require these tools.
     pnpm build:plugins
     ```
   </Step>
-  <Step title="Start Tauri development">
+  <Step title="Start development mode">
     ```bash
     pnpm tauri dev
     ```
@@ -60,8 +60,7 @@ toolchain. The released app does not require these tools.
 - Vite development server: `http://localhost:1420`.
 - Debug Harness: `127.0.0.1:3081` by default, with port fallback.
 - Managed dependencies: `<AppData>/dev`; data: `~/.dsh.dev`, ignoring inherited `DSH_HOME`.
+- The mobile app lives in `apps/native/`; start the Expo dev client with `pnpm dev:native`.
 - See [Runtime and data](../architecture/runtime-and-data) for the complete paths.
 
 <Note>`pnpm dev` starts only Vite; use `pnpm tauri dev` for native features. When editing `packages/`, run `pnpm dev:plugins` in another terminal, or use `pnpm dev:desktop` to start both the plugin watcher and desktop development mode.</Note>
-
-

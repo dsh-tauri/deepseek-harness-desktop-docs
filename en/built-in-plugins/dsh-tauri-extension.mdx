@@ -3,7 +3,7 @@ title: Extensions
 description: Manage Skills, skill sources, and MCP servers.
 ---
 
-Open **Extensions** in the sidebar. `dsh-tauri-extension` provides Skills and MCP tabs.
+Open **Extensions** in the sidebar. `dsh-tauri-extension` provides **Plugins**, **Skills**, and **MCP** tabs; the **Plugins** tab is only an entry point to the Harness built-in plugin manager, and the marketplace comes from the `dshmarket` preset.
 
 <Tabs>
   <Tab title="Skills">
@@ -34,8 +34,8 @@ Open **Extensions** in the sidebar. `dsh-tauri-extension` provides Skills and MC
 ## Data and boundaries
 
 - Custom skills and source records live under `$DSH_HOME/skills/`; MCP configuration belongs to the current profile.
-- Host routes use `/api/desktop/dsh-tauri-extension`.
-- This plugin has no marketplace; see [plugin management](../guides/plugins) for community plugins.
+- Host routes use `/api/tauri/extension`.
+- The plugin itself has no marketplace; see [plugin management](../guides/plugins) for community plugins and the marketplace.
 - Skills and MCP can trigger local code execution. Verify sources and permissions before importing.
 
-[Source and third-party notices](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-extension)
+[Source and third-party notices](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-extension)

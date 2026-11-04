@@ -27,9 +27,11 @@ Register panels with `definePanel(ctx, entry)`. A `PanelEntry` contains `id`, `l
 
 The current [`dsh-tauri-extension`](./dsh-tauri-extension) and [`dsh-tauri-scheduler`](./dsh-tauri-scheduler) use this entry point. The retired `dsh-tauri-panel` package's `panel.protocol` and `sidebar.panel.action` have no compatibility path.
 
+Windows are hosted by `tauri-runtime-electron` inside Electron; host commands, CSP, and ACL stay in Rust, and the embedded client reaches allowlisted commands through parent-window messages.
+
 ## Compatibility and security boundaries
 
-- The desktop currently recommends Harness **0.2.0-rc.2** and accepts **0.1.5-rc.1** as its minimum. Acceptance does not guarantee every API; adapters probe actual services and capabilities.
+- The desktop currently recommends Harness **0.2.1-rc.5** and accepts **0.2.1-rc.1** as its minimum. Acceptance does not guarantee every API; adapters probe actual services and capabilities.
 - Embedded-carrier authentication applies only when the desktop injects `DSH_TAURI_EMBEDDED=1`. Independently launched `dsh web` retains browser-session authentication.
 - Tauri calls pass through parent-window messages. The desktop shell verifies the iframe source and origin and executes only allowlisted commands. Without the host bridge, calls fail rather than gaining other native permissions.
 - The client bridge runs only in an embedded environment. If it is missing or fails to initialize, dependent desktop navigation and native calls have no general fallback.
@@ -38,4 +40,4 @@ The current [`dsh-tauri-extension`](./dsh-tauri-extension) and [`dsh-tauri-sched
   Message validation is not an execution sandbox. Harness and plugins can execute local code; profiles are not operating-system sandboxes.
 </Warning>
 
-[View source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri)
+[View source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-tauri)

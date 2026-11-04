@@ -26,8 +26,8 @@ By default, reminders are suppressed when the window is foregrounded and you are
 
 ## Data and boundaries
 
-- Settings and custom sound data use the current WebView's `dsh-tauri-notification` local storage namespace, not a separate backup file.
+- Settings and custom sound data use the current Chromium window's `dsh-tauri-notification` local storage namespace, not a separate backup file.
 - Clicks and actions depend on the desktop bridge, host service, and session APIs. OS notification policies may still suppress delivery.
 - Notifications may show response summaries, commands, or questions. Consider sensitive content on shared screens and lock screens.
 
-[Settings guide](../guides/settings) · [Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-notification)
+[Settings guide](../guides/settings) · [Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-notification)

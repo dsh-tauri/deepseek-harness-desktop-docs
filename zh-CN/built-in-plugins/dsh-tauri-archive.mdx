@@ -28,10 +28,10 @@ description: 搜索、恢复或删除已归档聊天。
 ## 数据与边界
 
 - 归档状态由宿主 `WorkspaceRegistry` 管理，不维护独立归档账本。
-- 宿主路由前缀为 `/api/desktop/dsh-tauri-archive/session`。
+- 宿主路由前缀为 `/api/tauri/archive/session`。
 
 <Warning>
   彻底删除会移除归档记录与会话持久化目录，不能通过取消归档恢复。删除前备份需要保留的聊天。
 </Warning>
 
-[源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-archive)
+[源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-archive)

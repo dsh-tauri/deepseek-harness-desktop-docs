@@ -32,7 +32,7 @@ description: 管理 Chat 与 Codex 桌宠、预设资源和会话活动状态。
 
 | 来源 | 如何载入 | 位置或定义 |
 | --- | --- | --- |
-| 预设 | 直接使用远端配置与媒体，不经过下载、解压或本地安装步骤。 | `src-tauri/resources/manifest.jsonc` 的 `pets.built-in`；条目提供 `config`、`uri`、`ext`、`kind` 和 `size`。 |
+| 预设 | 直接使用远端配置与媒体，不经过下载、解压或本地安装步骤。 | `apps/desktop/src-tauri/resources/manifest.jsonc` 的 `pets.built-in`；条目提供 `config`、`uri`、`ext`、`kind` 和 `size`。 |
 | Chat | 查询时读取本地宠物目录，不是固定的预设名单。 | 当前 DSH 数据目录的 `pets` 子目录，默认 `~/.dsh/pets`。 |
 | Codex | 查询本地目录，或从 Codex 标签页导入 `.zip`。 | `$HOME/.codex/pets`。 |
 
@@ -58,4 +58,4 @@ description: 管理 Chat 与 Codex 桌宠、预设资源和会话活动状态。
 
 状态与选择使用 `get_pet_status`、`set_pet_enabled`、`set_active_pet` 和 `set_pet_size`；资源使用 `list_pets`、`list_preset_pets`、`get_pet_asset` 和 `import_pet`。原生命令经桌面白名单桥执行，不提供普通浏览器的原生窗口保证。
 
-[查看源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-pet)
+[查看源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-pet)

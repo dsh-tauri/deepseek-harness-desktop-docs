@@ -1,38 +1,49 @@
 ---
 title: 项目结构
-description: 浏览前端、Rust 后端、服务、任务、测试与发布自动化。
+description: 浏览桌面工程、原生后端、第一方插件、服务、测试与发布自动化。
 ---
 
-仓库把 React 前端和 Rust 后端放在同一个 Tauri 应用中，并按职责拆分平台服务。
+仓库是 pnpm workspace：`apps/` 放桌面与移动端应用，`packages/` 放第一方插件，`crates/` 以子模块引入 Electron 运行时等原生依赖。
 
 ```text
 deepseek-harness-desktop/
-├── src/                    # React 前端
-├── packages/               # 第一方插件与共享包
-├── src-tauri/
-│   ├── src/
-│   │   ├── bridge/         # Tauri command 边界
-│   │   ├── config/         # 路径、常量与设置
-│   │   ├── desktop/        # 原生窗口与 WebView
-│   │   ├── service/        # 运行时与桌面服务
-│   │   └── task/           # 定期任务入口
-│   ├── resources/          # 运行时清单与内置插件产物
-│   ├── vendor/             # 修补后的原生依赖
-│   └── tauri.conf.json
+├── apps/
+│   ├── desktop/            # 桌面应用
+│   │   ├── src/            # React 前端（Vite + Tailwind CSS 4）
+│   │   └── src-tauri/
+│   │       ├── src/
+│   │       │   ├── bridge/     # Tauri command 边界
+│   │       │   ├── config/     # 路径、常量与设置
+│   │       │   ├── desktop/    # 窗口、菜单与系统集成
+│   │       │   ├── service/    # 运行时与桌面服务
+│   │       │   └── task/       # 定期任务入口
+│   │       ├── resources/      # 运行时清单与内置插件产物
+│   │       ├── vendor/         # 修补后的原生依赖
+│   │       └── tauri.conf.json
+│   └── native/             # Expo / React Native 移动端
+├── packages/
+│   ├── builtin-plugin-*/   # 第一方插件源码，构建产物进入桌面资源
+│   └── builtin-plugin-config/  # 共享配置与类型
+├── crates/                 # 子模块：electron-rs、tauri-runtime-electron、通知插件
 ├── scripts/                # 插件构建、维护与发布脚本
-├── test/                   # 单元测试、插件与桌面 E2E
+├── config/                 # Vitest 工程配置
+├── tests/                  # 单元测试与桌面 E2E
 ├── docs/                   # 仓库内工程说明
 └── .github/workflows/      # CI 与发布流水线
 ```
 
 ## 前端
 
-`src/` 包含组件、配置、hooks、国际化、布局、store、样式和工具，负责安装与加载状态、桌面设置以及嵌入客户端周边 UI。
+`apps/desktop/src/` 包含组件、配置、hooks、国际化、布局、store、样式和工具，负责安装与加载状态、桌面设置以及嵌入客户端周边 UI。
 
-## Rust 后端
+## 原生后端
 
-`src-tauri/src/service/` 按下载、内核、Profile、插件、CLI、更新、工作流和调度等能力组织。
-`bridge/` 暴露选定能力为 Tauri command，UI 代码不应绕过该边界。
+`apps/desktop/src-tauri/src/service/` 按下载、内核、Profile、插件、CLI、更新、工作流和调度等能力组织。
+`bridge/` 暴露选定能力为 Tauri command，UI 代码不应绕过该边界。窗口与事件循环由 `crates/tauri-runtime-electron` 在 Electron 中运行，Rust 仍持有命令、CSP 与 ACL。
+
+## 第一方插件
+
+`packages/builtin-plugin-*` 各自是独立包，构建期通过 `pnpm build:plugins` 打包进 `apps/desktop/src-tauri/resources/node_modules`。清单 `resources/manifest.jsonc` 的 `plugins.built-in` 决定随包分发的 ID，插件源码本身不再单独托管在另一个仓库。
 
 {/* <!-- [源码树与主要模块归属](/images/project-structure.webp) --> */}
 
@@ -40,16 +51,15 @@ deepseek-harness-desktop/
 
 | 修改内容 | 从这里开始 |
 | --- | --- |
-| React 视图或状态 | `src/` |
-| 第一方插件 | `packages/` |
-| 原生命令契约 | `src-tauri/src/bridge/` |
-| 路径或持久化设置 | `src-tauri/src/config/` |
-| 窗口或 WebView | `src-tauri/src/desktop/` |
-| 内核、Profile、插件、CLI 或更新 | `src-tauri/src/service/` |
-| 启动、重启与进程编排 | `src-tauri/src/service/workflow/` |
-| 定期状态检测 | `src-tauri/src/task/` |
-| CI 或打包 | `.github/workflows/`、[Tauri 配置](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/tauri.conf.json) |
+| React 视图或状态 | `apps/desktop/src/` |
+| 第一方插件 | `packages/builtin-plugin-*/` |
+| 原生命令契约 | `apps/desktop/src-tauri/src/bridge/` |
+| 路径或持久化设置 | `apps/desktop/src-tauri/src/config/` |
+| 窗口、菜单或系统集成 | `apps/desktop/src-tauri/src/desktop/` |
+| 内核、Profile、插件、CLI 或更新 | `apps/desktop/src-tauri/src/service/` |
+| 启动、重启与进程编排 | `apps/desktop/src-tauri/src/service/workflow/` |
+| 定期状态检测 | `apps/desktop/src-tauri/src/task/` |
+| 移动端 | `apps/native/` |
+| CI 或打包 | `.github/workflows/`、[Tauri 配置](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/apps/desktop/src-tauri/tauri.conf.json) |
 
 把平台差异封装在职责明确的 Rust service 中；新增路径、端口或 store 时保持正式版与 Debug 隔离。
-
-

@@ -28,10 +28,10 @@ description: Find, restore, or delete archived chats.
 ## Data and boundaries
 
 - The host `WorkspaceRegistry` owns archive state; the plugin keeps no separate archive ledger.
-- Host routes use `/api/desktop/dsh-tauri-archive/session`.
+- Host routes use `/api/tauri/archive/session`.
 
 <Warning>
   Permanent deletion removes archive records and persisted session directories. Unarchiving cannot recover them. Back up chats you need before deleting.
 </Warning>
 
-[Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-archive)
+[Source](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-archive)

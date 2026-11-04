@@ -4,8 +4,8 @@ description: Run DeepSeek Harness locally in a lightweight, zero-setup desktop a
 ---
 
 DeepSeek Harness Desktop packages the local runtime, Harness core, plugin management,
-and updates behind a native Tauri shell. Install it and start working—without setting
-up Node.js, pnpm, or Docker yourself.
+and updates behind a native Tauri shell whose window and interface render in the bundled
+Chromium runtime. Install it and start working—without setting up Node.js, pnpm, or Docker yourself.
 
 <Frame>
   <img src="/images/home-overview.png" alt="DeepSeek Harness Desktop overview" />
@@ -19,17 +19,17 @@ up Node.js, pnpm, or Docker yourself.
     Let the app prepare its local runtime and open Harness.
   </Card>
   <Card title="Understand the architecture" icon="diagram-project" href="./architecture/overview">
-    Learn how the Tauri shell, Harness service, and plugins fit together.
+    Learn how the desktop shell, Harness service, and plugins fit together.
   </Card>
 </CardGroup>
 
 ## What the desktop app adds
 
-- A native, lightweight Tauri 2 shell around the local Harness web interface.
+- A native Tauri 2 + Electron runtime shell; the interface does not depend on the system WebView.
 - Guided runtime and Harness core installation with regional download fallbacks.
 - Profile, core, and plugin controls in one bilingual interface.
-- A registered `dsh` command for new terminal sessions.
-- Built-in first-party desktop integrations and optional preset plugins.
+- Registered `dsh` / `pnpm` commands for new terminal sessions.
+- 12 first-party desktop plugins, a shared styling package, and optional community presets.
 - Desktop and Harness core updates without rebuilding your environment.
 
 <Warning>

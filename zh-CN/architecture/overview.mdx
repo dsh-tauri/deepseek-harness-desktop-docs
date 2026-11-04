@@ -3,7 +3,7 @@ title: 架构概览
 description: 理解 Tauri 桌面壳、本地 Harness 服务与嵌入式 Web UI 如何协作。
 ---
 
-DeepSeek Harness Desktop 是 Tauri 2 应用，负责管理本地 Harness 服务，并在原生窗口中显示其 Web 界面。
+DeepSeek Harness Desktop 是 Tauri 2 应用：Rust 负责窗口、命令与系统集成，窗口和界面由安装包内置的 Electron / Chromium 运行时渲染。桌面端管理本地 Harness 服务，并在原生窗口中显示其 Web 界面。
 
 {/* <!-- [桌面端架构与进程边界](/images/architecture-overview.webp) --> */}
 
@@ -13,7 +13,7 @@ DeepSeek Harness Desktop 是 Tauri 2 应用，负责管理本地 Harness 服务�
 
 ```text
 +---------------------------+      +---------------------------+
-| Tauri window / WebView    |      | Native backend            |
+| Window / Chromium WebView  |      | Native backend            |
 | Desktop UI (React)        |<---->| Rust / Tauri 2            |
 | Settings, profiles, etc.  | IPC  | Runtime & service manager |
 |                           |      +-------------+-------------+
@@ -43,6 +43,7 @@ DeepSeek Harness Desktop 是 Tauri 2 应用，负责管理本地 Harness 服务�
 | 层 | 技术 | 职责 |
 | --- | --- | --- |
 | 桌面 UI | React 19、TypeScript、Vite、Tailwind CSS 4 | 设置、Profile、插件、更新与窗口状态 |
+| 窗口运行时 | Electron（Chromium）与 `tauri-runtime-electron` | 承载桌面窗口与 WebView，由 Rust 侧驱动事件循环、命令与 ACL |
 | 原生后端 | Rust 与 Tauri 2 | 运行时发现、下载、服务生命周期、文件、CLI 与系统 API |
 | Harness 服务 | 托管或兼容的本地 `dsh` 内核 | 会话、工具、Profile、插件与本地 Web 应用 |
 | 嵌入客户端 | 回环 URL 上的 Harness Web UI | 桌面窗口内的主要会话体验 |
@@ -54,12 +55,13 @@ DeepSeek Harness Desktop 是 Tauri 2 应用，负责管理本地 Harness 服务�
   <Step title="准备依赖">复用兼容的本地工具或准备托管 Node.js、pnpm 与内核；首次启动需要联网下载缺少的依赖。</Step>
   <Step title="确保插件">启动服务前检查并恢复活动 Profile 的内置插件。</Step>
   <Step title="启动并探测 Harness">选定 Node 启动 Harness 入口，传入 `--profile <id> --port <port> --no-open`，然后等待健康检查。</Step>
-  <Step title="加载客户端">原生窗口从设置或加载状态切换到本地 Harness UI；默认端口为正式版 `3080`、Debug `3081`，占用时可避让。</Step>
+  <Step title="加载客户端">窗口从设置或加载状态切换到本地 Harness UI；默认端口为正式版 `3080`、Debug `3081`，占用时可避让。</Step>
 </Steps>
 
 ## 信任边界
 
 Web 客户端、Rust 后端、Harness 进程、插件、模型供应商和工作区是不同组件，但并非独立安全沙箱。
 Tauri command 缩小原生能力范围；Harness 工具和插件仍可使用用户权限执行本地代码，Profile 不是操作系统沙箱。
+Chromium 的进程沙箱只隔离渲染进程，不限制插件与 Harness 进程持有的用户权限。
 
 继续阅读[运行时与数据](./runtime-and-data)或[插件系统](./plugin-system)。

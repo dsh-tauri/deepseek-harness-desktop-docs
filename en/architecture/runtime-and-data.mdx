@@ -10,14 +10,15 @@ This allows core updates and development builds without mixing profile state.
 
 | Item | Current value |
 | --- | --- |
-| Desktop version | `0.20.0-beta.1` (prerelease) |
-| Harness core | Recommended `0.2.0-rc.2`; the current manifest and local CLI validation minimum is `0.1.5-rc.1` |
+| Desktop version | `0.30.3` (stable) |
+| Harness core | Recommended `0.2.1-rc.5`; the manifest and local CLI validation minimum is `0.2.1-rc.1` |
 | Managed environment | Node.js `v22.22.0`, pnpm `11.7.0` |
+| Interface runtime | Chromium (Electron) bundled with the installer; no system WebView |
 
-- The minimum core version does not guarantee compatibility with every plugin.
+- The minimum core version does not guarantee compatibility with every plugin; a locally installed core below that minimum is not activated.
 - Compatible local tools are reused; missing tools or incompatible native-module ABIs can trigger managed fallback.
-- The managed core comes from [deepseek-harness-pkg](https://github.com/dsh-tauri/deepseek-harness-pkg), using official GitHub assets first and a mirror on failure.
-- The [runtime manifest](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/resources/manifest.jsonc) defines the versions.
+- The managed core comes from [deepseek-harness-pkg](https://github.com/dsh-tauri-desk/deepseek-harness-pkg), using official GitHub assets first and mirrors in order on failure.
+- The [runtime manifest](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/apps/desktop/src-tauri/resources/manifest.jsonc) defines the versions.
 
 ## Release and debug isolation
 
@@ -26,13 +27,14 @@ This allows core updates and development builds without mixing profile state.
 | Concern | Release | Debug |
 | --- | --- | --- |
 | Default port | `3080` | `3081` |
+| Default profile | `desktop` | `desktop` (separate data root) |
 | Harness data root | Non-empty `DSH_HOME`, otherwise `~/.dsh` | Forced to `~/.dsh.dev`; inherited `DSH_HOME` is ignored |
 | Managed Node | `<AppData>/runtime/` | `<AppData>/dev/runtime/` |
 | Default managed core | `<AppData>/dependencies/dsh/` | `<AppData>/dev/dependencies/dsh/` |
 | Managed dependencies | `<AppData>/dependencies/` | `<AppData>/dev/dependencies/` |
 | Settings store | `.store.dat` | `.store.dev.dat` |
 | Service log | `<AppData>/logs/dsh-web.log` | `<AppData>/dev/logs/dsh-web.dev.log` |
-| CLI PATH changes | Enabled by default; can be disabled in settings | Does not modify user PATH or overwrite the release `dsh` shim |
+| CLI PATH changes | Enabled by default; can be disabled in settings | Writes no release `dsh` shim and registers no user PATH |
 
 {/* <!-- [Runtime and data directory boundaries](/images/runtime-data.webp) --> */}
 
@@ -44,6 +46,6 @@ future launch can return to the preferred port after it becomes available.
 
 ## CLI integration
 
-Release builds enable the `dsh` / `pnpm` shims by default; disable them in settings if needed. Windows registers a user-level PATH entry. Unix maintains its own marked blocks in `~/.zshrc` and `~/.bashrc`, preserving other configuration. Open a new terminal afterward.
+Release builds enable the `dsh` / `pnpm` shims by default; disable them in settings if needed. Windows writes the shims to `%LOCALAPPDATA%\deepseek-harness\bin` and registers a user-level PATH entry. Unix writes them to `~/.local/bin` and maintains its own marked blocks in `~/.zshrc` and `~/.bashrc`, preserving other configuration. Open a new terminal afterward.
 
 <Warning>Harness and plugins can execute local code with your permissions. Profile and debug directory separation is not an operating-system sandbox.</Warning>

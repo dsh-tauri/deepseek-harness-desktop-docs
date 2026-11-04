@@ -15,7 +15,8 @@ Open **Running** in the desktop title bar. Model providers, tools, and agent beh
 | --- | --- |
 | Service address and connection status | View the actual address; local access by default, with preferred port `3080` |
 | Port | Restart Harness when prompted after saving; another available port may be used if it is busy |
-| Memory limit | Use automatic management or set Harness's Node.js heap limit; restart the service after changes |
+| Memory limit | Use automatic management or set Harness's Node.js heap limit (`1024`–`32768` MB); restart the service after changes |
+| Proxy address | Set an HTTP / HTTPS / SOCKS5 / SOCKS5H proxy for dependency downloads, update checks, and plugin metadata; leave it empty to use the system proxy |
 | CLI integration | Release builds enable the managed `dsh` shim by default; open a new terminal after changes |
 | Launch on login and close behavior | Closing the window hides it to the tray by default; you can change this to quit |
 | Versions, data directory, and logs | View running components, open directories, or copy diagnostic information |
@@ -24,7 +25,7 @@ Open **Running** in the desktop title bar. Model providers, tools, and agent beh
 
 ## Profiles
 
-First installation uses the `tauri` profile; `web` is the built-in fallback profile. Profiles manage configuration, plugins, and patches, not operating system isolation.
+First installation uses the built-in `desktop` profile; `web` is Harness's own default profile. Profiles manage configuration, plugins, and patches, not operating system isolation.
 
 1. Create or clone a profile in **Profiles**, using a short ASCII name.
 2. Select it, confirm the switch, and restart the service when prompted.

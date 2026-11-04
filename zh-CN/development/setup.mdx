@@ -3,23 +3,23 @@ title: 开发环境
 description: 准备本地环境并从源码运行 DeepSeek Harness Desktop。
 ---
 
-开发需要 JavaScript 前端工具链和 Rust/Tauri 平台工具链；正式版用户不需要这些工具。
+开发需要 JavaScript 工具链、Rust 工具链与对应平台的原生构建依赖；正式版用户不需要这些工具。
 
 ## 前置条件
 
-- Node.js 22，建议 `22.22.0`，与托管环境一致。
-- Rust `1.93+` 与 Cargo：[修补后的通知依赖](https://github.com/dsh-tauri/deepseek-harness-desktop/blob/main/src-tauri/vendor/tauri-plugin-notifications/Cargo.toml)要求此版本。
+- Node.js 22（CI 使用 `22.22.0`，与托管环境一致）。
+- Rust `1.98.1` 与 Cargo：CI 固定该版本，其他版本可能因依赖升级失败。
 - Corepack 与桌面仓库固定的 pnpm `11.7.0`；不要套用独立文档仓库的 pnpm 版本。
-- Git 和对应平台的 Tauri 依赖。
+- Git，以及首次检出时拉取 `crates/` 与 `source/` 子模块所需的网络。
 
 <Tabs>
-  <Tab title="Windows">安装带 MSVC 工作负载的 Microsoft C++ Build Tools 和 WebView2。</Tab>
+  <Tab title="Windows">安装带 MSVC 工作负载的 Microsoft C++ Build Tools。界面由内置 Chromium 渲染，不需要 WebView2 开发依赖。</Tab>
   <Tab title="macOS">安装并选用 Xcode `16+`，确保 Swift `6` 可用；通知后端使用 Swift 6 typed throws，仅旧版 Command Line Tools 不够。</Tab>
   <Tab title="Ubuntu / Debian">
-    需要 WebKitGTK `4.1` 和 Tauri 原生构建依赖：
+    需要 GTK、appindicator 与打包工具：
     ```bash
     sudo apt update
-    sudo apt install libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+    sudo apt install libappindicator3-dev librsvg2-dev patchelf gstreamer1.0-plugins-good gstreamer1.0-plugins-bad
     ```
   </Tab>
 </Tabs>
@@ -29,7 +29,7 @@ description: 准备本地环境并从源码运行 DeepSeek Harness Desktop。
 <Steps>
   <Step title="克隆仓库">
     ```bash
-    git clone https://github.com/dsh-tauri/deepseek-harness-desktop.git
+    git clone --recurse-submodules https://github.com/dsh-tauri/deepseek-harness-desktop.git
     cd deepseek-harness-desktop
     ```
   </Step>
@@ -45,7 +45,7 @@ description: 准备本地环境并从源码运行 DeepSeek Harness Desktop。
     pnpm build:plugins
     ```
   </Step>
-  <Step title="启动 Tauri 开发模式">
+  <Step title="启动开发模式">
     ```bash
     pnpm tauri dev
     ```
@@ -57,8 +57,7 @@ description: 准备本地环境并从源码运行 DeepSeek Harness Desktop。
 - Vite 开发服务器：`http://localhost:1420`。
 - Debug Harness：默认 `127.0.0.1:3081`，端口占用时可避让。
 - 托管依赖：`<AppData>/dev`；数据：`~/.dsh.dev`，忽略继承的 `DSH_HOME`。
+- 移动端工程位于 `apps/native/`，用 `pnpm dev:native` 启动 Expo 开发客户端。
 - 完整路径见[运行时与数据](../architecture/runtime-and-data)。
 
 <Note>`pnpm dev` 只启动 Vite；原生功能使用 `pnpm tauri dev`。修改 `packages/` 时另开终端运行 `pnpm dev:plugins`，或使用 `pnpm dev:desktop` 同时启动插件 watcher 与桌面开发模式。</Note>
-
-

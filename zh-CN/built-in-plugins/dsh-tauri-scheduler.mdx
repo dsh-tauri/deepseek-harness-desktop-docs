@@ -43,10 +43,10 @@ Chat 工具：`scheduler_create`、`scheduler_list`、`scheduler_update`、`sche
 - 使用电脑本地时区；电脑须保持唤醒且宿主服务运行。
 - 最多同时运行 4 个任务；单次最长运行 30 分钟。
 - 任务与记录位于 `$DSH_HOME/crons/`，保留最近 200 条运行记录。
-- 宿主路由前缀为 `/api/desktop/dsh-tauri-scheduler`。
+- 宿主路由前缀为 `/api/tauri/scheduler`。
 
 <Warning>
   任务能够执行 Agent 指令与本地工具。保存前检查工作区和权限；休眠或服务停止期间不会执行。
 </Warning>
 
-[源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/dsh-tauri-scheduler)
+[源码](https://github.com/dsh-tauri/deepseek-harness-desktop/tree/main/packages/builtin-plugin-scheduler)
