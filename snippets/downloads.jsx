@@ -68,6 +68,26 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
           "size": "168 MB"
         },
         {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.31.2.deb",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.2/Deepseek.Harness.Desktop_Bundle_0.31.2.deb",
+          "size": "255 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.31.2.exe",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.2/Deepseek.Harness.Desktop_Bundle_0.31.2.exe",
+          "size": "212 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.31.2_aarch64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.2/Deepseek.Harness.Desktop_Bundle_0.31.2_aarch64.dmg",
+          "size": "268 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_Bundle_0.31.2_x64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.2/Deepseek.Harness.Desktop_Bundle_0.31.2_x64.dmg",
+          "size": "280 MB"
+        },
+        {
           "name": "Deepseek.Harness.iOS_0.31.2_unsigned.ipa",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.2/Deepseek.Harness.iOS_0.31.2_unsigned.ipa",
           "size": "13.3 MB"
