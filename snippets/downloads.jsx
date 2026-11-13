@@ -13,6 +13,11 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
       "prerelease": false,
       "assets": [
         {
+          "name": "Deepseek.Harness.Android_0.31.5.apk",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.5/Deepseek.Harness.Android_0.31.5.apk",
+          "size": "21.9 MB"
+        },
+        {
           "name": "Deepseek.Harness.Desktop_0.31.5_aarch64.AppImage",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.5/Deepseek.Harness.Desktop_0.31.5_aarch64.AppImage",
           "size": "150 MB"
@@ -61,6 +66,26 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
           "name": "Deepseek.Harness.Desktop_0.31.5_x64_en-US.msi",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.5/Deepseek.Harness.Desktop_0.31.5_x64_en-US.msi",
           "size": "168 MB"
+        },
+        {
+          "name": "Deepseek.Harness.iOS_0.31.5_unsigned.ipa",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.5/Deepseek.Harness.iOS_0.31.5_unsigned.ipa",
+          "size": "13.3 MB"
+        },
+        {
+          "name": "SHA256SUMS-Android.txt",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.5/SHA256SUMS-Android.txt",
+          "size": null
+        },
+        {
+          "name": "SHA256SUMS-iOS.txt",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.5/SHA256SUMS-iOS.txt",
+          "size": null
+        },
+        {
+          "name": "THIRD_PARTY_NOTICES.md",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.5/THIRD_PARTY_NOTICES.md",
+          "size": "3.84 KB"
         }
       ]
     },
