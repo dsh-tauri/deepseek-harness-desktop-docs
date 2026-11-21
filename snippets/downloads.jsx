@@ -110,6 +110,122 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
       ]
     },
     {
+      "tag": "nightly-20261120",
+      "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/nightly-20261120",
+      "published": "2026-11-21T00:01:51Z",
+      "prerelease": true,
+      "assets": [
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_aarch64.AppImage",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_aarch64.AppImage",
+          "size": "151 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_aarch64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_aarch64.dmg",
+          "size": "138 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_amd64.AppImage",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_amd64.AppImage",
+          "size": "151 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_amd64.deb",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_amd64.deb",
+          "size": "137 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64-setup.exe",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64-setup.exe",
+          "size": "113 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64.deb",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64.deb",
+          "size": "138 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64_en-US.msi",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64_en-US.msi",
+          "size": "167 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64-setup.exe",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64-setup.exe",
+          "size": "121 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64.dmg",
+          "size": "145 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64_en-US.msi",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261120/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64_en-US.msi",
+          "size": "169 MB"
+        }
+      ]
+    },
+    {
+      "tag": "nightly",
+      "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/nightly",
+      "published": "2026-10-08T01:03:01Z",
+      "prerelease": true,
+      "assets": [
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_aarch64.AppImage",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_aarch64.AppImage",
+          "size": "151 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_aarch64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_aarch64.dmg",
+          "size": "138 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_amd64.AppImage",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_amd64.AppImage",
+          "size": "151 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_amd64.deb",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_amd64.deb",
+          "size": "137 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64-setup.exe",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64-setup.exe",
+          "size": "113 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64.deb",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64.deb",
+          "size": "138 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64_en-US.msi",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_arm64_en-US.msi",
+          "size": "167 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64-setup.exe",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64-setup.exe",
+          "size": "121 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64.dmg",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64.dmg",
+          "size": "145 MB"
+        },
+        {
+          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64_en-US.msi",
+          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261120.gbffe290_x64_en-US.msi",
+          "size": "169 MB"
+        }
+      ]
+    },
+    {
       "tag": "v0.32.0",
       "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/v0.32.0",
       "published": "2026-11-19T11:55:45Z",
@@ -266,64 +382,6 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
         {
           "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_x64_en-US.msi",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261119/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_x64_en-US.msi",
-          "size": "169 MB"
-        }
-      ]
-    },
-    {
-      "tag": "nightly",
-      "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/nightly",
-      "published": "2026-10-08T01:03:01Z",
-      "prerelease": true,
-      "assets": [
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_aarch64.AppImage",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_aarch64.AppImage",
-          "size": "151 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_aarch64.dmg",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_aarch64.dmg",
-          "size": "138 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_amd64.AppImage",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_amd64.AppImage",
-          "size": "151 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_amd64.deb",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_amd64.deb",
-          "size": "137 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_arm64-setup.exe",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_arm64-setup.exe",
-          "size": "113 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_arm64.deb",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_arm64.deb",
-          "size": "138 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_arm64_en-US.msi",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_arm64_en-US.msi",
-          "size": "167 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_x64-setup.exe",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_x64-setup.exe",
-          "size": "121 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_x64.dmg",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_x64.dmg",
-          "size": "145 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_x64_en-US.msi",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly/Deepseek.Harness.Desktop_0.0.0-nightly.20261119.gace6a7d_x64_en-US.msi",
           "size": "169 MB"
         }
       ]
@@ -685,64 +743,6 @@ export const ReleaseDownloads = ({ lang = "zh-CN" }) => {
           "name": "THIRD_PARTY_NOTICES.md",
           "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/v0.31.6/THIRD_PARTY_NOTICES.md",
           "size": "3.84 KB"
-        }
-      ]
-    },
-    {
-      "tag": "nightly-20261114",
-      "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/tag/nightly-20261114",
-      "published": "2026-11-14T22:25:58Z",
-      "prerelease": true,
-      "assets": [
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_aarch64.AppImage",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_aarch64.AppImage",
-          "size": "151 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_aarch64.dmg",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_aarch64.dmg",
-          "size": "138 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_amd64.AppImage",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_amd64.AppImage",
-          "size": "151 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_amd64.deb",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_amd64.deb",
-          "size": "137 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_arm64-setup.exe",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_arm64-setup.exe",
-          "size": "113 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_arm64.deb",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_arm64.deb",
-          "size": "138 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_arm64_en-US.msi",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_arm64_en-US.msi",
-          "size": "167 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_x64-setup.exe",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_x64-setup.exe",
-          "size": "121 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_x64.dmg",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_x64.dmg",
-          "size": "145 MB"
-        },
-        {
-          "name": "Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_x64_en-US.msi",
-          "url": "https://github.com/dsh-tauri/deepseek-harness-desktop/releases/download/nightly-20261114/Deepseek.Harness.Desktop_0.0.0-nightly.20261114.gd7f1cb3_x64_en-US.msi",
-          "size": "169 MB"
         }
       ]
     }
